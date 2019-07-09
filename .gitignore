@@ -1,6 +1,10 @@
 .DS_Store
 node_modules
+archives
+coverage
 /dist
+version.json
+version.jsone
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
