@@ -1,16 +1,9 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  el-container
+    el-header(style="background-color:#999") Header
+    el-container
+      el-aside(width="200px",style="background-color:#ccc") Aside
+      el-main Main
 </template>
 
 <script>
