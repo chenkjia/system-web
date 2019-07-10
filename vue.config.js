@@ -1,5 +1,14 @@
 const version = require('./version.json')
+
 module.exports = {
+
+  pluginOptions: {
+    dll: {
+      entry: ['vue', 'vue-router', 'axios', '@/utils/request'],
+      open: 'auto',
+      inject: true
+    }
+  },
   devServer: {
     proxy: {
       '/api': {
@@ -7,7 +16,6 @@ module.exports = {
       }
     }
   },
-
   pages: {
     index: {
       // page 的入口
