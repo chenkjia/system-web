@@ -2,8 +2,10 @@
   el-container
     el-header(style="background-color:#999") Header
     el-container
-      el-aside(width="200px",style="background-color:#ccc") Aside
-      el-main Main
+      el-aside(width="200px",style="background-color:#ccc")
+        router-link(to="/setcategories") setcategories
+      el-main
+        router-view
 </template>
 
 <script>

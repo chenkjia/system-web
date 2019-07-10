@@ -1,7 +1,11 @@
 const version = require('./version.json')
 module.exports = {
   devServer: {
-    proxy: 'http://localhost:3000'
+    proxy: {
+      '/api': {
+        target: 'http://192.168.0.50:3000'
+      }
+    }
   },
 
   pages: {
