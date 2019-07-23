@@ -1,17 +1,24 @@
 const version = require('./version.json')
 
 module.exports = {
-
+  configureWebpack: {
+    externals: {
+      'vue': 'Vue'
+    }
+  },
   pluginOptions: {
     dll: {
-      entry: ['vue', 'vue-router', 'axios', '@/utils/request'],
-      open: 'auto',
-      inject: true
+      entry: ['vue', 'vue-router', 'axios', '@/utils/request']
+      // open: 'auto',
+      // inject: true
     }
   },
   devServer: {
     proxy: {
       '/api': {
+        target: 'http://localhost:3000'
+      },
+      '/files': {
         target: 'http://localhost:3000'
       }
     }

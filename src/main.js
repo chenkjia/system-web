@@ -6,7 +6,8 @@ import './plugins/element.js'
 import './assets/sass/main.sass'
 import store from './store'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
+// Vue.config.devtools = true
 
 new Vue({
   router,
