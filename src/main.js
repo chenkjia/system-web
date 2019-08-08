@@ -2,7 +2,7 @@ import Vue from 'vue'
 import './plugins/axios'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
+import './plugins/components.js'
 import './assets/sass/main.sass'
 import store from './store'
 
