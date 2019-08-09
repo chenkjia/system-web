@@ -1,56 +1,68 @@
 'use strict'
 
 import Vue from 'vue'
-import axios from 'axios'
+import request from '@/utils/request'
 
-// Full config:  https://github.com/axios/axios#request-config
-// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-let config = {
-  // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  // timeout: 60 * 1000, // Timeout
-  // withCredentials: true, // Check cross-site Access-Control
+export function getList ({ url, params }) {
+  return request({
+    url,
+    method: 'get',
+    params
+  })
 }
 
-const _axios = axios.create(config)
+export function createSingle ({ url, data }) {
+  return request({
+    url,
+    method: 'post',
+    data
+  })
+}
 
-_axios.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
-    return config
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error)
-  }
-)
+export function updateSingle ({ url, params, data }) {
+  return request({
+    url,
+    method: 'put',
+    params,
+    data
+  })
+}
 
-// Add a response interceptor
-_axios.interceptors.response.use(
-  function (response) {
-    // Do something with response data
-    return response
-  },
-  function (error) {
-    // Do something with response error
-    return Promise.reject(error)
-  }
-)
+export function deleteSingle ({ url, params }) {
+  return request({
+    url,
+    method: 'delete',
+    params
+  })
+}
 
 Plugin.install = function (Vue, options) {
-  Vue.axios = _axios
-  window.axios = _axios
+  Vue.axios = request
+  window.axios = request
   Object.defineProperties(Vue.prototype, {
-    axios: {
-      get () {
-        return _axios
-      }
-    },
     $axios: {
       get () {
-        return _axios
+        return request
+      }
+    },
+    $getList: {
+      get () {
+        return getList
+      }
+    },
+    $createSingle: {
+      get () {
+        return createSingle
+      }
+    },
+    $updateSingle: {
+      get () {
+        return updateSingle
+      }
+    },
+    $deleteSingle: {
+      get () {
+        return deleteSingle
       }
     }
   })

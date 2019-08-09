@@ -4,7 +4,7 @@
       v-for="button in buttonList"
       v-bind="button"
       :size="button.size||'mini'"
-      @click="button.func(row)"
+      @click="button.func(data)"
     ) {{button.label}}
 </template>
 <script>
@@ -12,7 +12,7 @@
 export default {
   name: 'ButtonGroup',
   props: {
-    row: {
+    data: {
       type: Object,
       default: () => ({})
     },

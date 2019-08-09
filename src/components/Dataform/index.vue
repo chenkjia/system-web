@@ -1,6 +1,6 @@
 <template lang="pug">
   el-form(
-    v-bind="formConfig"
+    v-bind="$attrs"
     :model="formData")
     el-form-item(
       v-for="column in columns"
@@ -8,6 +8,9 @@
       el-input(
         v-model="formData[column.name]"
       )
+    ButtonGroup.dataform-button(
+      :data="formData"
+      :buttonList="buttonList")
 </template>
 
 <script>
@@ -16,11 +19,15 @@
 export default {
   name: 'Dataform',
   props: {
-    formConfig: {
+    dataInit: {
       type: Object,
       default: () => ({})
     },
     columns: {
+      type: Array,
+      default: () => ([])
+    },
+    buttonList: {
       type: Array,
       default: () => ([])
     }
@@ -29,8 +36,16 @@ export default {
     return {
       formData: {}
     }
+  },
+  watch: {
+    dataInit (data) {
+      this.formData = data
+    }
   }
 }
 </script>
-<style scoped lang="sass">
+<style lang="scss" scoped>
+.dataform-button {
+  text-align: right
+}
 </style>

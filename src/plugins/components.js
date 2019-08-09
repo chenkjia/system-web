@@ -23,14 +23,10 @@ import {
   DatatablesPage
 } from '@/components'
 
-// import ElementUI from 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
-// Vue.use(ElementUI)
-
 Vue.use(Icon)
 Vue.use(Button)
 Vue.use(Dialog)
-Vue.use(MessageBox)
+// Vue.use(MessageBox)
 Vue.use(Container)
 Vue.use(Header)
 Vue.use(Aside)
@@ -42,6 +38,7 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 
+Vue.prototype.$msgbox = MessageBox.msgbox
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt

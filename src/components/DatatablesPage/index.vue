@@ -11,21 +11,38 @@
         slot="right")
         template(slot-scope="scope")
           ButtonGroup(
-            :row="scope.row"
+            :data="scope.row"
             :buttonList="operation")
-    el-dialog(
+    el-dialog.dataform-dialog(
       title="添加"
       :visible.sync="createDialogVisible"
-      width="30%")
-      Dataform(:columns="columns")
-      span(slot="footer")
-        el-button(@click="createDialogVisible=false") 取 消
-        el-button(type="primary",@click="createDialogVisible=false") 确 定
+      width="25%")
+      Dataform(
+        slot="footer"
+        ref="createForm"
+        label-position="right"
+        label-width="100px"
+        :dataInit="createData"
+        :columns="columns"
+        :buttonList="createButtonList")
+    el-dialog.dataform-dialog(
+      title="编辑"
+      :visible.sync="updateDialogVisible"
+      width="25%")
+      Dataform(
+        slot="footer"
+        ref="updateForm"
+        label-position="right"
+        label-width="100px"
+        :dataInit="updateData"
+        :columns="columns"
+        :buttonList="updateButtonList")
 </template>
 <script>
 import { pick, isString, defaultsDeep } from 'lodash'
 
-import { getList, deleteSingle } from '@/api/common'
+import CreateForm from './CreateForm'
+import UpdateForm from './UpdateForm'
 
 const buttonListReset = (buttonList, buttonPreset) => {
   return buttonList.map(item => {
@@ -37,6 +54,7 @@ const buttonListReset = (buttonList, buttonPreset) => {
 }
 export default {
   name: 'DatatablesPage',
+  mixins: [CreateForm, UpdateForm],
   props: {
     resource: String,
     data: {
@@ -59,27 +77,17 @@ export default {
   data () {
     return {
       tableData: [],
-      createDialogVisible: false,
       toolbarPreset: {
         create: {
           label: '添加',
           type: 'primary',
-          func: () => {
-            this.createDialogVisible = true
-          }
+          func: this.createFormInit
         }
       },
       operationPreset: {
         update: {
           label: '编辑',
-          func: (row) => {
-            const params = pick(row, ['_id'])
-            deleteSingle('setcategories', params).then((res) => {
-              if (res.code === 0) {
-                this.getList()
-              }
-            })
-          }
+          func: this.updateFormInit
         },
         delete: {
           label: '删除',
@@ -90,7 +98,7 @@ export default {
               type: 'warning'
             }).then(() => {
               const params = pick(row, ['_id'])
-              deleteSingle('setcategories', params).then((res) => {
+              this.$deleteSingle({ url: this.resource, params }).then(res => {
                 if (res.code === 0) {
                   this.getList()
                 }
@@ -114,9 +122,12 @@ export default {
   },
   methods: {
     getList () {
-      getList('setcategories').then((res) => {
+      this.$getList({ url: this.resource }).then((res) => {
         this.tableData = res.data
       })
+    },
+    editFormSubmit () {
+      console.log(this.$refs.editForm.formData)
     }
   }
 }
@@ -127,5 +138,8 @@ export default {
 }
 .operation-column {
   padding: 5px 0 4px
+}
+.dataform-dialog /deep/ .el-dialog__body {
+  padding: 0
 }
 </style>
