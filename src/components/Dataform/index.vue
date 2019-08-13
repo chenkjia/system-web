@@ -8,7 +8,7 @@
       el-input(
         v-model="formData[field.name]"
       )
-    el-form-item
+    el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
         :data="formData"
         :buttonList="buttonList")
@@ -45,8 +45,9 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.dataform-button {
+<style lang="sass" scoped>
+.dataform-button-item
+  margin-bottom: 0
+.dataform-button
   text-align: right
-}
 </style>

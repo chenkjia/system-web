@@ -183,6 +183,10 @@ export default {
   flex: 1
 .datatablespage-header
   margin-bottom: 1em
+  display: flex;
+  justify-content: space-between
+  .datatablespage-filter
+    margin-bottom: -18px
 .datatablespage-info
   margin-top: 1em
 .datatablespage-pagination
