@@ -9,10 +9,10 @@
         v-if="field.form.type==='input'"
         v-model="formData[field.name]"
       )
-      el-upload(
+      el-upload.form-upload(
         v-else-if="field.form.type==='file'"
         v-model="formData[field.name]"
-        action="/upload")
+        action="/api/files")
         el-button(size="small",type="primary") 点击上传
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
@@ -56,4 +56,6 @@ export default {
   margin-bottom: 0
 .dataform-button
   text-align: right
+.form-upload
+  text-align: left
 </style>
