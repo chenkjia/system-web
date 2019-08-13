@@ -11,6 +11,7 @@ import {
   Upload,
   Table,
   TableColumn,
+  Pagination,
   Form,
   FormItem,
   Input
@@ -34,6 +35,7 @@ Vue.use(Main)
 Vue.use(Upload)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Pagination)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)

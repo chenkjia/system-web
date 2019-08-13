@@ -1,26 +1,42 @@
 <template lang="pug">
-  div
-    DatatablesPage(
-      resource="setcategories"
-      :columns="columns"
-      :toolbarList="toolbarList"
-      :operationList="operationList")
+  DatatablesPage(
+    resource="setcategories"
+    :fields="fields"
+    :columnList="columnList"
+    :filterList="filterList"
+    :createList="createList"
+    :updateList="updateList"
+    :toolbarList="toolbarList"
+    :operationList="operationList")
 </template>
 <script>
-
+const columnList = ['label', 'name']
 export default {
   name: 'home',
   data () {
     return {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
-      columns: [{
-        name: 'label',
-        label: '系列名'
-      }, {
-        name: 'name',
-        label: '英文名'
-      }]
+      columnList,
+      filterList: columnList,
+      createList: columnList,
+      updateList: columnList,
+      fields: {
+        label: {
+          name: 'label',
+          label: '系列名',
+          form: {
+            type: 'input'
+          }
+        },
+        name: {
+          name: 'name',
+          label: '英文名',
+          form: {
+            type: 'input'
+          }
+        }
+      }
     }
   },
   methods: {

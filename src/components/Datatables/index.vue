@@ -1,5 +1,6 @@
 <template lang="pug">
   el-table(
+    v-bind="$attrs"
     :data="data"
     border
     size="small"

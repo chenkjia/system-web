@@ -1,21 +1,45 @@
 <template lang="pug">
-  div
-    ButtonGroup.toolbar(
-      :buttonList="toolbar")
-    Datatables(
-      :data="tableData",
-      :columns="columns")
-      el-table-column.operation-column(
-        v-if="operation&&operation.length"
-        label="操作"
-        slot="right")
-        template(slot-scope="scope")
-          ButtonGroup(
-            :data="scope.row"
-            :buttonList="operation")
+  div.datatablespage
+    slot(name="prev")
+    slot(name="header")
+      .datatablespage-header
+        ButtonGroup.datatablespage-toolbar(
+          :buttonList="toolbar")
+        Dataform.datatablespage-filter(
+          slot="footer"
+          ref="filterForm"
+          size="mini"
+          :inline="true"
+          :dataInit="filterData"
+          :formFields="filterFields"
+          :buttonList="filterButtonList")
+    slot(name="table")
+      Datatables(
+        height="1"
+        :data="tableData",
+        :columns="columns")
+        el-table-column.operation-column(
+          v-if="operation&&operation.length"
+          label="操作"
+          slot="right")
+          template(slot-scope="scope")
+            ButtonGroup(
+              :data="scope.row"
+              :buttonList="operation")
+    slot(name="footer")
+      .datatablespage-info
+        el-pagination.datatablespage-pagination(
+          @size-change="pageSizeChange"
+          @current-change="pageCurrentChange"
+          :current-page="pageCurrent"
+          :page-sizes="[10, 50, 100, 400]"
+          :page-size="pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="recordsFiltered")
     el-dialog.dataform-dialog(
       title="添加"
       :visible.sync="createDialogVisible"
+      :append-to-body="true"
       width="25%")
       Dataform(
         slot="footer"
@@ -23,11 +47,12 @@
         label-position="right"
         label-width="100px"
         :dataInit="createData"
-        :columns="columns"
+        :formFields="createFields"
         :buttonList="createButtonList")
     el-dialog.dataform-dialog(
       title="编辑"
       :visible.sync="updateDialogVisible"
+      :append-to-body="true"
       width="25%")
       Dataform(
         slot="footer"
@@ -35,14 +60,16 @@
         label-position="right"
         label-width="100px"
         :dataInit="updateData"
-        :columns="columns"
+        :formFields="updateFields"
         :buttonList="updateButtonList")
 </template>
 <script>
 import { pick, isString, defaultsDeep } from 'lodash'
 
+import Pagination from './Pagination'
 import CreateForm from './CreateForm'
 import UpdateForm from './UpdateForm'
+import FilterForm from './FilterForm'
 
 const buttonListReset = (buttonList, buttonPreset) => {
   return buttonList.map(item => {
@@ -54,16 +81,20 @@ const buttonListReset = (buttonList, buttonPreset) => {
 }
 export default {
   name: 'DatatablesPage',
-  mixins: [CreateForm, UpdateForm],
+  mixins: [Pagination, CreateForm, UpdateForm, FilterForm],
   props: {
     resource: String,
     data: {
       type: Array,
       default: () => ([])
     },
-    columns: {
+    columnList: {
       type: Array,
       default: () => ([])
+    },
+    fields: {
+      type: Object,
+      default: () => ({})
     },
     toolbarList: {
       type: Array,
@@ -110,6 +141,9 @@ export default {
     }
   },
   computed: {
+    columns () {
+      return this.columnList.map(item => this.fields[item])
+    },
     operation () {
       return buttonListReset(this.operationList, this.operationPreset)
     },
@@ -122,8 +156,17 @@ export default {
   },
   methods: {
     getList () {
-      this.$getList({ url: this.resource }).then((res) => {
-        this.tableData = res.data
+      console.log(this.pageCurrent)
+      this.$getList({
+        url: this.resource,
+        params: {
+          limit: this.pageSize,
+          skip: (this.pageCurrent - 1) * this.pageSize
+        }
+      }).then((res) => {
+        this.recordsTotal = res.data.recordsTotal
+        this.recordsFiltered = res.data.recordsFiltered
+        this.tableData = res.data.data
       })
     },
     editFormSubmit () {
@@ -132,14 +175,20 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.toolbar {
+<style lang="sass" scoped>
+.datatablespage
+  height: 100%
+  display: flex
+  flex-direction: column
+  flex: 1
+.datatablespage-header
   margin-bottom: 1em
-}
-.operation-column {
+.datatablespage-info
+  margin-top: 1em
+.datatablespage-pagination
+  text-align: right
+.operation-column
   padding: 5px 0 4px
-}
-.dataform-dialog /deep/ .el-dialog__body {
+.dataform-dialog /deep/ .el-dialog__body
   padding: 0
-}
 </style>

@@ -1,5 +1,13 @@
 <script>
+import { cloneDeep } from 'lodash'
+
 export default {
+  props: {
+    createList: {
+      type: Array,
+      default: () => ([])
+    }
+  },
   data () {
     return {
       createData: {},
@@ -14,6 +22,20 @@ export default {
         type: 'primary',
         func: this.createFormSubmit
       }]
+    }
+  },
+  computed: {
+    createFields () {
+      return this.createList.map(item => {
+        const field = cloneDeep(this.fields[item])
+        return {
+          ...field,
+          form: {
+            ...field.form,
+            ...field.create
+          }
+        }
+      })
     }
   },
   methods: {

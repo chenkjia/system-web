@@ -1,7 +1,13 @@
 <script>
-import { omit } from 'lodash'
+import { omit, cloneDeep } from 'lodash'
 
 export default {
+  props: {
+    updateList: {
+      type: Array,
+      default: () => ([])
+    }
+  },
   data () {
     return {
       updateFormId: null,
@@ -17,6 +23,20 @@ export default {
         type: 'primary',
         func: this.updateFormSubmit
       }]
+    }
+  },
+  computed: {
+    updateFields () {
+      return this.updateList.map(item => {
+        const field = cloneDeep(this.fields[item])
+        return {
+          ...field,
+          form: {
+            ...field.form,
+            ...field.update
+          }
+        }
+      })
     }
   },
   methods: {

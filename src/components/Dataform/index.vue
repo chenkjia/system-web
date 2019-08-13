@@ -3,14 +3,15 @@
     v-bind="$attrs"
     :model="formData")
     el-form-item(
-      v-for="column in columns"
-      :label="column.label")
+      v-for="field in formFields"
+      :label="field.label")
       el-input(
-        v-model="formData[column.name]"
+        v-model="formData[field.name]"
       )
-    ButtonGroup.dataform-button(
-      :data="formData"
-      :buttonList="buttonList")
+    el-form-item
+      ButtonGroup.dataform-button(
+        :data="formData"
+        :buttonList="buttonList")
 </template>
 
 <script>
@@ -23,7 +24,7 @@ export default {
       type: Object,
       default: () => ({})
     },
-    columns: {
+    formFields: {
       type: Array,
       default: () => ([])
     },
