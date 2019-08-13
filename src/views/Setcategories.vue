@@ -10,7 +10,7 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['label', 'name']
+const columnList = ['label', 'name', 'logo', 'picture']
 export default {
   name: 'home',
   data () {
@@ -23,17 +23,43 @@ export default {
       updateList: columnList,
       fields: {
         label: {
-          name: 'label',
           label: '系列名',
+          sortable: true,
           form: {
             type: 'input'
+          },
+          filter: {
+            like: true
           }
         },
         name: {
-          name: 'name',
           label: '英文名',
+          sortable: true,
           form: {
             type: 'input'
+          },
+          filter: {
+            like: true
+          }
+        },
+        logo: {
+          label: 'Logo',
+          sortable: true,
+          form: {
+            type: 'file'
+          },
+          filter: {
+            like: true
+          }
+        },
+        picture: {
+          label: '图片',
+          sortable: true,
+          form: {
+            type: 'file'
+          },
+          filter: {
+            like: true
           }
         }
       }

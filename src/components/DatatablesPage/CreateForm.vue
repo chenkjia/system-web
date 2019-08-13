@@ -29,6 +29,7 @@ export default {
       return this.createList.map(item => {
         const field = cloneDeep(this.fields[item])
         return {
+          name: item,
           ...field,
           form: {
             ...field.form,
@@ -44,7 +45,7 @@ export default {
       this.createDialogVisible = true
     },
     createFormSubmit (data) {
-      this.$createSingle({ url: this.resource, data }).then(res => {
+      this.$createOne({ url: this.resource, data }).then(res => {
         if (res.code === 0) {
           this.createDialogVisible = false
           this.getList()

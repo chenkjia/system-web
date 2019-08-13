@@ -1,6 +1,7 @@
 <template lang="pug">
   el-table(
     v-bind="$attrs"
+    v-on="$listeners"
     :data="data"
     border
     size="small"
@@ -9,9 +10,10 @@
     slot(name="left")
     el-table-column(
       v-for="column in columns"
+      v-bind="column"
+      :sortable="column.sortable?'custom':false"
       :key="column.name"
-      :prop="column.name"
-      :label="column.label")
+      :prop="column.name")
     slot(
       name="right")
 </template>
@@ -34,6 +36,12 @@ export default {
       cellClassName: ({ column }) => {
         return column.label === '操作' ? 'operation-column' : ''
       }
+    }
+  },
+  methods: {
+    sortChange (column, prop, order) {
+      console.log(column, prop, order)
+      return false
     }
   }
 }

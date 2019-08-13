@@ -6,8 +6,14 @@
       v-for="field in formFields"
       :label="field.label")
       el-input(
+        v-if="field.form.type==='input'"
         v-model="formData[field.name]"
       )
+      el-upload(
+        v-else-if="field.form.type==='file'"
+        v-model="formData[field.name]"
+        action="/upload")
+        el-button(size="small",type="primary") 点击上传
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
         :data="formData"

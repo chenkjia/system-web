@@ -17,7 +17,8 @@
       Datatables(
         height="1"
         :data="tableData",
-        :columns="columns")
+        :columns="columns"
+        @sort-change="sortChange")
         el-table-column.operation-column(
           v-if="operation&&operation.length"
           label="操作"
@@ -79,6 +80,12 @@ const buttonListReset = (buttonList, buttonPreset) => {
     return defaultsDeep(item, buttonPreset[item.name])
   })
 }
+
+const orders = {
+  ascending: 1,
+  descending: -1
+}
+
 export default {
   name: 'DatatablesPage',
   mixins: [Pagination, CreateForm, UpdateForm, FilterForm],
@@ -107,6 +114,7 @@ export default {
   },
   data () {
     return {
+      sortData: {},
       tableData: [],
       toolbarPreset: {
         create: {
@@ -129,7 +137,7 @@ export default {
               type: 'warning'
             }).then(() => {
               const params = pick(row, ['_id'])
-              this.$deleteSingle({ url: this.resource, params }).then(res => {
+              this.$deleteOne({ url: this.resource, params }).then(res => {
                 if (res.code === 0) {
                   this.getList()
                 }
@@ -142,7 +150,10 @@ export default {
   },
   computed: {
     columns () {
-      return this.columnList.map(item => this.fields[item])
+      return this.columnList.map((item) => ({
+        ...this.fields[item],
+        name: item
+      }))
     },
     operation () {
       return buttonListReset(this.operationList, this.operationPreset)
@@ -156,12 +167,14 @@ export default {
   },
   methods: {
     getList () {
-      console.log(this.pageCurrent)
       this.$getList({
         url: this.resource,
         params: {
           limit: this.pageSize,
-          skip: (this.pageCurrent - 1) * this.pageSize
+          skip: (this.pageCurrent - 1) * this.pageSize,
+          sort: this.sortData,
+          filter: this.filterData,
+          fields: this.fields
         }
       }).then((res) => {
         this.recordsTotal = res.data.recordsTotal
@@ -169,8 +182,9 @@ export default {
         this.tableData = res.data.data
       })
     },
-    editFormSubmit () {
-      console.log(this.$refs.editForm.formData)
+    sortChange ({ order, prop }) {
+      this.sortData = { [prop]: orders[order] }
+      this.getList()
     }
   }
 }

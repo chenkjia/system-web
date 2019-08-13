@@ -17,9 +17,7 @@ export default {
       }, {
         label: '重置',
         type: 'primary',
-        func: () => {
-          this.filterData = {}
-        }
+        func: this.filterFormReset
       }]
     }
   },
@@ -28,6 +26,7 @@ export default {
       return this.filterList.map(item => {
         const field = cloneDeep(this.fields[item])
         return {
+          name: item,
           ...field,
           form: {
             ...field.form,
@@ -38,7 +37,12 @@ export default {
     }
   },
   methods: {
-    filterFormSubmit () {
+    filterFormSubmit (data) {
+      this.filterData = data
+      this.getList()
+    },
+    filterFormReset () {
+      this.filterData = {}
       this.getList()
     }
   }

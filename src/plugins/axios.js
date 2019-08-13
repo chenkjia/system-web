@@ -11,7 +11,7 @@ export function getList ({ url, params }) {
   })
 }
 
-export function createSingle ({ url, data }) {
+export function createOne ({ url, data }) {
   return request({
     url,
     method: 'post',
@@ -19,7 +19,7 @@ export function createSingle ({ url, data }) {
   })
 }
 
-export function updateSingle ({ url, params, data }) {
+export function updateOne ({ url, params, data }) {
   return request({
     url,
     method: 'put',
@@ -28,7 +28,7 @@ export function updateSingle ({ url, params, data }) {
   })
 }
 
-export function deleteSingle ({ url, params }) {
+export function deleteOne ({ url, params }) {
   return request({
     url,
     method: 'delete',
@@ -50,19 +50,19 @@ Plugin.install = function (Vue, options) {
         return getList
       }
     },
-    $createSingle: {
+    $createOne: {
       get () {
-        return createSingle
+        return createOne
       }
     },
-    $updateSingle: {
+    $updateOne: {
       get () {
-        return updateSingle
+        return updateOne
       }
     },
-    $deleteSingle: {
+    $deleteOne: {
       get () {
-        return deleteSingle
+        return deleteOne
       }
     }
   })

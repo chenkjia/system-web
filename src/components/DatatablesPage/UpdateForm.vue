@@ -30,6 +30,7 @@ export default {
       return this.updateList.map(item => {
         const field = cloneDeep(this.fields[item])
         return {
+          name: item,
           ...field,
           form: {
             ...field.form,
@@ -46,7 +47,7 @@ export default {
       this.updateDialogVisible = true
     },
     updateFormSubmit (data) {
-      this.$updateSingle({
+      this.$updateOne({
         url: this.resource,
         params: {
           _id: this.updateFormId
