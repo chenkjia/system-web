@@ -18,7 +18,7 @@ export default {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: columnList,
+      filterList: ['label', 'name'],
       createList: columnList,
       updateList: columnList,
       fields: {
@@ -44,22 +44,16 @@ export default {
         },
         logo: {
           label: 'Logo',
-          sortable: true,
+          type: 'file',
           form: {
             type: 'file'
-          },
-          filter: {
-            like: true
           }
         },
         picture: {
           label: '图片',
-          sortable: true,
+          type: 'file',
           form: {
             type: 'file'
-          },
-          filter: {
-            like: true
           }
         }
       }

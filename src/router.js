@@ -15,6 +15,11 @@ export default new Router({
       path: '/setcategories',
       name: 'setcategories',
       component: () => import(/* webpackChunkName: "setcategories" */ './views/Setcategories.vue')
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     }
   ]
 })

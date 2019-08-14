@@ -2,18 +2,11 @@
   el-form(
     v-bind="$attrs"
     :model="formData")
-    el-form-item(
-      v-for="field in formFields"
-      :label="field.label")
-      el-input(
-        v-if="field.form.type==='input'"
-        v-model="formData[field.name]"
-      )
-      el-upload.form-upload(
-        v-else-if="field.form.type==='file'"
-        v-model="formData[field.name]"
-        action="/api/files")
-        el-button(size="small",type="primary") 点击上传
+    DataformItem(
+      v-for="field in formFields",
+      :field="field"
+      v-model="formData[field.name]"
+    )
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
         :data="formData"
@@ -21,10 +14,13 @@
 </template>
 
 <script>
-// import { cloneDeep } from 'lodash'
+import DataformItem from './DataformItem'
 
 export default {
   name: 'Dataform',
+  components: {
+    DataformItem
+  },
   props: {
     dataInit: {
       type: Object,

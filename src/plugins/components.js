@@ -14,7 +14,8 @@ import {
   Pagination,
   Form,
   FormItem,
-  Input
+  Input,
+  Image
 } from 'element-ui'
 
 import {
@@ -39,6 +40,7 @@ Vue.use(Pagination)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+Vue.use(Image)
 
 Vue.prototype.$msgbox = MessageBox.msgbox
 Vue.prototype.$alert = MessageBox.alert

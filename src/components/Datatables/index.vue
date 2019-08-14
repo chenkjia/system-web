@@ -14,13 +14,21 @@
       :sortable="column.sortable?'custom':false"
       :key="column.name"
       :prop="column.name")
+      template(slot-scope="scope")
+        DatatablesFiles(
+          v-if="column.type==='file'"
+          :images="scope|fileFilter")
+        span(v-else,slot-scope="scope") {{scope|textFilter}}
     slot(
       name="right")
 </template>
 <script>
-
+import DatatablesFiles from './DatatablesFiles'
 export default {
   name: 'Datatables',
+  components: {
+    DatatablesFiles
+  },
   props: {
     data: {
       type: Array,
@@ -38,6 +46,10 @@ export default {
       }
     }
   },
+  filters: {
+    textFilter: (scope) => scope.row[scope.column.property],
+    fileFilter: (scope) => scope.row[scope.column.property].map(({ url }) => 'http://localhost:8080/' + url)
+  },
   methods: {
     sortChange (column, prop, order) {
       console.log(column, prop, order)
@@ -46,8 +58,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.el-table--small .operation-column {
-  padding: 5px 0 4px
-}
-</style>

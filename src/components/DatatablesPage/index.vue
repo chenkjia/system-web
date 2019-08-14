@@ -210,3 +210,8 @@ export default {
 .dataform-dialog /deep/ .el-dialog__body
   padding: 0
 </style>
+
+<style lang="sass">
+.el-table--small .operation-column
+  padding: 5px 0 4px
+</style>
