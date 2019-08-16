@@ -33,12 +33,9 @@ export default {
   methods: {
     handleRemove (file, fileList) {
       this.$emit('input', fileList)
-      console.log(file, fileList)
     },
     handleSuccess (file, fileList) {
       const { filename, path } = file
-      console.log(file)
-      console.log(fileList)
       this.$emit('input', [{
         name: filename,
         url: path
