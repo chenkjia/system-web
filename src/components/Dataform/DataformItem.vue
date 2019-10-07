@@ -9,6 +9,7 @@
     DataformUpload(
       v-else-if="field.form.type==='file'"
       v-on="$listeners"
+      :multiple="field.form.multiple"
       :value="value")
 </template>
 

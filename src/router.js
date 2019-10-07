@@ -12,6 +12,11 @@ export default new Router({
       redirect: 'setcategories'
     },
     {
+      path: '/sets',
+      name: 'sets',
+      component: () => import(/* webpackChunkName: "sets" */ './views/Sets.vue')
+    },
+    {
       path: '/setcategories',
       name: 'setcategories',
       component: () => import(/* webpackChunkName: "setcategories" */ './views/Setcategories.vue')
