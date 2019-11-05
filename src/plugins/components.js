@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import {
-  Icon,
   Button,
   Dialog,
   MessageBox,
@@ -15,6 +14,7 @@ import {
   Form,
   FormItem,
   Input,
+  Switch,
   Image
 } from 'element-ui'
 
@@ -25,7 +25,6 @@ import {
   DatatablesPage
 } from '@/components'
 
-Vue.use(Icon)
 Vue.use(Button)
 Vue.use(Dialog)
 // Vue.use(MessageBox)
@@ -40,6 +39,7 @@ Vue.use(Pagination)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+Vue.use(Switch)
 Vue.use(Image)
 
 Vue.prototype.$msgbox = MessageBox.msgbox
