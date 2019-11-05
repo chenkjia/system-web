@@ -45,7 +45,7 @@ export default {
       this.createDialogVisible = true
     },
     createFormSubmit (data) {
-      this.$createOne({ url: this.resource, data }).then(res => {
+      this.$create({ url: this.resource, data }).then(res => {
         if (res.code === 0) {
           this.createDialogVisible = false
           this.getList()

@@ -3,36 +3,31 @@
 import Vue from 'vue'
 import request from '@/utils/request'
 
-export function getList ({ url, params }) {
+export function get (props) {
   return request({
-    url,
     method: 'get',
-    params
+    ...props
   })
 }
 
-export function createOne ({ url, data }) {
+export function create (props) {
   return request({
-    url,
     method: 'post',
-    data
+    ...props
   })
 }
 
-export function updateOne ({ url, params, data }) {
+export function update (props) {
   return request({
-    url,
     method: 'put',
-    params,
-    data
+    ...props
   })
 }
 
-export function deleteOne ({ url, params }) {
+export function remove (props) {
   return request({
-    url,
     method: 'delete',
-    params
+    ...props
   })
 }
 
@@ -45,24 +40,24 @@ Plugin.install = function (Vue, options) {
         return request
       }
     },
-    $getList: {
+    $get: {
       get () {
-        return getList
+        return get
       }
     },
-    $createOne: {
+    $create: {
       get () {
-        return createOne
+        return create
       }
     },
-    $updateOne: {
+    $update: {
       get () {
-        return updateOne
+        return update
       }
     },
-    $deleteOne: {
+    $remove: {
       get () {
-        return deleteOne
+        return remove
       }
     }
   })

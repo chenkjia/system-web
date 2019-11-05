@@ -47,7 +47,7 @@ export default {
       this.updateDialogVisible = true
     },
     updateFormSubmit (data) {
-      this.$updateOne({
+      this.$update({
         url: this.resource,
         params: {
           _id: this.updateFormId

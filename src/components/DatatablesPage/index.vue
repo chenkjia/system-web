@@ -137,7 +137,7 @@ export default {
               type: 'warning'
             }).then(() => {
               const params = pick(row, ['_id'])
-              this.$deleteOne({ url: this.resource, params }).then(res => {
+              this.$remove({ url: this.resource, params }).then(res => {
                 if (res.code === 0) {
                   this.getList()
                 }
@@ -167,7 +167,7 @@ export default {
   },
   methods: {
     getList () {
-      this.$getList({
+      this.$get({
         url: this.resource,
         params: {
           limit: this.pageSize,
