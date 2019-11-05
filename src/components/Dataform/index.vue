@@ -4,6 +4,7 @@
     :model="formData")
     DataformItem(
       v-for="field in formFields",
+      :key="field.name",
       :field="field"
       v-model="formData[field.name]"
     )
