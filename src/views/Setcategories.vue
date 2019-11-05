@@ -26,7 +26,7 @@ export default {
           label: '系列名',
           sortable: true,
           form: {
-            type: 'input'
+            formtype: 'input'
           },
           filter: {
             like: true
@@ -36,7 +36,7 @@ export default {
           label: '英文名',
           sortable: true,
           form: {
-            type: 'input'
+            formtype: 'input'
           },
           filter: {
             like: true
@@ -46,14 +46,14 @@ export default {
           label: 'Logo',
           type: 'file',
           form: {
-            type: 'file'
+            formtype: 'file'
           }
         },
         picture: {
           label: '图片',
           type: 'file',
           form: {
-            type: 'file'
+            formtype: 'file'
           }
         }
       }
