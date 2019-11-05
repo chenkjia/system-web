@@ -1,6 +1,6 @@
 <template lang="pug">
   DatatablesPage(
-    resource="setcategories"
+    resource="menus"
     :fields="fields"
     :columnList="columnList"
     :filterList="filterList"
@@ -10,50 +10,80 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['label', 'name', 'logo', 'picture']
+import ButtonGroup from '@/components/ButtonGroup'
+const columnList = ['label', 'type', 'url', 'icon', 'enabled', 'remark']
 export default {
   name: 'home',
+  components: {
+    ButtonGroup
+  },
   data () {
     return {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: ['label', 'name'],
+      filterList: ['label'],
       createList: columnList,
       updateList: columnList,
       fields: {
         label: {
-          label: '系列名',
+          label: '菜单名称',
           sortable: true,
           form: {
-            type: 'input'
+            formtype: 'input'
           },
           filter: {
             like: true
           }
         },
-        name: {
-          label: '英文名',
+        type: {
+          label: '菜单类型',
           sortable: true,
           form: {
-            type: 'input'
+            formtype: 'input'
           },
           filter: {
             like: true
           }
         },
-        logo: {
-          label: 'Logo',
-          type: 'file',
+        url: {
+          label: '路径',
+          sortable: true,
           form: {
-            type: 'file'
+            formtype: 'input'
+          },
+          filter: {
+            like: true
           }
         },
-        picture: {
-          label: '图片',
-          type: 'file',
+        icon: {
+          label: '图标',
           form: {
-            type: 'file'
+            formtype: 'icon'
+          },
+          filter: {
+            like: true
+          }
+        },
+        enabled: {
+          label: '是否启用',
+          form: {
+            formtype: 'switch'
+          },
+          filter: {
+            formtype: 'select'
+          }
+        },
+        remark: {
+          label: '备注',
+          form: {
+            formtype: 'input',
+            type: 'textarea',
+            resize: 'none',
+            autosize: true
+          },
+          filter: {
+            formtype: 'input'
           }
         }
       }
