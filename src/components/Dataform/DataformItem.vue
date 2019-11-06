@@ -22,6 +22,7 @@
       v-else-if="field.form.formtype==='icon'"
       v-bind="$attrs"
       v-on="$listeners"
+      :size="field.form.size||'small'"
       :value="value")
 </template>
 
