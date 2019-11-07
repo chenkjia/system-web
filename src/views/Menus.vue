@@ -22,13 +22,12 @@ export default {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: ['label'],
+      filterList: ['label', 'type', 'enabled'],
       createList: columnList,
       updateList: columnList,
       fields: {
         label: {
           label: '菜单名称',
-          sortable: true,
           form: {
             formtype: 'input'
           },
@@ -38,17 +37,15 @@ export default {
         },
         type: {
           label: '菜单类型',
-          sortable: true,
           form: {
-            formtype: 'input'
+            formtype: 'select'
           },
           filter: {
-            like: true
+            formtype: 'select'
           }
         },
         url: {
           label: '路径',
-          sortable: true,
           form: {
             formtype: 'input'
           },
