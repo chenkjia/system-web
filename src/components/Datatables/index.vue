@@ -6,6 +6,7 @@
     border
     size="small"
     style="width: 100%"
+    header-cell-class-name="table-header-cell"
     :cell-class-name="cellClassName")
     slot(name="left")
     el-table-column(
@@ -52,7 +53,6 @@ export default {
   },
   methods: {
     sortChange (column, prop, order) {
-      console.log(column, prop, order)
       return false
     }
   }
