@@ -6,11 +6,11 @@ module.exports = {
       'vue': 'Vue'
     }
   },
-  chainWebpack: config => {
+  chainWebpack: process.env.NODE_ENV === 'production' ? config => {
     config
       .plugin('webpack-bundle-analyzer')
       .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-  },
+  } : () => {},
   pluginOptions: {
     dll: {
       entry: ['vue', 'vue-router', 'axios', '@/utils/request']
