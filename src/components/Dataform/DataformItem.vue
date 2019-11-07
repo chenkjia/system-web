@@ -5,7 +5,11 @@
       v-if="field.form.formtype==='input'"
       v-bind="field.form"
       v-on="$listeners"
-      :size="field.form.size||'small'"
+      :value="value")
+    el-select(
+      v-else-if="field.form.formtype==='select'"
+      v-bind="$attrs"
+      v-on="$listeners"
       :value="value")
     el-switch(
       v-else-if="field.form.formtype==='switch'"
@@ -22,7 +26,6 @@
       v-else-if="field.form.formtype==='icon'"
       v-bind="$attrs"
       v-on="$listeners"
-      :size="field.form.size||'small'"
       :value="value")
 </template>
 

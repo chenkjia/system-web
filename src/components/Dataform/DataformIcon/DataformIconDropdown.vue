@@ -21,6 +21,9 @@ export default {
     placement: {
       default: 'bottom-start'
     },
+    visibleArrow: {
+      default: true
+    },
     boundariesPadding: {
       default: 0
     },

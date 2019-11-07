@@ -45,6 +45,7 @@
       Dataform(
         slot="footer"
         ref="createForm"
+        size="small"
         label-position="right"
         label-width="100px"
         :dataInit="createData"
@@ -58,6 +59,7 @@
       Dataform(
         slot="footer"
         ref="updateForm"
+        size="small"
         label-position="right"
         label-width="100px"
         :dataInit="updateData"

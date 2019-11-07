@@ -15,6 +15,7 @@ import {
   FormItem,
   Input,
   Switch,
+  Select,
   Image
 } from 'element-ui'
 
@@ -40,6 +41,7 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Switch)
+Vue.use(Select)
 Vue.use(Image)
 
 Vue.prototype.$msgbox = MessageBox.msgbox
