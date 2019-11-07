@@ -1,6 +1,6 @@
 <template lang="pug">
   .form-icon(
-    :class="`form-icon--${size}`"
+    :class="`form-icon--${inputSize}`"
     @click="toggleDropdown"
     v-clickoutside="closeDropdown")
     .form-icon-input.iconfont(
@@ -20,7 +20,6 @@ export default {
   components: {
     DataformIconDropdown
   },
-  directives: { Clickoutside },
   props: {
     size: {
       type: String,
@@ -31,10 +30,24 @@ export default {
       default: ''
     }
   },
+  directives: { Clickoutside },
+  inject: {
+    elForm: {
+      default: ''
+    },
+    elFormItem: {
+      default: ''
+    }
+  },
   data () {
     return {
       icons: [],
       visible: false
+    }
+  },
+  computed: {
+    inputSize () {
+      return this.size || (this.elFormItem || {}).size || (this.elForm || {}).size
     }
   },
   methods: {
