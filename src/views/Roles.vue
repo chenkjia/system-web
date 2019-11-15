@@ -1,6 +1,6 @@
 <template lang="pug">
   DatatablesPage(
-    resource="setcategories"
+    resource="roles"
     :fields="fields"
     :columnList="columnList"
     :filterList="filterList"
@@ -10,50 +10,47 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['label', 'name', 'logo', 'picture']
+const columnList = ['label', 'enabled', 'remark']
+
 export default {
-  name: 'home',
+  name: 'roles',
   data () {
     return {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: ['label', 'name'],
+      filterList: ['label', 'enabled'],
       createList: columnList,
       updateList: columnList,
       fields: {
         label: {
-          label: '系列名',
-          sortable: true,
+          label: '角色名称',
           form: {
-            type: 'input'
+            formtype: 'input'
           },
           filter: {
             like: true
           }
         },
-        name: {
-          label: '英文名',
-          sortable: true,
+        enabled: {
+          label: '是否启用',
           form: {
-            type: 'input'
+            formtype: 'switch'
           },
           filter: {
-            like: true
+            formtype: 'select'
           }
         },
-        logo: {
-          label: 'Logo',
-          type: 'file',
+        remark: {
+          label: '备注',
           form: {
-            type: 'file'
-          }
-        },
-        picture: {
-          label: '图片',
-          type: 'file',
-          form: {
-            type: 'file'
+            formtype: 'input',
+            type: 'textarea',
+            resize: 'none',
+            autosize: true
+          },
+          filter: {
+            formtype: 'input'
           }
         }
       }

@@ -1,6 +1,6 @@
 <template lang="pug">
   DatatablesPage(
-    resource="setcategories"
+    resource="menus"
     :fields="fields"
     :columnList="columnList"
     :filterList="filterList"
@@ -10,21 +10,20 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['label', 'name', 'logo', 'picture']
+const columnList = ['label', 'type', 'url', 'icon', 'enabled', 'remark']
 export default {
-  name: 'home',
+  name: 'logs',
   data () {
     return {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: ['label', 'name'],
+      filterList: ['label', 'type', 'enabled'],
       createList: columnList,
       updateList: columnList,
       fields: {
         label: {
-          label: '系列名',
-          sortable: true,
+          label: '菜单名称',
           form: {
             formtype: 'input'
           },
@@ -32,9 +31,17 @@ export default {
             like: true
           }
         },
-        name: {
-          label: '英文名',
-          sortable: true,
+        type: {
+          label: '菜单类型',
+          form: {
+            formtype: 'select'
+          },
+          filter: {
+            formtype: 'select'
+          }
+        },
+        url: {
+          label: '路径',
           form: {
             formtype: 'input'
           },
@@ -42,18 +49,34 @@ export default {
             like: true
           }
         },
-        logo: {
-          label: 'Logo',
-          type: 'file',
+        icon: {
+          label: '图标',
           form: {
-            formtype: 'file'
+            formtype: 'icon'
+          },
+          filter: {
+            like: true
           }
         },
-        picture: {
-          label: '图片',
-          type: 'file',
+        enabled: {
+          label: '是否启用',
           form: {
-            formtype: 'file'
+            formtype: 'switch'
+          },
+          filter: {
+            formtype: 'select'
+          }
+        },
+        remark: {
+          label: '备注',
+          form: {
+            formtype: 'input',
+            type: 'textarea',
+            resize: 'none',
+            autosize: true
+          },
+          filter: {
+            formtype: 'input'
           }
         }
       }

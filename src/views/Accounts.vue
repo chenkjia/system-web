@@ -1,6 +1,6 @@
 <template lang="pug">
   DatatablesPage(
-    resource="menus"
+    resource="accounts"
     :fields="fields"
     :columnList="columnList"
     :filterList="filterList"
@@ -10,20 +10,20 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['label', 'type', 'url', 'icon', 'enabled', 'remark']
+const columnList = ['jobNumber', 'account', 'username', 'mobile', 'enabled', 'remark']
 export default {
-  name: 'menus',
+  name: 'accounts',
   data () {
     return {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: ['label', 'type', 'enabled'],
+      filterList: ['jobNumber', 'account', 'mobile', 'enabled'],
       createList: columnList,
       updateList: columnList,
       fields: {
-        label: {
-          label: '菜单名称',
+        jobNumber: {
+          label: '工号',
           form: {
             formtype: 'input'
           },
@@ -31,17 +31,8 @@ export default {
             like: true
           }
         },
-        type: {
-          label: '菜单类型',
-          form: {
-            formtype: 'select'
-          },
-          filter: {
-            formtype: 'select'
-          }
-        },
-        url: {
-          label: '路径',
+        account: {
+          label: '账号',
           form: {
             formtype: 'input'
           },
@@ -49,10 +40,19 @@ export default {
             like: true
           }
         },
-        icon: {
-          label: '图标',
+        username: {
+          label: '姓名',
           form: {
-            formtype: 'icon'
+            formtype: 'input'
+          },
+          filter: {
+            like: true
+          }
+        },
+        mobile: {
+          label: '联系电话',
+          form: {
+            formtype: 'input'
           },
           filter: {
             like: true

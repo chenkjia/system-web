@@ -9,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: 'setcategories'
+      redirect: 'menus'
     },
     {
       path: '/menus',
@@ -17,19 +17,24 @@ export default new Router({
       component: () => import(/* webpackChunkName: "menus" */ './views/Menus.vue')
     },
     {
-      path: '/sets',
-      name: 'sets',
-      component: () => import(/* webpackChunkName: "sets" */ './views/Sets.vue')
+      path: '/organizations',
+      name: 'organizations',
+      component: () => import(/* webpackChunkName: "organizations" */ './views/Organizations.vue')
     },
     {
-      path: '/setcategories',
-      name: 'setcategories',
-      component: () => import(/* webpackChunkName: "setcategories" */ './views/Setcategories.vue')
+      path: '/accounts',
+      name: 'accounts',
+      component: () => import(/* webpackChunkName: "accounts" */ './views/Accounts.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/roles',
+      name: 'roles',
+      component: () => import(/* webpackChunkName: "roles" */ './views/Roles.vue')
+    },
+    {
+      path: '/logs',
+      name: 'logs',
+      component: () => import(/* webpackChunkName: "logs" */ './views/Logs.vue')
     }
   ]
 })
