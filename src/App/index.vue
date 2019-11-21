@@ -75,7 +75,7 @@ export default {
   display: flex
   flex-direction: column
 #app-header
-  z-index: 9999
+  z-index: 1999
   background-color: #FFF
   color: #666
   display: flex
