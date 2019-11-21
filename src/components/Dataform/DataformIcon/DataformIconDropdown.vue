@@ -37,6 +37,7 @@ export default {
     }
   },
   methods: {
+    // 从css文件获取所有ICON信息
     getIcons () {
       axios({ url: '/icon/iconfont.css' }).then((req) => {
         this.icons = req.data
@@ -45,6 +46,7 @@ export default {
           .map(item => item.split(':before')[0])
       })
     },
+    // icon选择方法
     iconSelect (icon) {
       this.$emit('iconSelect', icon)
     }

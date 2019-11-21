@@ -46,20 +46,31 @@ export default {
     }
   },
   computed: {
+    // 通过表单定义的大小
+    elFormSize () {
+      return (this.elForm || {}).size
+    },
+    // 通过表单项定义的大小
+    elFormItemSize () {
+      return (this.elFormItem || {}).size
+    },
+    // 最终计算得出的大小
     inputSize () {
-      return this.size || (this.elFormItem || {}).size || (this.elForm || {}).size
+      return this.size || this.elFormItemSize || this.elFormSize
     }
   },
   methods: {
+    // icon选择界面开关方法
     toggleDropdown () {
       this.visible = !this.visible
     },
+    // icon选择界面关闭方法
     closeDropdown () {
       this.visible = false
     },
+    // icon选择方法
     handleSelect (icon) {
       this.$emit('input', icon)
-      // this.closeDropdown()
     }
   }
 }

@@ -2,12 +2,14 @@
   el-form(
     v-bind="$attrs"
     :model="formData")
-    DataformItem(
+    el-form-item(
       v-for="field in formFields",
       :key="field.name",
-      :field="field"
-      v-model="formData[field.name]"
-    )
+      :label="field.label")
+      component(
+        :is="dataFormItem[field.form.formtype]"
+        v-bind="field.form"
+        v-model="formData[field.name]")
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
         :data="formData"
@@ -15,13 +17,10 @@
 </template>
 
 <script>
-import DataformItem from './DataformItem'
-
+import DataFormItemReg from './DataFormItemReg'
 export default {
   name: 'Dataform',
-  components: {
-    DataformItem
-  },
+  mixins: [DataFormItemReg],
   props: {
     dataInit: {
       type: Object,
