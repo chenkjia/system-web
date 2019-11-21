@@ -10,7 +10,7 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['jobNumber', 'account', 'username', 'mobile', 'enabled', 'remark']
+const columnList = ['jobNumber', 'username', 'fullname', 'photo', 'mobile', 'enabled', 'remark']
 export default {
   name: 'accounts',
   data () {
@@ -18,7 +18,7 @@ export default {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: ['jobNumber', 'account', 'mobile', 'enabled'],
+      filterList: ['jobNumber', 'username', 'fullname', 'mobile', 'enabled'],
       createList: columnList,
       updateList: columnList,
       fields: {
@@ -31,7 +31,7 @@ export default {
             like: true
           }
         },
-        account: {
+        username: {
           label: '账号',
           form: {
             formtype: 'input'
@@ -40,7 +40,7 @@ export default {
             like: true
           }
         },
-        username: {
+        fullname: {
           label: '姓名',
           form: {
             formtype: 'input'
@@ -65,6 +65,12 @@ export default {
           },
           filter: {
             formtype: 'select'
+          }
+        },
+        photo: {
+          label: '照片',
+          form: {
+            formtype: 'file'
           }
         },
         remark: {
