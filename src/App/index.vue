@@ -46,14 +46,19 @@ export default {
         url: 'menus'
       }).then(req => {
         this.menus = req.data.data
-        console.log(this.menus)
       })
     },
     changeAsideActive () {
       this.asideActive = !this.asideActive
+    },
+    removeStartLoading () {
+      if (document.getElementById('loading')) {
+        document.body.removeChild(document.getElementById('loading'))
+      }
     }
   },
   created () {
+    this.removeStartLoading()
     this.getMenus()
   }
 }

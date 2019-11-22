@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="version" content="<%= htmlWebpackPlugin.options.version %>">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link type="text/css" rel="styleSheet"  href="./loading.css" />
+    <link type="text/css" rel="styleSheet"  href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" />
+    <link type="text/css" rel="styleSheet"  href="./icon/iconfont.css" />
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.common.dev.js"></script>
     <script src="https://cdn.bootcss.com/element-ui/2.12.0/index.js"></script>
     <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
-    <link type="text/css" rel="styleSheet"  href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" />
-    <link type="text/css" rel="styleSheet"  href="./icon/iconfont.css" />
     <title>legoweb</title>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but legoweb doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+    <div id="loading">
+      <div class="loader"></div>
+    </div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
