@@ -6,13 +6,10 @@ export default {
     createList: {
       type: Array,
       default: () => ([])
-    }
-  },
-  data () {
-    return {
-      createData: {},
-      createDialogVisible: false,
-      createButtonList: [{
+    },
+    createButtonList: {
+      type: Array,
+      default: () => ([{
         label: '取 消',
         func: () => {
           this.createDialogVisible = false
@@ -21,7 +18,13 @@ export default {
         label: '确 定',
         type: 'primary',
         func: this.createFormSubmit
-      }]
+      }])
+    }
+  },
+  data () {
+    return {
+      createData: {},
+      createDialogVisible: false
     }
   },
   computed: {

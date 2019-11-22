@@ -1,27 +1,30 @@
 <template lang="pug">
   DatatablesPage(
     resource="accounts"
+    ref="DatatablesPage"
     :fields="fields"
     :columnList="columnList"
     :filterList="filterList"
     :createList="createList"
     :updateList="updateList"
+    :createButtonList="createButtonList"
+    :updateButtonList="updateButtonList"
     :toolbarList="toolbarList"
     :operationList="operationList")
-    el-dialog.dataform-dialog(
-      title="修改密码"
-      :visible.sync="changeDialogVisible"
-      :append-to-body="true"
-      width="25%")
-      Dataform(
-        slot="footer"
-        ref="changeForm"
-        size="small"
-        label-position="right"
-        label-width="100px"
-        :dataInit="changeData"
-        :formFields="changeFields"
-        :buttonList="changeButtonList")
+    //- el-dialog.dataform-dialog(
+    //-   title="修改密码"
+    //-   :visible.sync="changeDialogVisible"
+    //-   :append-to-body="true"
+    //-   width="25%")
+    //-   Dataform(
+    //-     slot="footer"
+    //-     ref="changeForm"
+    //-     size="small"
+    //-     label-position="right"
+    //-     label-width="100px"
+    //-     :dataInit="changeData"
+    //-     :formFields="changeFields"
+    //-     :buttonList="changeButtonList")
 </template>
 <script>
 import { omit } from 'lodash'
@@ -29,6 +32,7 @@ const columnList = ['jobNumber', 'username', 'fullname', 'photo', 'mobile', 'ena
 export default {
   name: 'accounts',
   data () {
+    console.log(this)
     return {
       toolbarList: ['create'],
       operationList: ['update', 'delete', {
@@ -44,6 +48,48 @@ export default {
       filterList: ['jobNumber', 'username', 'fullname', 'mobile', 'enabled'],
       createList: ['jobNumber', 'username', 'password', 'fullname', 'photo', 'mobile', 'enabled', 'remark'],
       updateList: columnList,
+      createButtonList: [{
+        label: '取 消',
+        func: () => {
+          this.$refs.DatatablesPage.createDialogVisible = false
+        }
+      }, {
+        label: '确 定',
+        type: 'primary',
+        func: (data) => {
+          data.password = this.$md5(data.password)
+          this.$create({ url: this.$refs.DatatablesPage.resource, data }).then(res => {
+            if (res.code === 0) {
+              this.$refs.DatatablesPage.createDialogVisible = false
+              this.$refs.DatatablesPage.getList()
+            }
+          })
+        }
+      }],
+      updateButtonList: [{
+        label: '取 消',
+        func: () => {
+          this.$refs.DatatablesPage.updateDialogVisible = false
+        }
+      }, {
+        label: '确 定',
+        type: 'primary',
+        func: (data) => {
+          data.password = this.$md5(data.password)
+          this.$update({
+            url: this.$refs.DatatablesPage.resource,
+            params: {
+              _id: this.$refs.DatatablesPage.updateFormId
+            },
+            data
+          }).then(res => {
+            if (res.code === 0) {
+              this.$refs.DatatablesPage.updateDialogVisible = false
+              this.$refs.DatatablesPage.getList()
+            }
+          })
+        }
+      }],
       fields: {
         jobNumber: {
           label: '工号',

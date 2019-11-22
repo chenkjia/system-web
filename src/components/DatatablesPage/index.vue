@@ -22,7 +22,8 @@
         el-table-column.operation-column(
           v-if="operation&&operation.length"
           label="操作"
-          slot="right")
+          slot="right"
+          :width="operationWidth")
           template(slot-scope="scope")
             ButtonGroup(
               :data="scope.row"
@@ -159,6 +160,15 @@ export default {
     },
     operation () {
       return buttonListReset(this.operationList, this.operationPreset)
+    },
+    operationWidth () {
+      const fontSize = 12
+      const buttonSize = 32
+      const gridSize = 10
+      return this.operation.reduce((result, item) => {
+        // 文字的长度+按钮的长度+间距
+        return result + item.label.length * fontSize + buttonSize + gridSize
+      }, 22 - gridSize)
     },
     toolbar () {
       return buttonListReset(this.toolbarList, this.toolbarPreset)
