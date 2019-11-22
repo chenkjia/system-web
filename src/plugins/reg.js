@@ -1,40 +1,13 @@
-'use strict'
 
 import Vue from 'vue'
-import md5 from 'md5'
 import request from '@/utils/request'
-
-export function get (props) {
-  return request({
-    method: 'get',
-    ...props
-  })
-}
-
-export function create (props) {
-  return request({
-    method: 'post',
-    ...props
-  })
-}
-
-export function update (props) {
-  return request({
-    method: 'put',
-    ...props
-  })
-}
-
-export function remove (props) {
-  return request({
-    method: 'delete',
-    ...props
-  })
-}
-
-export function $md5 (data) {
-  return md5(data + 'dXiN666')
-}
+import encryption from './encryption'
+import {
+  get,
+  create,
+  update,
+  remove
+} from './axios'
 
 Plugin.install = function (Vue, options) {
   Vue.axios = request
@@ -42,7 +15,7 @@ Plugin.install = function (Vue, options) {
   Object.defineProperties(Vue.prototype, {
     $md5: {
       get () {
-        return $md5
+        return encryption
       }
     },
     $axios: {
