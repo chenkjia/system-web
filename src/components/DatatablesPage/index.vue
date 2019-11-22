@@ -51,7 +51,7 @@
         label-width="100px"
         :dataInit="createData"
         :formFields="createFields"
-        :buttonList="createButtonList")
+        :buttonList="createButtons")
     el-dialog.dataform-dialog(
       title="编辑"
       :visible.sync="updateDialogVisible"
@@ -65,7 +65,7 @@
         label-width="100px"
         :dataInit="updateData"
         :formFields="updateFields"
-        :buttonList="updateButtonList")
+        :buttonList="updateButtons")
 </template>
 <script>
 import { pick, isString, defaultsDeep } from 'lodash'

@@ -8,7 +8,6 @@
     :createList="createList"
     :updateList="updateList"
     :createButtonList="createButtonList"
-    :updateButtonList="updateButtonList"
     :toolbarList="toolbarList"
     :operationList="operationList")
     //- el-dialog.dataform-dialog(
@@ -61,30 +60,6 @@ export default {
           this.$create({ url: this.$refs.DatatablesPage.resource, data }).then(res => {
             if (res.code === 0) {
               this.$refs.DatatablesPage.createDialogVisible = false
-              this.$refs.DatatablesPage.getList()
-            }
-          })
-        }
-      }],
-      updateButtonList: [{
-        label: '取 消',
-        func: () => {
-          this.$refs.DatatablesPage.updateDialogVisible = false
-        }
-      }, {
-        label: '确 定',
-        type: 'primary',
-        func: (data) => {
-          data.password = this.$md5(data.password)
-          this.$update({
-            url: this.$refs.DatatablesPage.resource,
-            params: {
-              _id: this.$refs.DatatablesPage.updateFormId
-            },
-            data
-          }).then(res => {
-            if (res.code === 0) {
-              this.$refs.DatatablesPage.updateDialogVisible = false
               this.$refs.DatatablesPage.getList()
             }
           })

@@ -8,8 +8,15 @@ export default {
       default: () => ([])
     },
     updateButtonList: {
-      type: Array,
-      default: () => ([{
+      type: Array
+    }
+  },
+  data () {
+    return {
+      updateFormId: null,
+      updateData: {},
+      updateDialogVisible: false,
+      updateButtons: this.updateButtonList || [{
         label: '取 消',
         func: () => {
           this.updateDialogVisible = false
@@ -18,14 +25,7 @@ export default {
         label: '确 定',
         type: 'primary',
         func: this.updateFormSubmit
-      }])
-    }
-  },
-  data () {
-    return {
-      updateFormId: null,
-      updateData: {},
-      updateDialogVisible: false
+      }]
     }
   },
   computed: {
