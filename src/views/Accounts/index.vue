@@ -8,18 +8,41 @@
     :updateList="updateList"
     :toolbarList="toolbarList"
     :operationList="operationList")
+    el-dialog.dataform-dialog(
+      title="修改密码"
+      :visible.sync="changeDialogVisible"
+      :append-to-body="true"
+      width="25%")
+      Dataform(
+        slot="footer"
+        ref="changeForm"
+        size="small"
+        label-position="right"
+        label-width="100px"
+        :dataInit="changeData"
+        :formFields="changeFields"
+        :buttonList="changeButtonList")
 </template>
 <script>
+import { omit } from 'lodash'
 const columnList = ['jobNumber', 'username', 'fullname', 'photo', 'mobile', 'enabled', 'remark']
 export default {
   name: 'accounts',
   data () {
     return {
       toolbarList: ['create'],
-      operationList: ['update', 'delete'],
+      operationList: ['update', 'delete', {
+        name: 'change',
+        label: '修改密码',
+        func (data) {
+          this.updateFormId = data._id
+          this.updateData = omit(data, ['_id'])
+          this.updateDialogVisible = true
+        }
+      }],
       columnList,
       filterList: ['jobNumber', 'username', 'fullname', 'mobile', 'enabled'],
-      createList: columnList,
+      createList: ['jobNumber', 'username', 'password', 'fullname', 'photo', 'mobile', 'enabled', 'remark'],
       updateList: columnList,
       fields: {
         jobNumber: {
@@ -36,8 +59,21 @@ export default {
           form: {
             formtype: 'input'
           },
+          update: {
+            formtype: 'render'
+          },
+          render: {
+            type: 'text'
+          },
           filter: {
             like: true
+          }
+        },
+        password: {
+          label: '密码',
+          form: {
+            formtype: 'input',
+            'show-password': true
           }
         },
         fullname: {
@@ -71,6 +107,9 @@ export default {
           label: '照片',
           form: {
             formtype: 'file'
+          },
+          render: {
+            type: 'file'
           }
         },
         remark: {

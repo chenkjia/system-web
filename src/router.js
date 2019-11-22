@@ -12,29 +12,33 @@ export default new Router({
       redirect: 'menus'
     },
     {
+      path: '/login',
+      redirect: 'menus'
+    },
+    {
       path: '/menus',
       name: 'menus',
-      component: () => import(/* webpackChunkName: "menus" */ './views/Menus.vue')
+      component: () => import(/* webpackChunkName: "menus" */ './views/Menus')
     },
     {
       path: '/organizations',
       name: 'organizations',
-      component: () => import(/* webpackChunkName: "organizations" */ './views/Organizations.vue')
+      component: () => import(/* webpackChunkName: "organizations" */ './views/Organizations')
     },
     {
       path: '/accounts',
       name: 'accounts',
-      component: () => import(/* webpackChunkName: "accounts" */ './views/Accounts.vue')
+      component: () => import(/* webpackChunkName: "accounts" */ './views/Accounts')
     },
     {
       path: '/roles',
       name: 'roles',
-      component: () => import(/* webpackChunkName: "roles" */ './views/Roles.vue')
+      component: () => import(/* webpackChunkName: "roles" */ './views/Roles')
     },
     {
       path: '/logs',
       name: 'logs',
-      component: () => import(/* webpackChunkName: "logs" */ './views/Logs.vue')
+      component: () => import(/* webpackChunkName: "logs" */ './views/Logs')
     }
   ]
 })
