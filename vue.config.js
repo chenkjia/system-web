@@ -3,7 +3,8 @@ const version = require('./version.json')
 module.exports = {
   configureWebpack: {
     externals: {
-      'vue': 'Vue'
+      'vue': 'Vue',
+      'moment': 'moment'
     }
   },
   chainWebpack: process.env.NODE_ENV === 'production' ? config => {
