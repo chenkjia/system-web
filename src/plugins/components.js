@@ -23,6 +23,7 @@ import Vue from 'vue'
 
 import {
   ButtonGroup,
+  InfoRender,
   Dataform,
   Datatables,
   DatatablesPage
@@ -53,6 +54,7 @@ import {
 // Vue.prototype.$prompt = MessageBox.prompt
 
 Vue.use(ButtonGroup)
+Vue.use(InfoRender)
 Vue.use(Dataform)
 Vue.use(Datatables)
 Vue.use(DatatablesPage)

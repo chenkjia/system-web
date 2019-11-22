@@ -15,20 +15,16 @@
       :key="column.name"
       :prop="column.name")
       template(slot-scope="scope")
-        DatatablesFiles(
-          v-if="column.type==='file'"
-          :images="scope|fileFilter")
-        span(v-else,slot-scope="scope") {{scope|textFilter}}
+        InfoRender(
+          :field="column"
+          :value="scope.row[scope.column.property]"
+        )
     slot(
       name="right")
 </template>
 <script>
-import DatatablesFiles from './DatatablesFiles'
 export default {
   name: 'Datatables',
-  components: {
-    DatatablesFiles
-  },
   props: {
     data: {
       type: Array,
@@ -45,10 +41,6 @@ export default {
         return column.label === '操作' ? 'operation-column' : ''
       }
     }
-  },
-  filters: {
-    textFilter: (scope) => scope.row[scope.column.property],
-    fileFilter: (scope) => scope.row[scope.column.property].map(({ url }) => 'http://localhost:8080/' + url)
   },
   methods: {
     sortChange (column, prop, order) {

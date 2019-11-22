@@ -8,6 +8,7 @@
       :label="field.label")
       component(
         :is="dataFormItem[field.form.formtype]"
+        :field="field"
         v-bind="field.form"
         v-model="formData[field.name]")
     el-form-item.dataform-button-item

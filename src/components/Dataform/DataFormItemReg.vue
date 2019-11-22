@@ -11,7 +11,8 @@ const dataFormItem = {
   timePicker: 'el-time-picker',
   datePicker: 'el-date-picker',
   file: 'DataformUpload',
-  icon: 'DataformIcon'
+  icon: 'DataformIcon',
+  render: 'InfoRender'
 }
 
 export default {
