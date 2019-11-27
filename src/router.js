@@ -9,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: 'menus'
+      redirect: 'dictionaries'
     },
     {
       path: '/login',
@@ -19,6 +19,11 @@ export default new Router({
       path: '/menus',
       name: 'menus',
       component: () => import(/* webpackChunkName: "menus" */ './views/Menus')
+    },
+    {
+      path: '/dictionaries',
+      name: 'dictionaries',
+      component: () => import(/* webpackChunkName: "menus" */ './views/Dictionaries')
     },
     {
       path: '/organizations',
