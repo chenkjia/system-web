@@ -4,6 +4,7 @@ import DataformComponent from './Dataform'
 import DatatablesComponent from './Datatables'
 import DatatablesPageComponent from './DatatablesPage'
 import InfoRenderComponent from './InfoRender'
+import DoubleColumnLayoutComponent from './DoubleColumnLayout'
 
 export const ButtonGroup = {
   install: (Vue) => Vue.component('ButtonGroup', ButtonGroupComponent)
@@ -23,4 +24,8 @@ export const DatatablesPage = {
 
 export const InfoRender = {
   install: (Vue) => Vue.component('InfoRender', InfoRenderComponent)
+}
+
+export const DoubleColumnLayout = {
+  install: (Vue) => Vue.component('DoubleColumnLayout', DoubleColumnLayoutComponent)
 }
