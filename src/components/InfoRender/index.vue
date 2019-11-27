@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    DatatablesFiles(
+    InfoRenderFiles(
       v-if="field.render&&field.render.type==='file'"
       :images="value|fileFilter")
     span(v-else) {{result}}
@@ -8,13 +8,13 @@
 
 <script>
 
-import DatatablesFiles from './DatatablesFiles'
+import InfoRenderFiles from './InfoRenderFiles'
 import isFunction from 'lodash/isFunction'
 import renderList from './renderList'
 export default {
   name: 'InfoRender',
   components: {
-    DatatablesFiles
+    InfoRenderFiles
   },
   props: {
     field: {

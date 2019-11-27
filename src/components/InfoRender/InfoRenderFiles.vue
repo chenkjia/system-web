@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    el-image.datatables-files(
+    el-image.infoRender-files(
       style="height: 24px;"
       v-for="image in images"
       :key="image"
@@ -16,7 +16,7 @@
 <script>
 
 export default {
-  name: 'DatatablesFiles',
+  name: 'InfoRenderFiles',
   props: {
     images: {
       type: Array,
@@ -38,6 +38,8 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.datatables-files /deep/ .el-image__inner
-  width: auto
+.infoRender-files
+  vertical-align: top
+  /deep/ .el-image__inner
+    width: auto
 </style>
