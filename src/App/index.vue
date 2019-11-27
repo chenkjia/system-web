@@ -79,6 +79,7 @@ export default {
   height: 100%
   display: flex
   flex-direction: column
+  padding: 0
 #app-header
   z-index: 1999
   background-color: #FFF

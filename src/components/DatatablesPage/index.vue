@@ -1,20 +1,21 @@
 <template lang="pug">
-  div.datatablespage
+  .datatablespage
     slot(name="prev")
     slot(name="header")
       .datatablespage-header
         ButtonGroup.datatablespage-toolbar(
           :buttonList="toolbar")
-        Dataform.datatablespage-filter(
-          slot="footer"
-          ref="filterForm"
-          size="mini"
-          :inline="true"
-          :dataInit="filterData"
-          :formFields="filterFields"
-          :buttonList="filterButtonList")
+        .datatablespage-filter-wrapper
+          Dataform.datatablespage-filter(
+            slot="footer"
+            ref="filterForm"
+            size="mini"
+            :inline="true"
+            :dataInit="filterData"
+            :formFields="filterFields"
+            :buttonList="filterButtonList")
     slot(name="table")
-      Datatables(
+      Datatables.datatablespage-table(
         height="1"
         :data="tableData",
         :columns="columns"
@@ -203,16 +204,39 @@ export default {
 </script>
 <style lang="sass" scoped>
 .datatablespage
-  height: 100%
   display: flex
   flex-direction: column
   flex: 1
+  padding: 20px
+  overflow: hidden
 .datatablespage-header
+  max-height: 29px
   margin-bottom: 1em
-  display: flex;
+  display: flex
   justify-content: space-between
+  .datatablespage-filter-wrapper
+    overflow: hidden
+    &:hover,&:focus-within
+      overflow: visible
   .datatablespage-filter
+    // text-align: right
     margin-bottom: -18px
+    &:hover,&:focus-within
+      border-radius: 4px
+      position: relative
+      z-index: 999
+      background: #fff
+      padding: 12px
+      margin: -12px
+      box-shadow: 0 0 5px 1px #ddd
+    /deep/ .el-form-item--mini.el-form-item
+      // margin-left: 10px
+      // margin-right: 0
+      // margin-bottom: 0
+  .datatablespage-toolbar
+    margin-right: 1em
+.datatablespage-table
+  flex: 1
 .datatablespage-info
   margin-top: 1em
 .datatablespage-pagination
@@ -221,9 +245,4 @@ export default {
   padding: 5px 0 4px
 .dataform-dialog /deep/ .el-dialog__body
   padding: 0
-</style>
-
-<style lang="sass">
-.el-table--small .operation-column
-  padding: 5px 0 4px
 </style>
