@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import './plugins/reg'
-import App from './App'
+import App from './views/App'
 import router from './router'
 import './plugins/components.js'
 import './assets/sass/main.sass'

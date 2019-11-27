@@ -29,7 +29,7 @@ import AppLogo from './AppLogo'
 import AppProfile from './AppProfile'
 
 export default {
-  name: 'app',
+  name: 'AppFrame',
   components: {
     AppLogo,
     AppProfile
