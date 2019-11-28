@@ -39,6 +39,7 @@
           :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="recordsFiltered")
+    slot
     el-dialog.dataform-dialog(
       title="添加"
       :visible.sync="createDialogVisible"
