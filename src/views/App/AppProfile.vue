@@ -1,17 +1,28 @@
 <template lang="pug">
-  el-dropdown(trigger="click")
+  el-dropdown(trigger="click",@command="handleCommand")
     .app-profile-toggle
       | 下拉菜单
       i.el-icon-arrow-down.el-icon--right
     el-dropdown-menu(slot="dropdown")
-      el-dropdown-item 修改密码
-      el-dropdown-item(divided) 退出登录
+      el-dropdown-item(command="changePassword") 修改密码
+      el-dropdown-item(command="logout",divided) 退出登录
 </template>
 
 <script>
 
 export default {
-  name: 'AppProfile'
+  name: 'AppProfile',
+  methods: {
+    handleCommand (command) {
+      this[command]()
+    },
+    changePassword () {
+      console.log('changePassword')
+    },
+    logout () {
+      this.$router.push('logout')
+    }
+  }
 }
 </script>
 

@@ -8,6 +8,7 @@
     :buttonList="loginButtons")
 </template>
 <script>
+import { cloneDeep } from 'lodash'
 
 export default {
   name: 'home',
@@ -36,8 +37,18 @@ export default {
     }
   },
   methods: {
-    login () {
-      console.log('login')
+    login (data) {
+      const result = cloneDeep(data)
+      result.password = this.$md5(data.password)
+      console.log(data)
+      this.$post({
+        url: 'login',
+        data: result
+      }).then(res => {
+        if (res.code === 0) {
+          console.log('sdf')
+        }
+      })
     }
   }
 }

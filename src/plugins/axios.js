@@ -9,14 +9,14 @@ export function get (props) {
   })
 }
 
-export function create (props) {
+export function post (props) {
   return request({
     method: 'post',
     ...props
   })
 }
 
-export function update (props) {
+export function put (props) {
   return request({
     method: 'put',
     ...props

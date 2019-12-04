@@ -4,8 +4,8 @@ import request from '@/utils/request'
 import encryption from './encryption'
 import {
   get,
-  create,
-  update,
+  post,
+  put,
   remove
 } from './axios'
 
@@ -28,14 +28,24 @@ Plugin.install = function (Vue, options) {
         return get
       }
     },
+    $post: {
+      get () {
+        return post
+      }
+    },
+    $put: {
+      get () {
+        return put
+      }
+    },
     $create: {
       get () {
-        return create
+        return post
       }
     },
     $update: {
       get () {
-        return update
+        return put
       }
     },
     $remove: {
