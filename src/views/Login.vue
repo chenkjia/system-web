@@ -9,6 +9,7 @@
 </template>
 <script>
 import { cloneDeep } from 'lodash'
+import { setToken, getUserInfo } from '@/utils/auth'
 
 export default {
   name: 'home',
@@ -33,6 +34,11 @@ export default {
         label: '登录',
         type: 'primary',
         func: this.login
+      },
+      {
+        label: '测试',
+        type: 'primary',
+        func: getUserInfo
       }]
     }
   },
@@ -40,13 +46,12 @@ export default {
     login (data) {
       const result = cloneDeep(data)
       result.password = this.$md5(data.password)
-      console.log(data)
       this.$post({
         url: 'login',
         data: result
       }).then(res => {
         if (res.code === 0) {
-          console.log('sdf')
+          setToken(res.data.token)
         }
       })
     }

@@ -1,13 +1,13 @@
 
 import Vue from 'vue'
 import request from '@/utils/request'
-import encryption from './encryption'
+import encryption from '@/utils/encryption'
 import {
   get,
   post,
   put,
   remove
-} from './axios'
+} from '@/utils/axios'
 
 Plugin.install = function (Vue, options) {
   Vue.axios = request
