@@ -1,13 +1,9 @@
 const getters = {
-  // sidebar: state => state.app.sidebar,
-  // size: state => state.app.size,
-  // device: state => state.app.device,
-  // visitedViews: state => state.tagsView.visitedViews,
-  // cachedViews: state => state.tagsView.cachedViews,
-  // token: state => state.user.token,
+  visitedViews: state => state.tagsView.visitedViews,
+  cachedViews: state => state.tagsView.cachedViews,
   avatar: state => state.user.avatar,
-  fullname: state => state.user.fullname
-  // introduction: state => state.user.introduction,
+  fullname: state => state.user.fullname,
+  menus: state => state.user.menus
   // roles: state => state.user.roles,
   // permission_routes: state => state.permission.routes,
   // errorLogs: state => state.errorLog.logs

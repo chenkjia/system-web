@@ -1,58 +1,35 @@
 <template lang="pug">
   el-container#app-frame
     el-header#app-header
-      //- i#menu-toggle.iconfont(
-      //-   :class="{ iconoutdent: asideActive, iconindent: !asideActive }"
-      //-   @click="changeAsideActive"
-      //- )
       AppLogo
       #app-navbar
         AppProfile(
           :fullname="fullname",
           :avatar="avatar")
     el-container#app-container
-      el-aside#app-menu(
-        :width="asideActive?'200px':'60px'")
-        el-tooltip(
-          v-for="menu in menus"
-          :key="menu._id"
-          effect="dark"
-          :content="menu.label"
-          placement="right")
-          router-link.app-menu-item(
-            :to="menu.url")
-            span.iconfont(:class="'icon'+menu.icon")
-      el-main#app-main
-        router-view
+      AppMenu(:menus="menus")
+      .app-tagsview-container
+        TagsView(v-if="menus.length")
+        AppMain
 </template>
 
 <script>
 import AppLogo from './AppLogo'
 import AppProfile from './AppProfile'
+import AppMenu from './AppMenu'
+import AppMain from './AppMain'
+import TagsView from './TagsView'
 
 export default {
   name: 'AppFrame',
   components: {
     AppLogo,
-    AppProfile
-  },
-  data () {
-    return {
-      menus: [],
-      asideActive: false
-    }
+    AppProfile,
+    AppMenu,
+    AppMain,
+    TagsView
   },
   methods: {
-    getMenus () {
-      this.$get({
-        url: 'menus'
-      }).then(req => {
-        this.menus = req.data.data
-      })
-    },
-    changeAsideActive () {
-      this.asideActive = !this.asideActive
-    },
     removeStartLoading () {
       if (document.getElementById('loading')) {
         document.body.removeChild(document.getElementById('loading'))
@@ -60,6 +37,9 @@ export default {
     }
   },
   computed: {
+    menus () {
+      return this.$store.getters.menus
+    },
     fullname () {
       return this.$store.getters.fullname
     },
@@ -70,7 +50,7 @@ export default {
   created () {
     this.removeStartLoading()
     this.$store.dispatch('user/getInfo')
-    this.getMenus()
+    this.$store.dispatch('user/getMenus')
   }
 }
 </script>
@@ -86,11 +66,6 @@ export default {
   right: 0
 #app-container
   height: 100%
-#app-main
-  height: 100%
-  display: flex
-  flex-direction: column
-  padding: 0
 #app-header
   z-index: 1999
   background-color: #FFF
@@ -103,20 +78,9 @@ export default {
   font-size: 28px
   padding: 0 16px
   cursor: pointer
-#app-menu
-  border-right: 1px solid rgba(0,0,0,.05)
-  background-color: #FFF
-  .app-menu-item
-    display: block
-    color: #666
-    background-color: #FFF
-    text-decoration: none
-    &:hover
-      color: #333
-      background-color: #eee
-    .iconfont
-      display: block
-      padding: 0 18px
-      line-height: 60px
-      font-size: 24px
+.app-tagsview-container
+  width: 1px
+  flex: 1
+  display: flex
+  flex-direction: column
 </style>

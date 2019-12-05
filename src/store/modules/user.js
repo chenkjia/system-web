@@ -1,8 +1,9 @@
-import { getUserInfo } from '@/utils/auth'
+import { getUserInfo, getMenus } from '@/utils/auth'
 
 const state = {
   fullname: '',
-  avatar: ''
+  avatar: '',
+  menus: []
 }
 
 const mutations = {
@@ -11,6 +12,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_MENUS: (state, menus) => {
+    state.menus = menus
   }
 }
 
@@ -25,6 +29,21 @@ const actions = {
         const { fullname, photo } = data.account
         commit('SET_FULLNAME', fullname)
         commit('SET_AVATAR', photo[0])
+        resolve(data)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  getMenus ({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      getMenus().then(response => {
+        const { data } = response.data
+        if (!data) {
+          reject(new Error('没获取到菜单'))
+        }
+        console.log(data)
+        commit('SET_MENUS', data)
         resolve(data)
       }).catch(error => {
         reject(error)

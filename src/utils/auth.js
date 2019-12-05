@@ -11,8 +11,15 @@ export const setToken = (token) => {
 export const removeToken = () => {
   return localStorage.removeItem('token')
 }
+
 export const getUserInfo = () => {
   return get({
     url: 'userInfo'
+  })
+}
+
+export const getMenus = () => {
+  return get({
+    url: 'menus'
   })
 }
