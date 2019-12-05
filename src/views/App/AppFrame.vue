@@ -7,7 +7,9 @@
       //- )
       AppLogo
       #app-navbar
-        AppProfile
+        AppProfile(
+          :fullname="fullname",
+          :avatar="avatar")
     el-container#app-container
       el-aside#app-menu(
         :width="asideActive?'200px':'60px'")
@@ -57,8 +59,17 @@ export default {
       }
     }
   },
+  computed: {
+    fullname () {
+      return this.$store.getters.fullname
+    },
+    avatar () {
+      return this.$store.getters.avatar && this.$store.getters.avatar.url
+    }
+  },
   created () {
     this.removeStartLoading()
+    this.$store.dispatch('user/getInfo')
     this.getMenus()
   }
 }

@@ -9,7 +9,7 @@
 </template>
 <script>
 import { cloneDeep } from 'lodash'
-import { setToken, getUserInfo } from '@/utils/auth'
+import { setToken } from '@/utils/auth'
 
 export default {
   name: 'home',
@@ -34,11 +34,6 @@ export default {
         label: '登录',
         type: 'primary',
         func: this.login
-      },
-      {
-        label: '测试',
-        type: 'primary',
-        func: getUserInfo
       }]
     }
   },
@@ -52,6 +47,7 @@ export default {
       }).then(res => {
         if (res.code === 0) {
           setToken(res.data.token)
+          this.$router.push('/')
         }
       })
     }

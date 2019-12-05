@@ -14,7 +14,7 @@ module.exports = {
   } : () => {},
   pluginOptions: {
     dll: {
-      entry: ['vue', 'vue-router', 'axios']
+      entry: ['vue', 'vue-router', 'vuex', 'axios']
       // entry: {
       //   vue: ['vue', 'vue-router'],
       //   request: ['axios', '@/utils/request']

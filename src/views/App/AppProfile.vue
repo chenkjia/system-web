@@ -1,7 +1,8 @@
 <template lang="pug">
   el-dropdown(trigger="click",@command="handleCommand")
     .app-profile-toggle
-      | 下拉菜单
+      el-avatar.app-profile-avatar(:size="32",:src="avatar")
+      | {{fullname}}
       i.el-icon-arrow-down.el-icon--right
     el-dropdown-menu(slot="dropdown")
       el-dropdown-item(command="changePassword") 修改密码
@@ -12,6 +13,13 @@
 
 export default {
   name: 'AppProfile',
+  props: {
+    fullname: String,
+    avatar: {
+      type: String,
+      default: '/app-profile-avatar.png'
+    }
+  },
   methods: {
     handleCommand (command) {
       this[command]()
@@ -37,4 +45,7 @@ export default {
   &:hover
     color: #333
     background-color: #eee
+  .app-profile-avatar
+    float: left
+    margin: 14px 14px 14px 0
 </style>

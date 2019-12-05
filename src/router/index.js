@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { getToken, removeToken, getUserInfo } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
+
+// import store from '@/store/'
+// import user from '@/store/modules/user'
+
 Vue.use(Router)
 const router = new Router({
   mode: 'history',
@@ -19,11 +23,13 @@ const router = new Router({
     },
     {
       path: '/',
-      beforeEnter: (to, from, next) => {
-        // 第一次load页面的时候使用token获取登录账户信息
-        getUserInfo()
-        next()
-      },
+      // beforeEnter: (to, from, next) => {
+      //   // 第一次load页面的时候使用token获取登录账户信息
+      //   console.log(user.actions)
+      //   user.actions.getInfo(store)
+      //   // getUserInfo()
+      //   next()
+      // },
       redirect: '/menus',
       component: () => import(/* webpackChunkName: "appFrame" */ '@/views/App/AppFrame'),
       children: [
@@ -62,7 +68,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('beforeEach')
   // 每次跳转判断是否有token如果没有则跳转到登录页
   if (getToken() || to.name === 'login') {
     next()
