@@ -13,11 +13,11 @@
         span.el-tag__close.el-icon-close(
           v-if="!isAffix(tag)"
           @click.prevent.stop="closeSelectedTag(tag)")
-    ul.contextmenu(
+    ul.el-dropdown-menu.el-dropdown-menu--small(
       v-show="visible"
       :style="{left:left+'px',top:top+'px'}")
-      li(v-if="!isAffix(selectedTag)",@click="closeSelectedTag(selectedTag)") 关闭
-      li(@click="closeOthersTags") 关闭其它页面
+      li.el-dropdown-menu__item(v-if="!isAffix(selectedTag)",@click="closeSelectedTag(selectedTag)") 关闭
+      li.el-dropdown-menu__item(@click="closeOthersTags") 关闭其它页面
 </template>
 
 <script>
@@ -154,22 +154,4 @@ export default {
         margin-left: 20px
       &:last-of-type
         margin-right: 20px
-  .contextmenu
-    margin: 0
-    background: #fff
-    z-index: 3000
-    position: absolute
-    list-style-type: none
-    padding: 5px 0
-    border-radius: 4px
-    font-size: 12px
-    font-weight: 400
-    color: #333
-    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3)
-    li
-      margin: 0
-      padding: 7px 16px
-      cursor: pointer
-      &:hover
-        background: #eee
 </style>
