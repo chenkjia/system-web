@@ -1,11 +1,14 @@
 <template lang="pug">
-  Dataform(
-    size="large"
-    label-position="right"
-    label-width="100px"
-    :dataInit="loginData"
-    :formFields="loginFields"
-    :buttonList="loginButtons")
+  .login-wrapper
+    .login-bg
+      .login-container
+        div.app-logo 智慧水务平台
+        Dataform.login-form(
+          size="large"
+          label-position="top"
+          :dataInit="loginData"
+          :formFields="loginFields"
+          :buttonList="loginButtons")
 </template>
 <script>
 import { cloneDeep } from 'lodash'
@@ -54,6 +57,32 @@ export default {
   }
 }
 </script>
-<style scoped>
-@import url("//unpkg.com/element-ui@2.10.1/lib/theme-chalk/index.css")
+<style lang="sass" scoped>
+.login-wrapper
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background: url(/bg.jpg) no-repeat
+  background-size: cover
+.login-bg
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: 100%
+  overflow: auto
+.login-container
+  width: 300px
+  display: flex
+  flex-direction: column
+  padding: 20px 35px
+  background: rgba(255,255,255,0.8)
+  position: absolute
+  box-shadow: 0 0 20px -4px rgba(0, 0, 0, 0.1)
+.app-logo
+  font-size: 24px
+  line-height: 60px
+  color: #666
 </style>
