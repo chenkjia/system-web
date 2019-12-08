@@ -5,7 +5,7 @@
       .datatablespage-header
         ButtonGroup.datatablespage-toolbar(
           :buttonList="toolbar")
-        .datatablespage-filter-wrapper
+        .datatablespage-filter-wrapper(v-if="filterList.length")
           Dataform.datatablespage-filter(
             slot="footer"
             ref="filterForm"
@@ -32,6 +32,7 @@
     slot(name="footer")
       .datatablespage-info
         el-pagination.datatablespage-pagination(
+          v-if="hasPage"
           @size-change="pageSizeChange"
           @current-change="pageCurrentChange"
           :current-page="pageCurrent"
@@ -189,8 +190,8 @@ export default {
       this.$get({
         url: this.resource,
         params: {
-          limit: this.pageSize,
-          skip: (this.pageCurrent - 1) * this.pageSize,
+          limit: this.hasPage ? 9999999 : this.pageSize,
+          skip: this.hasPage ? 0 : (this.pageCurrent - 1) * this.pageSize,
           sort: this.sortData,
           filter: this.filterData,
           fields: this.fields
@@ -243,7 +244,7 @@ export default {
     margin-right: 1em
 .datatablespage-table
   flex: 1
-.datatablespage-info
+.datatablespage-info>div
   margin-top: 1em
 .datatablespage-pagination
   text-align: right

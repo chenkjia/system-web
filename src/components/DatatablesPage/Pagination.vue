@@ -1,5 +1,11 @@
 <script>
 export default {
+  props: {
+    hasPage: {
+      type: Boolean,
+      default: true
+    }
+  },
   data () {
     return {
       recordsFiltered: 100,
