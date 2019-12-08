@@ -8,8 +8,8 @@
           :avatar="avatar")
     el-container#app-container
       AppMenu(:menus="menus")
-      .app-tagsview-container
-        TagsView(v-if="menus.length")
+      .app-tagsview-container(v-if="menus.length")
+        TagsView
         AppMain
 </template>
 
