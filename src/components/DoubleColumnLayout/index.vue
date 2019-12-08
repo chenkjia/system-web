@@ -102,8 +102,9 @@ export default {
     margin-right: 4px
   .double-column-layout-btn
     position: absolute
-    padding: 2px
+    padding: 0
     box-sizing: inherit
+    z-index: 998
   .double-column-layout-leftBtn,
   .double-column-layout-rightBtn
     top: 50%

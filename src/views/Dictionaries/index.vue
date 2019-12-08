@@ -4,7 +4,10 @@
       slot="main"
       @selectDictionaryGroup="selectDictionaryGroup"
     )
-    DictionaryOptions(slot="sub")
+    DictionaryOptions(
+      slot="sub"
+      v-if="dictionaryGroupId!==''"
+      :dictionaryGroupId="dictionaryGroupId")
 </template>
 <script>
 import DictionaryGroups from './DictionaryGroups'
@@ -18,12 +21,12 @@ export default {
   data () {
     return {
       layoutState: 'main',
-      dictionaryGroup: ''
+      dictionaryGroupId: ''
     }
   },
   methods: {
     selectDictionaryGroup (group) {
-      this.dictionaryGroup = group.name
+      this.dictionaryGroupId = group._id
       this.setLayoutBoth()
     },
     setLayoutBoth () {

@@ -176,6 +176,11 @@ export default {
       return buttonListReset(this.toolbarList, this.toolbarPreset)
     }
   },
+  watch: {
+    resource () {
+      this.getList()
+    }
+  },
   mounted () {
     this.getList()
   },

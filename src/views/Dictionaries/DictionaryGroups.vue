@@ -1,6 +1,6 @@
 <template lang="pug">
   DatatablesPage(
-    resource="menus"
+    resource="dictionaries"
     :fields="fields"
     :columnList="columnList"
     :filterList="filterList"
@@ -10,20 +10,34 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['label', 'type', 'url', 'icon', 'enabled', 'remark']
 export default {
-  name: 'menus',
+  name: 'DictionaryGroups',
   data () {
     return {
       toolbarList: ['create'],
-      operationList: ['update', 'delete'],
-      columnList,
-      filterList: ['label', 'type', 'enabled'],
-      createList: columnList,
-      updateList: columnList,
+      operationList: ['update', 'delete', {
+        name: 'options',
+        label: '编辑字典项',
+        func: (data) => {
+          this.$emit('selectDictionaryGroup', data)
+        }
+      }],
+      columnList: ['sign', 'label', 'options', 'enabled', 'remark'],
+      filterList: ['sign', 'label', 'enabled'],
+      createList: ['sign', 'label', 'enabled', 'remark'],
+      updateList: ['sign', 'label', 'enabled', 'remark'],
       fields: {
+        sign: {
+          label: '字典标识',
+          form: {
+            formtype: 'input'
+          },
+          filter: {
+            like: true
+          }
+        },
         label: {
-          label: '菜单名称',
+          label: '字典名称',
           form: {
             formtype: 'input'
           },
@@ -31,32 +45,9 @@ export default {
             like: true
           }
         },
-        type: {
-          label: '菜单类型',
-          form: {
-            formtype: 'select'
-          },
-          filter: {
-            formtype: 'select'
-          }
-        },
-        url: {
-          label: '路径',
-          form: {
-            formtype: 'input'
-          },
-          filter: {
-            like: true
-          }
-        },
-        icon: {
-          label: '图标',
-          form: {
-            formtype: 'icon'
-          },
-          filter: {
-            like: true
-          }
+        options: {
+          label: '选项',
+          render: data => data.map(({ label }) => label).join(',')
         },
         enabled: {
           label: '是否启用',
