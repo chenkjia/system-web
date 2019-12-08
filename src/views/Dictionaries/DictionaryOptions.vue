@@ -1,17 +1,17 @@
 <template lang="pug">
   DatatablesPage(
     ref="DatatablesPage"
+    :hasPage="false"
     :resource="resource"
     :fields="fields"
     :columnList="columnList"
-    :filterList="filterList"
     :createList="createList"
     :updateList="updateList"
     :toolbarList="toolbarList"
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['value', 'label', 'remark']
+const columnList = ['value', 'label']
 export default {
   name: 'DictionaryOptions',
   props: {
@@ -27,7 +27,6 @@ export default {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columnList,
-      filterList: ['value', 'label'],
       createList: columnList,
       updateList: columnList,
       fields: {
