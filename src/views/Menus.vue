@@ -60,6 +60,9 @@ export default {
           },
           filter: {
             like: true
+          },
+          render: {
+            type: 'icon'
           }
         },
         enabled: {

@@ -3,6 +3,9 @@
     InfoRenderFiles(
       v-if="field.render&&field.render.type==='file'"
       :images="value|fileFilter")
+    span.iconfont(
+      v-else-if="field.render&&field.render.type==='icon'"
+      :class="`icon${value}`")
     span(v-else) {{result}}
 </template>
 
