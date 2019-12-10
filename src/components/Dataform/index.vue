@@ -38,7 +38,7 @@ export default {
   },
   data () {
     return {
-      formData: {}
+      formData: this.dataInit
     }
   },
   watch: {

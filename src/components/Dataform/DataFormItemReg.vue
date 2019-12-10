@@ -1,11 +1,12 @@
 <script>
 import DataformUpload from './DataformUpload'
 import DataformIcon from './DataformIcon'
+import DataformSelect from './DataformSelect'
 
 const dataFormItem = {
   input: 'el-input',
   inputNumber: 'el-input-number',
-  select: 'el-select',
+  select: 'DataformSelect',
   switch: 'el-switch',
   cascader: 'el-cascader',
   timePicker: 'el-time-picker',
@@ -18,7 +19,8 @@ const dataFormItem = {
 export default {
   components: {
     DataformUpload,
-    DataformIcon
+    DataformIcon,
+    DataformSelect
   },
   data () {
     return {
