@@ -108,14 +108,16 @@ export default {
           label: '角色',
           relation: 'roles',
           form: {
-            formtype: 'select',
-            multiple: true
-          },
-          filter: {
             formtype: 'select'
           },
+          create: {
+            multiple: true
+          },
+          update: {
+            multiple: true
+          },
           render: {
-            type: 'select'
+            type: 'multiselect'
           }
         },
         mobile: {

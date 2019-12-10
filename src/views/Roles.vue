@@ -41,6 +41,9 @@ export default {
           },
           filter: {
             like: true
+          },
+          render: {
+            type: 'multiselect'
           }
         },
         enabled: {
