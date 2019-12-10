@@ -42,7 +42,6 @@ const actions = {
         if (!data) {
           reject(new Error('没获取到菜单'))
         }
-        console.log(data)
         commit('SET_MENUS', data)
         resolve(data)
       }).catch(error => {
