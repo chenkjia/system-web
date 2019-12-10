@@ -48,7 +48,7 @@ export default {
         url: 'login',
         data: result
       }).then(res => {
-        if (res.code === 0) {
+        if (res.data) {
           setToken(res.data.token)
           this.$router.push('/')
         }
