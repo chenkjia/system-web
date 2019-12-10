@@ -43,6 +43,7 @@
     slot
     el-dialog.dataform-dialog(
       title="添加"
+      v-if="createDialogVisible"
       :visible.sync="createDialogVisible"
       :append-to-body="true"
       width="25%")
@@ -57,6 +58,7 @@
         :buttonList="createButtons")
     el-dialog.dataform-dialog(
       title="编辑"
+      v-if="updateDialogVisible"
       :visible.sync="updateDialogVisible"
       :append-to-body="true"
       width="25%")
@@ -71,7 +73,8 @@
         :buttonList="updateButtons")
 </template>
 <script>
-import { pick, isString, defaultsDeep } from 'lodash'
+import { pick, isString, defaultsDeep, values, cloneDeep, mapValues } from 'lodash'
+import { get } from '@/utils/axios'
 
 import Pagination from './Pagination'
 import CreateForm from './CreateForm'
@@ -122,6 +125,7 @@ export default {
     return {
       sortData: {},
       tableData: [],
+      resultFields: cloneDeep(this.fields),
       toolbarPreset: {
         create: {
           label: '添加',
@@ -157,7 +161,7 @@ export default {
   computed: {
     columns () {
       return this.columnList.map((item) => ({
-        ...this.fields[item],
+        ...this.resultFields[item],
         name: item
       }))
     },
@@ -175,6 +179,9 @@ export default {
     },
     toolbar () {
       return buttonListReset(this.toolbarList, this.toolbarPreset)
+    },
+    relationList () {
+      return values(this.fields).filter(({ relation }) => relation)
     }
   },
   watch: {
@@ -182,7 +189,16 @@ export default {
       this.getList()
     }
   },
-  mounted () {
+  async mounted () {
+    const relationList = this.relationList.map(({ relation }) => relation).join(',')
+    const relation = await this.getRelation(relationList)
+    this.resultFields = mapValues(this.resultFields, (field) => {
+      if (!field.relation) return field
+      return {
+        ...field,
+        options: relation[field.relation]
+      }
+    })
     this.getList()
   },
   methods: {
@@ -200,6 +216,18 @@ export default {
         this.recordsTotal = res.data.recordsTotal
         this.recordsFiltered = res.data.recordsFiltered
         this.tableData = res.data.data
+      })
+    },
+    getRelation: (relationList) => {
+      return new Promise((resolve, reject) => {
+        get({
+          url: 'relation',
+          params: {
+            relation: relationList
+          }
+        }).then((data) => {
+          resolve(data.data)
+        })
       })
     },
     sortChange ({ order, prop }) {

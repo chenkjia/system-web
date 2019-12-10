@@ -1,5 +1,4 @@
 <script>
-import { cloneDeep } from 'lodash'
 
 export default {
   props: {
@@ -30,7 +29,7 @@ export default {
   computed: {
     createFields () {
       return this.createList.map(item => {
-        const field = cloneDeep(this.fields[item])
+        const field = this.resultFields[item]
         return {
           name: item,
           ...field,
