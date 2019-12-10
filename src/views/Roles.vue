@@ -10,7 +10,7 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['label', 'enabled', 'remark']
+const columnList = ['label', 'menus', 'enabled', 'remark']
 
 export default {
   name: 'roles',
@@ -32,13 +32,28 @@ export default {
             like: true
           }
         },
+        menus: {
+          label: '菜单权限',
+          relation: 'menus',
+          form: {
+            formtype: 'select',
+            multiple: true
+          },
+          filter: {
+            like: true
+          }
+        },
         enabled: {
           label: '是否启用',
+          relation: 'enableOrDisable',
           form: {
             formtype: 'switch'
           },
           filter: {
             formtype: 'select'
+          },
+          render: {
+            type: 'select'
           }
         },
         remark: {

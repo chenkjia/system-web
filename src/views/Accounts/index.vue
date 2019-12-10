@@ -28,7 +28,7 @@
 <script>
 import { cloneDeep } from 'lodash'
 import changePassword from './changePassword'
-const columnList = ['jobNumber', 'username', 'fullname', 'photo', 'mobile', 'enabled', 'remark']
+const columnList = ['jobNumber', 'username', 'fullname', 'roles', 'photo', 'mobile', 'enabled', 'remark']
 export default {
   name: 'accounts',
   mixins: [changePassword],
@@ -41,8 +41,8 @@ export default {
         func: this.changeFormInit
       }],
       columnList,
-      filterList: ['jobNumber', 'username', 'fullname', 'mobile', 'enabled'],
-      createList: ['jobNumber', 'username', 'password', 'fullname', 'photo', 'mobile', 'enabled', 'remark'],
+      filterList: ['jobNumber', 'username', 'fullname', 'roles', 'mobile', 'enabled'],
+      createList: ['jobNumber', 'username', 'password', 'fullname', 'roles', 'photo', 'mobile', 'enabled', 'remark'],
       updateList: columnList,
       createButtonList: [{
         label: '取 消',
@@ -104,6 +104,20 @@ export default {
             like: true
           }
         },
+        roles: {
+          label: '角色',
+          relation: 'roles',
+          form: {
+            formtype: 'select',
+            multiple: true
+          },
+          filter: {
+            formtype: 'select'
+          },
+          render: {
+            type: 'select'
+          }
+        },
         mobile: {
           label: '联系电话',
           form: {
@@ -115,11 +129,15 @@ export default {
         },
         enabled: {
           label: '是否启用',
+          relation: 'enableOrDisable',
           form: {
             formtype: 'switch'
           },
           filter: {
             formtype: 'select'
+          },
+          render: {
+            type: 'select'
           }
         },
         photo: {

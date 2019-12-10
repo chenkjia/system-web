@@ -33,11 +33,15 @@ export default {
         },
         type: {
           label: '菜单类型',
+          relation: 'menuTypes',
           form: {
             formtype: 'select'
           },
           filter: {
             formtype: 'select'
+          },
+          render: {
+            type: 'select'
           }
         },
         url: {
@@ -60,11 +64,15 @@ export default {
         },
         enabled: {
           label: '是否启用',
+          relation: 'enableOrDisable',
           form: {
             formtype: 'switch'
           },
           filter: {
             formtype: 'select'
+          },
+          render: {
+            type: 'select'
           }
         },
         remark: {

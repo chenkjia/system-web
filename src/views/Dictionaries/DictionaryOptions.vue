@@ -11,7 +11,7 @@
     :operationList="operationList")
 </template>
 <script>
-const columnList = ['value', 'label']
+const columnList = ['value', 'label', 'enabled']
 export default {
   name: 'DictionaryOptions',
   props: {
@@ -46,6 +46,19 @@ export default {
           },
           filter: {
             like: true
+          }
+        },
+        enabled: {
+          label: '是否启用',
+          relation: 'enableOrDisable',
+          form: {
+            formtype: 'switch'
+          },
+          filter: {
+            formtype: 'select'
+          },
+          render: {
+            type: 'select'
           }
         },
         remark: {

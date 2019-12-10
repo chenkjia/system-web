@@ -51,11 +51,15 @@ export default {
         },
         enabled: {
           label: '是否启用',
+          relation: 'enableOrDisable',
           form: {
             formtype: 'switch'
           },
           filter: {
             formtype: 'select'
+          },
+          render: {
+            type: 'select'
           }
         },
         remark: {
