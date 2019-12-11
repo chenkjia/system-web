@@ -206,8 +206,8 @@ export default {
       this.$get({
         url: this.resource,
         params: {
-          limit: this.hasPage ? 9999999 : this.pageSize,
-          skip: this.hasPage ? 0 : (this.pageCurrent - 1) * this.pageSize,
+          limit: this.hasPage ? this.pageSize : 9999999,
+          skip: this.hasPage ? (this.pageCurrent - 1) * this.pageSize : 0,
           sort: this.sortData,
           filter: this.filterData,
           fields: this.fields
