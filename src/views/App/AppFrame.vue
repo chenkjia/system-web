@@ -49,8 +49,6 @@ export default {
   },
   created () {
     this.removeStartLoading()
-    this.$store.dispatch('user/getInfo')
-    this.$store.dispatch('user/getMenus')
   }
 }
 </script>

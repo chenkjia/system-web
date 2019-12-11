@@ -71,7 +71,7 @@ const actions = {
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
   },
-  addVisitedView ({ commit, rootGetters }, view) {
+  addVisitedView ({ commit }, view) {
     commit('ADD_VISITED_VIEW', view)
   },
   addCachedView ({ commit }, view) {

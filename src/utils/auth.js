@@ -17,9 +17,3 @@ export const getUserInfo = () => {
     url: 'userInfo'
   })
 }
-
-export const getMenus = () => {
-  return get({
-    url: 'menus'
-  })
-}
