@@ -11,7 +11,7 @@
         @click.middle.native="!isAffix(tag)?closeSelectedTag(tag):''"
         @contextmenu.prevent.native="openMenu(tag,$event)") {{ tag.title }}
         span.el-tag__close.el-icon-close(
-          v-if="!isAffix(tag)"
+          v-if="!isAffix(tag)&&visitedViews.length>1"
           @click.prevent.stop="closeSelectedTag(tag)")
     ul.el-dropdown-menu.el-dropdown-menu--small(
       v-show="visible"
