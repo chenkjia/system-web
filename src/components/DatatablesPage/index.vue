@@ -190,8 +190,8 @@ export default {
     }
   },
   async mounted () {
-    const relationList = this.relationList.map(({ relation }) => relation).join(',')
-    const relation = await this.getRelation(relationList)
+    const relationList = this.relationList.map(({ relation }) => relation)
+    const relation = await this.$store.dispatch('relation/getRelation', relationList)
     this.resultFields = mapValues(this.resultFields, (field) => {
       if (!field.relation) return field
       return {

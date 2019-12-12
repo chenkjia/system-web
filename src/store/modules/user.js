@@ -23,7 +23,7 @@ const mutations = {
 }
 
 const actions = {
-  getInfo ({ commit, dispatch }) {
+  getInfo ({ commit }) {
     return new Promise((resolve, reject) => {
       getUserInfo().then(response => {
         const { data } = response
