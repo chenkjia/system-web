@@ -4,12 +4,12 @@
       placement="right-start"
       width="800"
       trigger="hover")
-      el-input(placeholder="请输入菜单名",size="small")
+      el-input(placeholder="请输入菜单名",size="small",v-model="searchMenu")
       .menus-appstore
         el-divider(content-position="left") 系统管理
         .menus-appstore-list
           router-link.menus-appstore-item(
-            v-for="menu in menus"
+            v-for="menu in searchResultMenus"
             :to="menu.url")
             .menus-appstore-content
               span.iconfont(:class="'icon'+menu.icon")
@@ -41,7 +41,17 @@ export default {
       default: () => ([])
     }
   },
+  data () {
+    return {
+      searchMenu: ''
+    }
+  },
   computed: {
+    searchResultMenus () {
+      return this.searchMenu === '' ? this.menus : this.menus.filter(({ label }) => {
+        return label.includes(this.searchMenu)
+      })
+    },
     menusObject () {
       return this.menus.length ? keyBy(this.menus, '_id') : {}
     },
