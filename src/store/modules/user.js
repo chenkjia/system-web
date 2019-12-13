@@ -1,10 +1,11 @@
-import { getUserInfo } from '@/utils/auth'
+import { getUserInfo, changeShortcuts } from '@/utils/auth'
 
 const state = {
   accountId: '',
   fullname: '',
   avatar: '',
-  menus: []
+  menus: [],
+  shortcuts: []
 }
 
 const mutations = {
@@ -19,6 +20,9 @@ const mutations = {
   },
   SET_MENUS: (state, menus) => {
     state.menus = menus
+  },
+  SET_SHORTCUTS: (state, shortcuts) => {
+    state.shortcuts = shortcuts
   }
 }
 
@@ -30,15 +34,26 @@ const actions = {
         if (!data) {
           reject(new Error('令牌过期，请重新登录'))
         }
-        const { fullname, photo, _id } = data.account
+        const { _id, fullname, photo, shortcuts } = data.account
         commit('SET_ACCOUNTID', _id)
         commit('SET_FULLNAME', fullname)
         commit('SET_AVATAR', photo[0])
         commit('SET_MENUS', data.menus)
+        commit('SET_SHORTCUTS', shortcuts || [])
         resolve(data)
       }).catch(error => {
         reject(error)
       })
+    })
+  },
+  changeShortcuts ({ commit, state }, shortcut) {
+    const newShortcuts = state.shortcuts.includes(shortcut)
+      ? state.shortcuts.filter(item => item !== shortcut)
+      : [...state.shortcuts, shortcut]
+    changeShortcuts(newShortcuts).then(res => {
+      if (res.code === 0) {
+        commit('SET_SHORTCUTS', newShortcuts)
+      }
     })
   },
   delAccount ({ commit }) {
@@ -46,6 +61,7 @@ const actions = {
     commit('SET_FULLNAME', '')
     commit('SET_AVATAR', '')
     commit('SET_MENUS', [])
+    commit('SET_SHORTCUTS', [])
   }
 }
 

@@ -1,4 +1,4 @@
-import { get } from '@/utils/axios'
+import { get, put } from '@/utils/axios'
 
 export const getToken = () => {
   return localStorage.getItem('token')
@@ -15,5 +15,14 @@ export const removeToken = () => {
 export const getUserInfo = () => {
   return get({
     url: 'userInfo'
+  })
+}
+
+export const changeShortcuts = (shortcuts) => {
+  return put({
+    url: 'shortcuts',
+    data: {
+      shortcuts
+    }
   })
 }
