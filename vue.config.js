@@ -7,11 +7,11 @@ module.exports = {
       'moment': 'moment'
     }
   },
-  chainWebpack: process.env.NODE_ENV === 'production' ? config => {
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-  } : () => {},
+  // chainWebpack: process.env.NODE_ENV === 'production' ? config => {
+  //   config
+  //     .plugin('webpack-bundle-analyzer')
+  //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+  // } : () => {},
   pluginOptions: {
     dll: {
       entry: ['vue', 'vue-router', 'vuex', 'axios']

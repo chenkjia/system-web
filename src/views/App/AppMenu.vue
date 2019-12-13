@@ -10,6 +10,7 @@
         .menus-appstore-list
           router-link.menus-appstore-item(
             v-for="menu in searchResultMenus"
+            :key="menu._id"
             :to="menu.url")
             .menus-appstore-content
               span.iconfont(:class="'icon'+menu.icon")
