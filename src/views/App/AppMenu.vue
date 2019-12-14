@@ -60,9 +60,12 @@ export default {
       return this.$store.getters.shortcuts
     },
     shortcutMenus () {
-      return this.shortcuts.map(shortcut => {
-        return this.menusObject[shortcut]
-      })
+      return this.shortcuts.reduce((result, shortcut) => {
+        if (!this.menusObject[shortcut]) {
+          return result
+        }
+        return [...result, this.menusObject[shortcut]]
+      }, [])
     }
   },
   filters: {
