@@ -28,6 +28,12 @@ export default {
           form: {
             formtype: 'input'
           },
+          create: {
+            rules: [{ required: true, message: '请输入角色名称', trigger: 'blur' }]
+          },
+          update: {
+            rules: [{ required: true, message: '请输入角色名称', trigger: 'blur' }]
+          },
           filter: {
             like: true
           }
@@ -38,6 +44,12 @@ export default {
           form: {
             formtype: 'select',
             multiple: true
+          },
+          create: {
+            rules: [{ required: true, message: '请输入菜单权限', trigger: 'blur' }]
+          },
+          update: {
+            rules: [{ required: true, message: '请输入菜单权限', trigger: 'blur' }]
           },
           filter: {
             like: true

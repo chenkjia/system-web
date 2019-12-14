@@ -16,7 +16,7 @@ export default {
       }, {
         label: '确 定',
         type: 'primary',
-        func: (data) => {
+        func: ({ data }) => {
           const result = cloneDeep(data)
           result.password = this.$md5(data.password)
           this.$update({

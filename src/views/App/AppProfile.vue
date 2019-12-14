@@ -28,7 +28,7 @@ export default {
       console.log('changePassword')
     },
     logout () {
-      this.$router.push('logout')
+      this.$router.push('/logout')
     }
   }
 }

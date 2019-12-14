@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import { getToken, removeToken } from '@/utils/auth'
 
 import store from '@/store/'
-// import user from '@/store/modules/user'
+
+import systemRouter from './system.js'
 
 Vue.use(Router)
 const router = new Router({
@@ -52,36 +53,8 @@ const router = new Router({
       },
       component: () => import(/* webpackChunkName: "appFrame" */ '@/views/App/AppFrame'),
       children: [
-        {
-          path: '/menus',
-          name: 'menus',
-          component: () => import(/* webpackChunkName: "menus" */ '@/views/Menus')
-        },
-        {
-          path: '/dictionaries',
-          name: 'dictionaries',
-          component: () => import(/* webpackChunkName: "dictionaries" */ '@/views/Dictionaries')
-        },
-        {
-          path: '/organizations',
-          name: 'organizations',
-          component: () => import(/* webpackChunkName: "organizations" */ '@/views/Organizations')
-        },
-        {
-          path: '/accounts',
-          name: 'accounts',
-          component: () => import(/* webpackChunkName: "accounts" */ '@/views/Accounts')
-        },
-        {
-          path: '/roles',
-          name: 'roles',
-          component: () => import(/* webpackChunkName: "roles" */ '@/views/Roles')
-        },
-        {
-          path: '/logs',
-          name: 'logs',
-          component: () => import(/* webpackChunkName: "logs" */ '@/views/Logs')
-        }]
+        systemRouter
+      ]
     }
   ]
 })
