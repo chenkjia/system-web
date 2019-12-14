@@ -46,11 +46,17 @@ export default {
       this.createData = {}
       this.createDialogVisible = true
     },
-    createFormSubmit (data) {
-      this.$create({ url: this.resource, data }).then(res => {
-        if (res.code === 0) {
-          this.createDialogVisible = false
-          this.getList()
+    createFormSubmit ({ data, form }) {
+      form.validate((valid) => {
+        if (valid) {
+          this.$create({ url: this.resource, data }).then(res => {
+            if (res.code === 0) {
+              this.createDialogVisible = false
+              this.getList()
+            }
+          })
+        } else {
+          return false
         }
       })
     }

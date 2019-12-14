@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    login (data) {
+    login ({ data }) {
       const result = cloneDeep(data)
       result.password = this.$md5(data.password)
       this.$post({

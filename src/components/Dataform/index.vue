@@ -1,11 +1,14 @@
 <template lang="pug">
   el-form(
     v-bind="$attrs"
-    :model="formData")
+    ref="dataform"
+    :model="formData"
+    :rules="rules")
     el-form-item(
       v-for="field in formFields",
       :key="field.name",
-      :label="field.label")
+      :label="field.label"
+      :prop="field.name")
       component(
         :is="dataFormItem[field.form.formtype]"
         :field="field"
@@ -13,7 +16,7 @@
         v-model="formData[field.name]")
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
-        :data="formData"
+        :data="{data:formData,form:this.$refs['dataform']}"
         :buttonList="buttonList")
 </template>
 
@@ -39,6 +42,17 @@ export default {
   data () {
     return {
       formData: this.dataInit
+    }
+  },
+  computed: {
+    rules () {
+      const rules = this.formFields.reduce((result, current) => {
+        return !current.form.rules ? result : {
+          ...result,
+          [current.name]: current.form.rules
+        }
+      }, {})
+      return rules
     }
   },
   watch: {

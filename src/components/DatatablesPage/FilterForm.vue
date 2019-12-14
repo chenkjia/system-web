@@ -36,7 +36,7 @@ export default {
     }
   },
   methods: {
-    filterFormSubmit (data) {
+    filterFormSubmit ({ data }) {
       this.filterData = data
       this.getList()
     },

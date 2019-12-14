@@ -49,17 +49,23 @@ export default {
       this.updateData = omit(data, ['_id'])
       this.updateDialogVisible = true
     },
-    updateFormSubmit (data) {
-      this.$update({
-        url: this.resource,
-        params: {
-          _id: this.updateFormId
-        },
-        data
-      }).then(res => {
-        if (res.code === 0) {
-          this.updateDialogVisible = false
-          this.getList()
+    updateFormSubmit ({ data, form }) {
+      form.validate((valid) => {
+        if (valid) {
+          this.$update({
+            url: this.resource,
+            params: {
+              _id: this.updateFormId
+            },
+            data
+          }).then(res => {
+            if (res.code === 0) {
+              this.updateDialogVisible = false
+              this.getList()
+            }
+          })
+        } else {
+          return false
         }
       })
     }
