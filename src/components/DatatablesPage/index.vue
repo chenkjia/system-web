@@ -5,7 +5,7 @@
       .datatablespage-header
         ButtonGroup.datatablespage-toolbar(
           :buttonList="toolbar")
-        .datatablespage-filter-wrapper(v-if="filterList.length")
+        .datatablespage-filter-wrapper(v-if="filterFields.length")
           Dataform.datatablespage-filter(
             slot="footer"
             ref="filterForm"
@@ -16,12 +16,14 @@
             :buttonList="filterButtonList")
     slot(name="table")
       Datatables.datatablespage-table(
-        height="1"
+        v-bind="$attrs"
+        v-on="$listeners"
+        v-loading="!columns.length"
         :data="tableData",
         :columns="columns"
         @sort-change="sortChange")
         el-table-column.operation-column(
-          v-if="operation&&operation.length"
+          v-if="operation&&operation.length&&columns.length"
           label="操作"
           slot="right"
           :width="operationWidth")
@@ -73,8 +75,8 @@
         :buttonList="updateButtons")
 </template>
 <script>
-import { pick, isString, defaultsDeep, values, cloneDeep, mapValues } from 'lodash'
-import { get } from '@/utils/axios'
+import { pick, isString, defaultsDeep } from 'lodash'
+// import { get } from '@/utils/axios'
 
 import Pagination from './Pagination'
 import CreateForm from './CreateForm'
@@ -104,7 +106,7 @@ export default {
       type: Array,
       default: () => ([])
     },
-    columnList: {
+    columns: {
       type: Array,
       default: () => ([])
     },
@@ -125,7 +127,6 @@ export default {
     return {
       sortData: {},
       tableData: [],
-      resultFields: cloneDeep(this.fields),
       toolbarPreset: {
         create: {
           label: '添加',
@@ -159,12 +160,6 @@ export default {
     }
   },
   computed: {
-    columns () {
-      return this.columnList.map((item) => ({
-        ...this.resultFields[item],
-        name: item
-      }))
-    },
     operation () {
       return buttonListReset(this.operationList, this.operationPreset)
     },
@@ -179,9 +174,6 @@ export default {
     },
     toolbar () {
       return buttonListReset(this.toolbarList, this.toolbarPreset)
-    },
-    relationList () {
-      return values(this.fields).filter(({ relation }) => relation)
     }
   },
   watch: {
@@ -189,16 +181,7 @@ export default {
       this.getList()
     }
   },
-  async mounted () {
-    const relationList = this.relationList.map(({ relation }) => relation)
-    const relation = await this.$store.dispatch('relation/getRelation', relationList)
-    this.resultFields = mapValues(this.resultFields, (field) => {
-      if (!field.relation) return field
-      return {
-        ...field,
-        options: relation[field.relation]
-      }
-    })
+  mounted () {
     this.getList()
   },
   methods: {
@@ -216,18 +199,6 @@ export default {
         this.recordsTotal = res.data.recordsTotal
         this.recordsFiltered = res.data.recordsFiltered
         this.tableData = res.data.data
-      })
-    },
-    getRelation: (relationList) => {
-      return new Promise((resolve, reject) => {
-        get({
-          url: 'relation',
-          params: {
-            relation: relationList
-          }
-        }).then((data) => {
-          resolve(data.data)
-        })
       })
     },
     sortChange ({ order, prop }) {
@@ -272,6 +243,7 @@ export default {
     margin-right: 1em
 .datatablespage-table
   flex: 1
+  box-shadow: 0 0 1px 1px #EBEEF5
 .datatablespage-info>div
   margin-top: 1em
 .datatablespage-pagination

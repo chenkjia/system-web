@@ -1,9 +1,8 @@
 <template lang="pug">
   DatatablesPage(
-    ref="DatatablesPage"
-    :hasPage="false"
-    :resource="resource"
+    resource="roles"
     :columns="columns"
+    :filterFields="filterFields"
     :createFields="createFields"
     :updateFields="updateFields"
     :toolbarList="toolbarList"
@@ -11,28 +10,23 @@
 </template>
 <script>
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
-import { fields, columnList, createList, updateList } from './optionsFields'
+import { fields, columnList, filterList, createList, updateList } from './fields'
+
 export default {
-  name: 'DictionaryOptions',
-  props: {
-    dictionaryGroupId: String
-  },
-  computed: {
-    resource () {
-      return `dictionaries/options?dictionaryId=${this.dictionaryGroupId}`
-    }
-  },
+  name: 'roles',
   data () {
     return {
       toolbarList: ['create'],
       operationList: ['update', 'delete'],
       columns: [],
+      filterFields: [],
       createFields: [],
       updateFields: []
     }
   },
   async created () {
     this.columns = await fieldsGetRelation(fieldsFormat(fields, columnList))
+    this.filterFields = await fieldsGetRelation(fieldsFormat(fields, filterList, 'filter'))
     this.createFields = await fieldsGetRelation(fieldsFormat(fields, createList, 'create'))
     this.updateFields = await fieldsGetRelation(fieldsFormat(fields, updateList, 'update'))
   }

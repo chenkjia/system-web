@@ -1,5 +1,7 @@
 <script>
 import { cloneDeep } from 'lodash'
+import { fieldsFormat } from '@/utils/fieldsFormat.js'
+import { fields, changeList } from './fields'
 
 export default {
   name: 'accountsChangePassword',
@@ -7,7 +9,7 @@ export default {
     return {
       changeData: {},
       changeDialogVisible: false,
-      changeList: ['password'],
+      changeList: fieldsFormat(fields, changeList, 'change'),
       changeButtonList: [{
         label: '取 消',
         func: () => {
@@ -33,21 +35,6 @@ export default {
           })
         }
       }]
-    }
-  },
-  computed: {
-    changeFields () {
-      return this.changeList.map(item => {
-        const field = cloneDeep(this.fields[item])
-        return {
-          name: item,
-          ...field,
-          form: {
-            ...field.form,
-            ...field.change
-          }
-        }
-      })
     }
   },
   methods: {

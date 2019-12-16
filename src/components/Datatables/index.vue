@@ -6,6 +6,7 @@
     border
     size="small"
     style="width: 100%"
+    height="1"
     :cell-class-name="cellClassName")
     slot(name="left")
     el-table-column(

@@ -2,7 +2,7 @@
 
 export default {
   props: {
-    createList: {
+    createFields: {
       type: Array,
       default: () => ([])
     },
@@ -24,21 +24,6 @@ export default {
         type: 'primary',
         func: this.createFormSubmit
       }]
-    }
-  },
-  computed: {
-    createFields () {
-      return this.createList.map(item => {
-        const field = this.resultFields[item]
-        return {
-          name: item,
-          ...field,
-          form: {
-            ...field.form,
-            ...field.create
-          }
-        }
-      })
     }
   },
   methods: {

@@ -8,7 +8,7 @@ export default {
   },
   data () {
     return {
-      recordsFiltered: 100,
+      recordsFiltered: 0,
       pageCurrent: 1,
       pageSize: 10
     }

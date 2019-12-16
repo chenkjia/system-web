@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 
 export default {
   props: {
-    updateList: {
+    updateFields: {
       type: Array,
       default: () => ([])
     },
@@ -26,21 +26,6 @@ export default {
         type: 'primary',
         func: this.updateFormSubmit
       }]
-    }
-  },
-  computed: {
-    updateFields () {
-      return this.updateList.map(item => {
-        const field = this.resultFields[item]
-        return {
-          name: item,
-          ...field,
-          form: {
-            ...field.form,
-            ...field.update
-          }
-        }
-      })
     }
   },
   methods: {
