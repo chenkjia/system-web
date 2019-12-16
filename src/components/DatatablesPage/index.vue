@@ -19,9 +19,11 @@
         v-bind="$attrs"
         v-on="$listeners"
         v-loading="loading||!columns.length"
+        ref="Datatables"
         element-loading-text="拼命加载中"
         element-loading-spinner="el-icon-loading"
         element-loading-background="rgba(0, 0, 0, 0.2)"
+        :empty-text="loading?'':'暂无数据'"
         :data="tableData",
         :columns="columns"
         @sort-change="sortChange")
@@ -249,7 +251,11 @@ export default {
     margin-right: 1em
 .datatablespage-table
   flex: 1
+.datatablespage-info
+  display: flex
+  flex-direction: row
 .datatablespage-info>div
+  flex: 1
   margin-top: 1em
 .datatablespage-pagination
   text-align: right
