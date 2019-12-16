@@ -18,12 +18,15 @@
       Datatables.datatablespage-table(
         v-bind="$attrs"
         v-on="$listeners"
-        v-loading="!columns.length"
+        v-loading="loading||!columns.length"
+        element-loading-text="拼命加载中"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.2)"
         :data="tableData",
         :columns="columns"
         @sort-change="sortChange")
         el-table-column.operation-column(
-          v-if="operation&&operation.length&&columns.length"
+          v-if="operation&&operation.length"
           label="操作"
           slot="right"
           :width="operationWidth")
@@ -125,6 +128,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       sortData: {},
       tableData: [],
       toolbarPreset: {
@@ -186,6 +190,7 @@ export default {
   },
   methods: {
     getList () {
+      this.loading = true
       this.$get({
         url: this.resource,
         params: {
@@ -196,6 +201,7 @@ export default {
           fields: this.fields
         }
       }).then((res) => {
+        this.loading = false
         this.recordsTotal = res.data.recordsTotal
         this.recordsFiltered = res.data.recordsFiltered
         this.tableData = res.data.data
@@ -243,7 +249,6 @@ export default {
     margin-right: 1em
 .datatablespage-table
   flex: 1
-  box-shadow: 0 0 1px 1px #EBEEF5
 .datatablespage-info>div
   margin-top: 1em
 .datatablespage-pagination
