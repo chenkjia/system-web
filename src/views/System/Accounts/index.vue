@@ -52,14 +52,16 @@ export default {
       }, {
         label: '确 定',
         type: 'primary',
-        func: (data) => {
-          const result = cloneDeep(data)
-          result.password = this.$md5(data.password)
-          this.$create({ url: this.$refs.DatatablesPage.resource, data: result }).then(res => {
-            if (res.code === 0) {
-              this.$refs.DatatablesPage.createDialogVisible = false
-              this.$refs.DatatablesPage.getList()
-            }
+        func: ({ data, form }) => {
+          form.validate((valid) => {
+            const result = cloneDeep(data)
+            result.password = this.$md5(data.password)
+            this.$create({ url: this.$refs.DatatablesPage.resource, data: result }).then(res => {
+              if (res.code === 0) {
+                this.$refs.DatatablesPage.createDialogVisible = false
+                this.$refs.DatatablesPage.getList()
+              }
+            })
           })
         }
       }]

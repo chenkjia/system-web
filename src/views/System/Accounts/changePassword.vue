@@ -22,7 +22,7 @@ export default {
           const result = cloneDeep(data)
           result.password = this.$md5(data.password)
           this.$update({
-            url: 'accounts/changePassword',
+            url: 'system/accounts/changePassword',
             params: {
               _id: this.changeFormId
             },
