@@ -4,7 +4,8 @@ import { getToken, removeToken } from '@/utils/auth'
 
 import store from '@/store/'
 
-import systemRouter from './system.js'
+import systemRouter from './system'
+import demoRouter from './demo'
 
 Vue.use(Router)
 const router = new Router({
@@ -53,7 +54,8 @@ const router = new Router({
       },
       component: () => import(/* webpackChunkName: "appFrame" */ '@/views/App/AppFrame'),
       children: [
-        systemRouter
+        systemRouter,
+        demoRouter
       ]
     }
   ]

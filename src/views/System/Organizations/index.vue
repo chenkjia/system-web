@@ -1,6 +1,6 @@
 <template lang="pug">
   DatatablesPage(
-    resource="menus"
+    resource="system/menus"
     :columns="columns"
     :filterFields="filterFields"
     :createFields="createFields"

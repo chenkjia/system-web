@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     resource () {
-      return `dictionaries/options?dictionaryId=${this.dictionaryGroupId}`
+      return `system/dictionaries/options?dictionaryId=${this.dictionaryGroupId}`
     }
   },
   data () {

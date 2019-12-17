@@ -1,6 +1,6 @@
 <template lang="pug">
   DatatablesPage(
-    resource="roles"
+    resource="system/roles"
     :columns="columns"
     :filterFields="filterFields"
     :createFields="createFields"

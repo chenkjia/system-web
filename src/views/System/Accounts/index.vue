@@ -1,7 +1,7 @@
 <template lang="pug">
   DatatablesPage(
-    resource="accounts"
     ref="DatatablesPage"
+    resource="system/accounts"
     :columns="columns"
     :filterFields="filterFields"
     :createFields="createFields"
@@ -70,14 +70,6 @@ export default {
     this.filterFields = await fieldsGetRelation(fieldsFormat(fields, filterList, 'filter'))
     this.createFields = await fieldsGetRelation(fieldsFormat(fields, createList, 'create'))
     this.updateFields = await fieldsGetRelation(fieldsFormat(fields, updateList, 'update'))
-  },
-  methods: {
-    handleRemove (file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview (file) {
-      console.log(file)
-    }
   }
 }
 </script>
