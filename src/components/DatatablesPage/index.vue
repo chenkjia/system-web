@@ -29,6 +29,7 @@
         @sort-change="sortChange")
         el-table-column.operation-column(
           v-if="operation&&operation.length&&columns.length"
+          fixed="right"
           label="操作"
           :width="operationWidth")
           template(slot-scope="scope")
