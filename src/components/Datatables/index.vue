@@ -20,8 +20,8 @@
           :field="column"
           :value="scope.row[scope.column.property]"
         )
-    slot(
-      name="right")
+    slot
+    slot(name="right")
 </template>
 <script>
 export default {

@@ -28,14 +28,17 @@
         :columns="columns"
         @sort-change="sortChange")
         el-table-column.operation-column(
-          v-if="operation&&operation.length"
+          v-if="operation&&operation.length&&columns.length"
           label="操作"
-          slot="right"
           :width="operationWidth")
           template(slot-scope="scope")
             ButtonGroup(
               :data="scope.row"
               :buttonList="operation")
+        el-table-column(
+          v-if="loading"
+          label=" "
+          :width="1")
     slot(name="footer")
       .datatablespage-info
         el-pagination.datatablespage-pagination(
