@@ -50,7 +50,7 @@
     slot(name="footer")
       .datatablespage-footer
         slot(name="info")
-          .datatablespage-info asdfsad
+          .datatablespage-info
         slot(name="pagination")
           el-pagination.datatablespage-pagination(
             v-if="hasPage"
@@ -116,7 +116,7 @@ export default {
           skip: this.hasPage ? (this.pageCurrent - 1) * this.pageSize : 0,
           sort: this.sortData,
           filter: this.filterData,
-          fields: this.fields
+          fields: this.filterFieldsObject
         }
       }).then((res) => {
         this.loading = false

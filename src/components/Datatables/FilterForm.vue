@@ -1,4 +1,5 @@
 <script>
+import { keyBy } from 'lodash'
 export default {
   props: {
     filterFields: {
@@ -18,6 +19,11 @@ export default {
         type: 'primary',
         func: this.filterFormReset
       }]
+    }
+  },
+  computed: {
+    filterFieldsObject () {
+      return keyBy(this.filterFields, 'name')
     }
   },
   methods: {
