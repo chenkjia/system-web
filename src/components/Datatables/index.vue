@@ -14,39 +14,35 @@
               :dataInit="filterData"
               :formFields="filterFields"
               :buttonList="filterButtonList")
-    el-table(
-      v-bind="$attrs"
-      v-on="$listeners"
-      v-loading="loading"
-      :data="tableData"
-      border
-      size="small"
-      style="width: 100%"
-      height="1"
-      element-loading-text="拼命加载中"
-      element-loading-spinner="el-icon-loading"
-      element-loading-background="rgba(0, 0, 0, 0.2)"
-      :empty-text="loading?' ':'暂无数据'"
-      :cell-class-name="cellClassName"
-      @sort-change="sortChange")
-      slot(name="left")
-      el-table-column(
-        v-for="column in columns"
-        v-bind="column"
-        :sortable="column.sortable?'custom':false"
-        :key="column.name"
-        :prop="column.name")
-        template(slot-scope="scope")
-          InfoRender(
-            :field="column"
-            :value="scope.row[scope.column.property]"
-          )
-      slot
-      slot(name="right")
-      el-table-column(
-        v-if="loading"
-        label=" "
-        :width="1")
+    .datatables-table-wrapper
+      el-table.datatables-table(
+        v-bind="$attrs"
+        v-on="$listeners"
+        v-loading="loading"
+        :data="tableData"
+        border
+        size="small"
+        height="1"
+        element-loading-text="拼命加载中"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.2)"
+        :empty-text="loading?' ':'暂无数据'"
+        :cell-class-name="cellClassName"
+        @sort-change="sortChange")
+        slot(name="left")
+        el-table-column(
+          v-for="column in columns"
+          v-bind="column"
+          :sortable="column.sortable?'custom':false"
+          :key="column.name"
+          :prop="column.name")
+          template(slot-scope="scope")
+            InfoRender(
+              :field="column"
+              :value="scope.row[scope.column.property]"
+            )
+        slot
+        slot(name="right")
     slot(name="footer")
       .datatablespage-footer
         slot(name="info")
@@ -63,12 +59,25 @@
             :total="recordsFiltered")
 </template>
 <script>
+import { filter, slice, overEvery, keys } from 'lodash'
 import FilterForm from './FilterForm'
 import Pagination from './Pagination'
 
 const orders = {
   ascending: 1,
   descending: -1
+}
+
+const filterFormat = (filter, fields) => {
+  const filterKeys = keys(filter)
+  const filterFuncs = filterKeys.map(key => {
+    return fields[key].form.like ? (value) => {
+      return value[key].includes(filter[key])
+    } : (value) => {
+      return value[key] === filter[key]
+    }
+  })
+  return overEvery(filterFuncs)
 }
 
 export default {
@@ -78,6 +87,20 @@ export default {
     resource: {
       type: String,
       default: ''
+    },
+    // 是否使用服务端分页
+    serverSide: {
+      type: Boolean,
+      default: false
+    },
+    // 分页模式
+    mode: {
+      type: String,
+      default: 'page',
+      validator: (value) => {
+        // page:分页模式,roll:滚动模式,tree:树状模式
+        return ['page', 'roll', 'tree'].includes(value)
+      }
     },
     data: {
       type: Array,
@@ -91,6 +114,7 @@ export default {
   data () {
     return {
       sortData: {},
+      tableAllData: this.data,
       tableData: [],
       loading: false,
       cellClassName: ({ column }) => {
@@ -100,14 +124,33 @@ export default {
   },
   watch: {
     resource () {
-      this.getList()
+      this.getTableData()
     }
   },
   mounted () {
-    this.getList()
+    this.getTableData()
   },
   methods: {
-    getList () {
+    getTableData () {
+      if (this.serverSide) {
+        if (this.mode === 'page') {
+          this.getPageList()
+        }
+      } else {
+        if (this.mode === 'page') {
+          this.getPageRender()
+        }
+      }
+    },
+    getPageRender () {
+      const filterFormater = filterFormat(this.filterData, this.filterFieldsObject)
+      const filterData = filter(this.tableAllData, filterFormater)
+      const sortData = filterData
+      const result = this.pageCurrent * this.pageSize
+      this.recordsFiltered = filterData.length
+      this.tableData = slice(sortData, result - this.pageSize, result)
+    },
+    getPageList () {
       this.loading = true
       this.$get({
         url: this.resource,
@@ -126,7 +169,7 @@ export default {
     },
     sortChange ({ order, prop }) {
       this.sortData = { [prop]: orders[order] }
-      this.getList()
+      this.getTableData()
     }
   }
 }
@@ -134,7 +177,17 @@ export default {
 <style lang="sass" scoped>
 .datatables-main
   display: flex
+  flex: 1
   flex-direction: column
+  padding: 20px
+.datatables-table-wrapper
+  display: flex
+  flex: 1
+  flex-direction: column
+  .datatables-table
+    display: flex
+    flex: 1
+    flex-direction: column
 .datatablespage-header
   max-height: 45px
   display: flex

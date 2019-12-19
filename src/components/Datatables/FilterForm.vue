@@ -29,11 +29,11 @@ export default {
   methods: {
     filterFormSubmit ({ data }) {
       this.filterData = data
-      this.getList()
+      this.getTableData()
     },
     filterFormReset () {
       this.filterData = {}
-      this.getList()
+      this.getTableData()
     }
   }
 }

@@ -8,7 +8,7 @@ export default {
   },
   data () {
     return {
-      recordsFiltered: 0,
+      recordsFiltered: this.data.length,
       pageCurrent: 1,
       pageSize: 10
     }
@@ -16,11 +16,11 @@ export default {
   methods: {
     pageCurrentChange (val) {
       this.pageCurrent = val
-      this.getList()
+      this.getTableData()
     },
     pageSizeChange (val) {
       this.pageSize = val
-      this.getList()
+      this.getTableData()
     }
   }
 }

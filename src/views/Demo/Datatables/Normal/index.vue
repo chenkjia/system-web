@@ -1,9 +1,8 @@
 <template lang="pug">
-  DatatablesPage(
-    resource="demo/datatables/nestedField"
+  Datatables(
+    :data="data"
     :columns="columns"
-    :filterFields="filterFields"
-    :operationList="operationList")
+    :filterFields="filterFields")
 </template>
 <script>
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
@@ -11,8 +10,19 @@ import { fields, columnList, filterList } from './fields'
 export default {
   name: 'menus',
   data () {
+    const typeList = ['PAGE', 'MODULE', 'LINK', 'FRAME']
+    const iconList = ['fileprotect', 'up', 'down']
+    const data = Array.apply(null, { length: 136 }).map((item, index) => {
+      const type = typeList[index % typeList.length]
+      return {
+        label: `${type}${index}`,
+        type: type,
+        icon: iconList[index % iconList.length],
+        enabled: Boolean(index % 2)
+      }
+    })
     return {
-      operationList: ['delete'],
+      data,
       columns: [],
       filterFields: []
     }

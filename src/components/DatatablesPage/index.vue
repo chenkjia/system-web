@@ -151,7 +151,7 @@ export default {
   },
   methods: {
     getList () {
-      this.$refs.Datatables.getList()
+      this.$refs.Datatables.getTableData()
     }
   }
 }
@@ -161,11 +161,7 @@ export default {
   display: flex
   flex-direction: column
   flex: 1
-  padding: 20px
   overflow: hidden
-.datatablespage-main
-  flex: 1
-  flex-direction: column
 .operation-column
   padding: 5px 0 4px
 .dataform-dialog /deep/ .el-dialog__body
