@@ -3,8 +3,7 @@
     resource="demo/datatables/nestedField"
     :serverSide="true"
     :columns="columns"
-    :filterFields="filterFields"
-    :operationList="operationList")
+    :filterFields="filterFields")
 </template>
 <script>
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
@@ -13,7 +12,6 @@ export default {
   name: 'menus',
   data () {
     return {
-      operationList: ['delete'],
       columns: [],
       filterFields: []
     }

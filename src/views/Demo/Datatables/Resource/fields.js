@@ -1,6 +1,7 @@
 export const fields = {
   label: {
     label: '测试名称',
+    sortable: true,
     form: {
       formtype: 'input'
     },
@@ -11,6 +12,7 @@ export const fields = {
   type: {
     label: '测试类型',
     relation: 'menuTypes',
+    sortable: true,
     form: {
       formtype: 'select'
     },
@@ -23,6 +25,7 @@ export const fields = {
   },
   icon: {
     label: '图标',
+    sortable: true,
     form: {
       formtype: 'icon'
     },
@@ -36,6 +39,7 @@ export const fields = {
   enabled: {
     label: '是否启用',
     relation: 'enableOrDisable',
+    sortable: true,
     form: {
       formtype: 'switch'
     },
@@ -48,6 +52,7 @@ export const fields = {
   },
   remark: {
     label: '备注',
+    sortable: true,
     form: {
       formtype: 'input',
       type: 'textarea',

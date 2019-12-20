@@ -2,6 +2,7 @@
   DatatablesPage(
     ref="DatatablesPage"
     resource="system/accounts"
+    :serverSide="true"
     :columns="columns"
     :filterFields="filterFields"
     :createFields="createFields"

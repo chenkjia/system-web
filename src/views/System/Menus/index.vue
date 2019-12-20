@@ -2,6 +2,7 @@
   DatatablesPage(
     resource="system/menus"
     :columns="columns"
+    :serverSide="true"
     :filterFields="filterFields"
     :createFields="createFields"
     :updateFields="updateFields"
