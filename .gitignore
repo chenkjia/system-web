@@ -5,6 +5,7 @@ coverage
 /dist
 version.json
 version.jsone
+yarn.lock
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
