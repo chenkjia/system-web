@@ -59,26 +59,9 @@
             :total="recordsFiltered")
 </template>
 <script>
-import { filter, slice, overEvery, keys, orderBy } from 'lodash'
 import FilterForm from './FilterForm'
 import Pagination from './Pagination'
-
-const orders = {
-  ascending: 1,
-  descending: -1
-}
-
-const filterFormat = (filter, fields) => {
-  const filterKeys = keys(filter)
-  const filterFuncs = filterKeys.map(key => {
-    return fields[key].form.like ? (value) => {
-      return value[key].includes(filter[key])
-    } : (value) => {
-      return value[key] === filter[key]
-    }
-  })
-  return overEvery(filterFuncs)
-}
+import getTableData from './getTableData'
 
 export default {
   name: 'Datatables',
@@ -131,45 +114,28 @@ export default {
     this.getTableData()
   },
   methods: {
-    getTableData () {
-      if (this.serverSide) {
-        if (this.mode === 'page') {
-          this.getPageList()
-        }
-      } else {
-        if (this.mode === 'page') {
-          this.getPageRender()
-        }
-      }
-    },
-    getPageRender () {
-      const filterFormater = filterFormat(this.filterData, this.filterFieldsObject)
-      const filterData = filter(this.tableAllData, filterFormater)
-      const { prop, order } = this.sortData
-      const sortData = order ? orderBy(filterData, [prop], [order.substring(0, order.length - 6)]) : filterData
-      const result = this.pageCurrent * this.pageSize
-      this.recordsFiltered = filterData.length
-      this.tableData = slice(sortData, result - this.pageSize, result)
-    },
-    getPageList () {
+    async getTableData () {
+      console.log('getTableData')
       this.loading = true
-      this.$get({
-        url: this.resource,
-        params: {
-          limit: this.hasPage ? this.pageSize : 9999999,
-          skip: this.hasPage ? (this.pageCurrent - 1) * this.pageSize : 0,
-          sort: { [this.sortData.prop]: orders[this.sortData.order] },
-          filter: this.filterData,
-          fields: this.filterFieldsObject
-        }
-      }).then((res) => {
-        this.loading = false
-        this.recordsFiltered = res.data.recordsFiltered
-        this.tableData = res.data.data
+      const tableData = await getTableData({
+        serverSide: this.serverSide,
+        mode: this.mode,
+        resource: this.resource,
+        tableAllData: this.tableAllData,
+        filterData: this.filterData,
+        filterFieldsObject: this.filterFieldsObject,
+        sortData: this.sortData,
+        pageCurrent: this.pageCurrent,
+        pageSize: this.pageSize
       })
+      console.log('getTableDataEnd')
+      console.log(tableData)
+      this.recordsFiltered = tableData.recordsFiltered
+      this.tableData = tableData.tableData
+      this.loading = false
     },
-    sortChange ({ order, prop }) {
-      this.sortData = { order, prop }
+    sortChange (sortData) {
+      this.sortData = sortData
       this.getTableData()
     }
   }

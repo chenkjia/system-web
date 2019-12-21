@@ -12,7 +12,7 @@ export default {
   data () {
     const typeList = ['PAGE', 'MODULE', 'LINK', 'FRAME']
     const iconList = ['fileprotect', 'up', 'down']
-    const data = Array.apply(null, { length: 136 }).map((item, index) => {
+    const data = Array.apply(null, { length: 13006 }).map((item, index) => {
       const type = typeList[index % typeList.length]
       return {
         label: `${type}${index}`,
