@@ -1,6 +1,7 @@
 <template lang="pug">
   DatatablesPage(
     resource="system/dictionaries"
+    :serverSide="true"
     :columns="columns"
     :filterFields="filterFields"
     :createFields="createFields"

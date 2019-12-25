@@ -28,6 +28,9 @@
         element-loading-background="rgba(0, 0, 0, 0.2)"
         :empty-text="loading?' ':'暂无数据'"
         :cell-class-name="cellClassName"
+        :row-key="rowKey"
+        :lazy="lazy"
+        :load="treeLoad"
         @sort-change="sortChange")
         slot(name="left")
         el-table-column(
@@ -61,11 +64,12 @@
 <script>
 import FilterForm from './FilterForm'
 import Pagination from './Pagination'
+import Tree from './Tree'
 import getTableData from './getTableData'
 
 export default {
   name: 'Datatables',
-  mixins: [Pagination, FilterForm],
+  mixins: [Pagination, FilterForm, Tree],
   props: {
     resource: {
       type: String,
@@ -105,17 +109,18 @@ export default {
       }
     }
   },
-  watch: {
-    resource () {
-      this.getTableData()
-    }
-  },
   mounted () {
-    this.getTableData()
+    this.initTableData()
   },
   methods: {
+    initTableData () {
+      if (this.resource.length && !this.serverSide) {
+        this.getTableAllData()
+      } else {
+        this.getTableData()
+      }
+    },
     async getTableData () {
-      console.log('getTableData')
       this.loading = true
       const tableData = await getTableData({
         serverSide: this.serverSide,
@@ -128,11 +133,25 @@ export default {
         pageCurrent: this.pageCurrent,
         pageSize: this.pageSize
       })
-      console.log('getTableDataEnd')
-      console.log(tableData)
       this.recordsFiltered = tableData.recordsFiltered
       this.tableData = tableData.tableData
       this.loading = false
+    },
+    async getTableAllData () {
+      this.loading = true
+      const tableData = await getTableData({
+        serverSide: true,
+        mode: this.mode,
+        resource: this.resource,
+        tableAllData: this.tableAllData,
+        filterData: this.filterData,
+        filterFieldsObject: this.filterFieldsObject,
+        sortData: this.sortData,
+        pageCurrent: 1,
+        pageSize: 999999
+      })
+      this.tableAllData = tableData.tableData
+      this.getTableData()
     },
     sortChange (sortData) {
       this.sortData = sortData
