@@ -19,5 +19,13 @@ export default {
     path: 'serverSide',
     name: 'serverSide',
     component: () => import(/* webpackChunkName: "demo-datatables-serverSide" */ '@/views/Demo/Datatables/ServerSide')
+  }, {
+    path: 'treeNormal',
+    name: 'treeNormal',
+    component: () => import(/* webpackChunkName: "demo-datatables-treeNormal" */ '@/views/Demo/Datatables/TreeNormal')
+  }, {
+    path: 'treeServerSide',
+    name: 'treeServerSide',
+    component: () => import(/* webpackChunkName: "demo-datatables-treeServerSide" */ '@/views/Demo/Datatables/TreeServerSide')
   }]
 }

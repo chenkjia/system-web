@@ -29,7 +29,7 @@
         :empty-text="loading?' ':'暂无数据'"
         :cell-class-name="cellClassName"
         :row-key="rowKey"
-        :lazy="lazy"
+        lazy
         :load="treeLoad"
         @sort-change="sortChange")
         slot(name="left")
@@ -109,11 +109,17 @@ export default {
       }
     }
   },
+  computed: {
+    hasPage () {
+      return this.mode === 'page'
+    }
+  },
   mounted () {
     this.initTableData()
   },
   methods: {
     initTableData () {
+      // 对有绑定远程请求接口但非服务端分页的做第一次全数据请求
       if (this.resource.length && !this.serverSide) {
         this.getTableAllData()
       } else {
@@ -121,8 +127,9 @@ export default {
       }
     },
     async getTableData () {
+      // 刷新表格显示内容
       this.loading = true
-      const tableData = await getTableData({
+      const { tableData, recordsFiltered } = await getTableData({
         serverSide: this.serverSide,
         mode: this.mode,
         resource: this.resource,
@@ -133,8 +140,8 @@ export default {
         pageCurrent: this.pageCurrent,
         pageSize: this.pageSize
       })
-      this.recordsFiltered = tableData.recordsFiltered
-      this.tableData = tableData.tableData
+      this.recordsFiltered = recordsFiltered
+      this.tableData = tableData
       this.loading = false
     },
     async getTableAllData () {
@@ -150,7 +157,7 @@ export default {
         pageCurrent: 1,
         pageSize: 999999
       })
-      this.tableAllData = tableData.tableData
+      this.tableAllData = tableData
       this.getTableData()
     },
     sortChange (sortData) {

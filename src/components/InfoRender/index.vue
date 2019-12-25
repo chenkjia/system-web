@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  span
     InfoRenderFiles(
       v-if="field.render&&field.render.type==='file'"
       :images="value|fileFilter")
