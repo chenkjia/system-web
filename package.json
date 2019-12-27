@@ -58,7 +58,7 @@
       "complexity": [
         "warn",
         {
-          "max": 6
+          "max": 7
         }
       ]
     },

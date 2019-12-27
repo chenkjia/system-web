@@ -1,4 +1,4 @@
-import { cloneDeep, isArray, keyBy, some } from 'lodash'
+import { cloneDeep, keyBy, some } from 'lodash'
 // 树里面获取父级节点的方法
 export const getPath = (node) => {
   return node.parent ? [...getPath(node.parent), node] : [node]
@@ -21,27 +21,23 @@ const endowNode = (node, parent) => {
 // 树的格式化
 export function treeFormat (list, key = 'id', parentKey = 'parentId', childKey = 'children', hasPath = true) {
   let nodes = cloneDeep(list)
-  if (isArray(nodes)) {
-    let r = []
-    const tmpNodes = keyBy(nodes, key)
-    nodes.forEach((node) => {
-      const parent = tmpNodes[node[parentKey]]
-      const tmpNode = tmpNodes[node[key]]
-      if (parent && node[key] !== node[parentKey]) {
-        if (!parent[childKey]) parent[childKey] = []
-        if (!some(parent[childKey], { [key]: node[key] })) {
-          parent[childKey].push(node)
-        }
-        // 为每个节点赋能
-        if (parent && hasPath) endowNode(tmpNode, parent)
-      } else {
-        r.push(node)
+  let r = []
+  const tmpNodes = keyBy(nodes, key)
+  nodes.forEach((node) => {
+    const parent = tmpNodes[node[parentKey]]
+    const tmpNode = tmpNodes[node[key]]
+    if (parent && node[key] !== node[parentKey]) {
+      if (!parent[childKey]) parent[childKey] = []
+      if (!some(parent[childKey], { [key]: node[key] })) {
+        parent[childKey].push(node)
       }
-    })
-    return r
-  } else {
-    return [nodes]
-  }
+      // 为每个节点赋能
+      if (hasPath) endowNode(tmpNode, parent)
+    } else {
+      r.push(node)
+    }
+  })
+  return r
 }
 
 export function treeFlat (nodes, childKey = 'children') {

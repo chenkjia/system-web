@@ -28,8 +28,8 @@
         element-loading-background="rgba(0, 0, 0, 0.2)"
         :empty-text="loading?' ':'暂无数据'"
         :cell-class-name="cellClassName"
-        :row-key="rowKey"
-        lazy
+        :row-key="treeKey"
+        :lazy="lazy"
         :load="treeLoad"
         @sort-change="sortChange")
         slot(name="left")
@@ -62,14 +62,15 @@
             :total="recordsFiltered")
 </template>
 <script>
-import FilterForm from './FilterForm'
-import Pagination from './Pagination'
-import Tree from './Tree'
+import { treeInit } from '@/utils/tree.js'
+import filterForm from './plugins/filterForm'
+import pagination from './plugins/pagination'
+import tree from './plugins/tree'
 import getTableData from './getTableData'
 
 export default {
   name: 'Datatables',
-  mixins: [Pagination, FilterForm, Tree],
+  mixins: [pagination, filterForm, tree],
   props: {
     resource: {
       type: String,
@@ -101,7 +102,7 @@ export default {
   data () {
     return {
       sortData: {},
-      tableAllData: this.data,
+      tableAllData: [],
       tableData: [],
       loading: false,
       cellClassName: ({ column }) => {
@@ -112,16 +113,22 @@ export default {
   computed: {
     hasPage () {
       return this.mode === 'page'
+    },
+    remote () {
+      return !!this.resource.length
+    },
+    serverMode () {
+      return this.serverSide ? 'server' : 'web'
     }
   },
   mounted () {
-    this.initTableData()
+    this.init()
   },
   methods: {
-    initTableData () {
+    init () {
       // 对有绑定远程请求接口但非服务端分页的做第一次全数据请求
-      if (this.resource.length && !this.serverSide) {
-        this.getTableAllData()
+      if (!this.serverSide) {
+        this.initTableData()
       } else {
         this.getTableData()
       }
@@ -130,7 +137,7 @@ export default {
       // 刷新表格显示内容
       this.loading = true
       const { tableData, recordsFiltered } = await getTableData({
-        serverSide: this.serverSide,
+        serverMode: this.serverMode,
         mode: this.mode,
         resource: this.resource,
         tableAllData: this.tableAllData,
@@ -138,26 +145,31 @@ export default {
         filterFieldsObject: this.filterFieldsObject,
         sortData: this.sortData,
         pageCurrent: this.pageCurrent,
-        pageSize: this.pageSize
+        pageSize: this.pageSize,
+        treeKey: this.treeKey,
+        treeParentKey: this.treeParentKey,
+        treeChildKey: this.treeChildKey
       })
       this.recordsFiltered = recordsFiltered
       this.tableData = tableData
       this.loading = false
     },
-    async getTableAllData () {
+    async initTableData () {
       this.loading = true
-      const tableData = await getTableData({
-        serverSide: true,
+      const { tableData } = this.remote ? await getTableData({
+        serverMode: 'init',
         mode: this.mode,
         resource: this.resource,
-        tableAllData: this.tableAllData,
         filterData: this.filterData,
         filterFieldsObject: this.filterFieldsObject,
         sortData: this.sortData,
         pageCurrent: 1,
-        pageSize: 999999
-      })
-      this.tableAllData = tableData
+        pageSize: 999999,
+        treeKey: this.treeKey,
+        treeParentKey: this.treeParentKey,
+        treeChildKey: this.treeChildKey
+      }) : { tableData: this.data }
+      this.tableAllData = this.mode === 'tree' ? treeInit(tableData, this.treeKey, this.treeParentKey, 'child') : tableData
       this.getTableData()
     },
     sortChange (sortData) {
@@ -195,8 +207,8 @@ export default {
     &:hover,&:focus-within
       overflow: visible
   .datatablespage-filter
-    // text-align: right
     margin-bottom: -18px
+    display: inline-block
     &:hover,&:focus-within
       border-radius: 4px
       position: relative

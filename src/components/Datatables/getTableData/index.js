@@ -4,21 +4,24 @@ import { getTreeList, getTreeRender } from './getTreeData'
 // 所有显示数据获取函数集合
 const getTableFuncs = {
   page: {
-    true: getPageList,
-    false: getPageRender
+    init: getPageList,
+    server: getPageList,
+    web: getPageRender
   },
   roll: {
-    true: getRollList,
-    false: getRollRender
+    init: getPageList,
+    server: getRollList,
+    web: getRollRender
   },
   tree: {
-    true: getTreeList,
-    false: getTreeRender
+    init: getTreeList,
+    server: getTreeList,
+    web: getTreeRender
   }
 }
 
 const getTableData = (props) => {
-  return getTableFuncs[props.mode][props.serverSide](props)
+  // console.log(props)
+  return getTableFuncs[props.mode][props.serverMode](props)
 }
-
 export default getTableData

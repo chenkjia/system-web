@@ -24,6 +24,10 @@ export default {
     name: 'treeNormal',
     component: () => import(/* webpackChunkName: "demo-datatables-treeNormal" */ '@/views/Demo/Datatables/TreeNormal')
   }, {
+    path: 'treeResource',
+    name: 'treeResource',
+    component: () => import(/* webpackChunkName: "demo-datatables-treeResource" */ '@/views/Demo/Datatables/TreeResource')
+  }, {
     path: 'treeServerSide',
     name: 'treeServerSide',
     component: () => import(/* webpackChunkName: "demo-datatables-treeServerSide" */ '@/views/Demo/Datatables/TreeServerSide')

@@ -1,6 +1,7 @@
 <template lang="pug">
   DatatablesPage(
-    resource="demo/datatables/nestedField"
+    mode="tree"
+    resource="demo/datatables/tree"
     :serverSide="true"
     :columns="columns"
     :filterFields="filterFields")

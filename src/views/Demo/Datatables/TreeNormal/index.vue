@@ -1,13 +1,13 @@
 <template lang="pug">
   Datatables(
     mode="tree"
+    treeKey="id"
     :data="data"
     :columns="columns"
     :filterFields="filterFields")
 </template>
 <script>
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
-import { treeInit } from '@/utils/tree.js'
 
 import { fields, columnList, filterList } from './fields'
 export default {
@@ -27,7 +27,7 @@ export default {
       }
     })
     return {
-      data: treeInit(data, 'id', 'parentId', 'childs'),
+      data,
       columns: [],
       filterFields: []
     }

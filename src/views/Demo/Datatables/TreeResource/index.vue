@@ -1,7 +1,7 @@
 <template lang="pug">
   DatatablesPage(
-    resource="demo/datatables/page"
-    :serverSide="true"
+    mode="tree"
+    resource="demo/datatables/tree"
     :columns="columns"
     :filterFields="filterFields")
 </template>

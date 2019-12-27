@@ -1,4 +1,3 @@
-<script>
 import { keyBy } from 'lodash'
 export default {
   props: {
@@ -37,4 +36,3 @@ export default {
     }
   }
 }
-</script>
