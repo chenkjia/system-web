@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1444418",
+      "name": "drag-vertical",
+      "font_class": "drag-vertical",
+      "unicode": "e708",
+      "unicode_decimal": 59144
+    },
+    {
       "icon_id": "4765962",
       "name": "app store",
       "font_class": "appstore",
@@ -200,6 +207,13 @@
       "font_class": "search",
       "unicode": "e8ef",
       "unicode_decimal": 59631
+    },
+    {
+      "icon_id": "6901153",
+      "name": "ellipsis-vertical",
+      "font_class": "ellipsis-vertical",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
     }
   ]
 }
