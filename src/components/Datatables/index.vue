@@ -16,6 +16,7 @@
               :buttonList="filterButtonList")
     .datatables-table-wrapper
       el-table.datatables-table(
+        ref="table"
         v-bind="$attrs"
         v-on="$listeners"
         v-loading="loading"
@@ -32,6 +33,11 @@
         :lazy="lazy"
         :load="treeLoad"
         @sort-change="sortChange")
+        el-table-column(
+          v-if="canSort"
+          type=""
+          width="22"
+          class-name="table-handle iconfont icondrag-vertical")
         slot(name="left")
         el-table-column(
           v-for="column in columns"
@@ -62,15 +68,17 @@
             :total="recordsFiltered")
 </template>
 <script>
+
 import { treeInit } from '@/utils/tree.js'
 import filterForm from './plugins/filterForm'
 import pagination from './plugins/pagination'
 import tree from './plugins/tree'
+import sortable from './plugins/sortable'
 import getTableData from './getTableData'
 
 export default {
   name: 'Datatables',
-  mixins: [pagination, filterForm, tree],
+  mixins: [pagination, filterForm, tree, sortable],
   props: {
     resource: {
       type: String,
@@ -174,6 +182,7 @@ export default {
     },
     sortChange (sortData) {
       this.sortData = sortData
+      console.log(this.sortData)
       this.getTableData()
     }
   }
@@ -231,4 +240,7 @@ export default {
     margin-top: 1em
 .datatablespage-pagination
   text-align: right
+.datatables-table /deep/ .table-handle
+  font-size: 22px
+  cursor: move
 </style>
