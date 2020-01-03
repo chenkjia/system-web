@@ -134,6 +134,11 @@ export default {
   mounted () {
     this.init()
   },
+  watch: {
+    resource () {
+      this.init()
+    }
+  },
   methods: {
     init () {
       // 对有绑定远程请求接口但非服务端分页的做第一次全数据请求
