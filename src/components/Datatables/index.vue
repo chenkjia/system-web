@@ -34,10 +34,12 @@
         :load="treeLoad"
         @sort-change="sortChange")
         el-table-column(
-          v-if="canSort"
+          v-if="canSort&&columns.length"
           type=""
           width="22"
           class-name="table-handle iconfont icondrag-vertical")
+          template(slot-scope="scope")
+            div(:data-id="scope.row[treeKey]")
         slot(name="left")
         el-table-column(
           v-for="column in columns"
@@ -240,7 +242,31 @@ export default {
     margin-top: 1em
 .datatablespage-pagination
   text-align: right
-.datatables-table /deep/ .table-handle
-  font-size: 22px
-  cursor: move
+.datatables-table
+  /deep/
+    .table-handle
+      font-size: 22px
+      cursor: move
+    // 拖拉排序或拖拉改变父子关系时的样式
+    .highlight-in
+      background: #ecf5ff
+    .highlight-up
+      box-shadow: 0 10px 18px -20px inset blue
+      &::after
+        transform: translate(0, -100%)
+        box-shadow: 0 -10px 18px -20px inset blue
+    .highlight-down
+      box-shadow: 0 -10px 18px -20px inset blue
+      &::after
+        transform: translate(0, 100%)
+        box-shadow: 0 10px 18px -20px inset blue
+    .highlight-up,.highlight-down
+      position: relative
+      &::after
+        content: ''
+        display: block
+        position: absolute
+        width: 100%
+        height: 40px
+        left: 0
 </style>
