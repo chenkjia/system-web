@@ -1,5 +1,3 @@
-<script>
-
 export default {
   props: {
     createFields: {
@@ -47,4 +45,3 @@ export default {
     }
   }
 }
-</script>

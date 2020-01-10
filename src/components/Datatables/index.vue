@@ -34,7 +34,7 @@
         :load="treeLoad"
         @sort-change="sortChange")
         el-table-column(
-          v-if="canSort&&columns.length"
+          v-if="canDrag&&columns.length"
           type=""
           width="22"
           class-name="table-handle iconfont icondrag-vertical")
@@ -75,12 +75,12 @@ import { treeInit } from '@/utils/tree.js'
 import filterForm from './plugins/filterForm'
 import pagination from './plugins/pagination'
 import tree from './plugins/tree'
-import sortable from './plugins/sortable'
+import dragAndDrop from './plugins/dragAndDrop'
 import getTableData from './getTableData'
 
 export default {
   name: 'Datatables',
-  mixins: [pagination, filterForm, tree, sortable],
+  mixins: [pagination, filterForm, tree, dragAndDrop],
   props: {
     resource: {
       type: String,
@@ -158,7 +158,7 @@ export default {
         tableAllData: this.tableAllData,
         filterData: this.filterData,
         filterFieldsObject: this.filterFieldsObject,
-        sortData: this.sortData,
+        sortData: this.resultSortData,
         pageCurrent: this.pageCurrent,
         pageSize: this.pageSize,
         treeKey: this.treeKey,
@@ -177,7 +177,7 @@ export default {
         resource: this.resource,
         filterData: this.filterData,
         filterFieldsObject: this.filterFieldsObject,
-        sortData: this.sortData,
+        sortData: this.resultSortData,
         pageCurrent: 1,
         pageSize: 999999,
         treeKey: this.treeKey,

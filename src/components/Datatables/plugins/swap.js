@@ -74,8 +74,8 @@ function SwapPlugin () {
     pluginName: 'swap',
     eventProperties () {
       return {
-        swapItemIndex: index(lastSwapEl),
-        swapItem: lastSwapEl,
+        dropItemIndex: index(lastSwapEl),
+        dropItem: lastSwapEl,
         swapDirection: lastSwapDirection
       }
     }

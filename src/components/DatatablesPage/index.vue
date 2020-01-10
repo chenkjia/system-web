@@ -7,7 +7,9 @@
         v-on="$listeners"
         ref="Datatables"
         :resource="resource"
-        :columns="columns")
+        :columns="columns"
+        @changeParentId="changeParentId"
+        @changeSort="changeSort")
         el-table-column.operation-column(
           v-if="operation&&operation.length&&columns.length"
           fixed="right"
@@ -60,8 +62,10 @@
 <script>
 import { pick, isString, defaultsDeep } from 'lodash'
 
-import CreateForm from './CreateForm'
-import UpdateForm from './UpdateForm'
+import createForm from './createForm'
+import updateForm from './updateForm'
+import tree from './tree'
+import sort from './sort'
 
 const buttonListReset = (buttonList, buttonPreset) => {
   return buttonList.map(item => {
@@ -74,7 +78,7 @@ const buttonListReset = (buttonList, buttonPreset) => {
 
 export default {
   name: 'DatatablesPage',
-  mixins: [ CreateForm, UpdateForm ],
+  mixins: [ createForm, updateForm, tree, sort ],
   props: {
     resource: String,
     data: {

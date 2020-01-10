@@ -18,10 +18,11 @@ export default {
     const data = Array.apply(null, { length: 136 }).map((item, index) => {
       const type = typeList[index % typeList.length]
       return {
-        id: index + 1,
+        id: String(index + 1),
         label: `${type}${index + 1}`,
         type: type,
         icon: iconList[index % iconList.length],
+        sort: index,
         enabled: Boolean(index % 2),
         parentId: parseInt(index / 10)
       }

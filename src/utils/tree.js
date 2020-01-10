@@ -3,19 +3,19 @@ import { cloneDeep, keyBy, some } from 'lodash'
 export const getPath = (node) => {
   return node.parent ? [...getPath(node.parent), node] : [node]
 }
-const getPathId = (node) => getPath(node).map(({ id }) => id)
+const getPathId = (node, key) => getPath(node).map(item => item[key])
 const getParents = (node) => {
   const path = getPath(node)
   return path.splice(-1, path.length - 1)
 }
-const getParentsId = (node) => getPathId(node).splice(-1, 1)
+const getParentsId = (node, key) => getPathId(node, key).splice(-1, 1)
 
-const endowNode = (node, parent) => {
+const endowNode = (node, parent, key) => {
   node.parent = parent
   node.getPath = () => getPath(node)
-  node.getPathId = () => getPathId(node)
+  node.getPathId = () => getPathId(node, key)
   node.getParents = () => getParents(node)
-  node.getParentsId = () => getParentsId(node)
+  node.getParentsId = () => getParentsId(node, key)
 }
 
 // 树的格式化
@@ -32,7 +32,7 @@ export function treeFormat (list, key = 'id', parentKey = 'parentId', childKey =
         parent[childKey].push(node)
       }
       // 为每个节点赋能
-      if (hasPath) endowNode(tmpNode, parent)
+      if (hasPath) endowNode(tmpNode, parent, key)
     } else {
       r.push(node)
     }
@@ -48,12 +48,7 @@ export function treeFlat (nodes, childKey = 'children') {
 
 // 初始化tree数据，为每个节点赋能后重新将数据扁平化
 export function treeInit (nodes, key = 'id', parentKey = 'parentId', childKey = 'children', hasPath = true) {
-  return treeFlat(treeFormat(nodes, key, parentKey, childKey, hasPath), childKey).map(item => {
-    return {
-      ...item,
-      children: []
-    }
-  })
+  return treeFlat(treeFormat(nodes, key, parentKey, childKey, hasPath), childKey)
 }
 
 export function treeChildren (tree, value, parentKey = 'parentId') {

@@ -1,4 +1,3 @@
-<script>
 import { omit } from 'lodash'
 
 export default {
@@ -56,4 +55,3 @@ export default {
     }
   }
 }
-</script>
