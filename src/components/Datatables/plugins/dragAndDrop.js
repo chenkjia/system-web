@@ -61,12 +61,22 @@ export default {
           remove(dropParentChildren, item => item[this.treeKey] === dragId)
         }
         const dropIndex = findIndex(dropParentChildren, [this.treeKey, dropId])
-        // 把拖拽项插入到它们中并重新进行排序
+        // 把拖拽项插入到它们中
         dropParentChildren.splice(direction === 'up' ? dropIndex : dropIndex + 1, 0, dragItem)
+        // 把重新排序前的序号进行记录，供过滤
+        const sortObject = dropParentChildren.reduce((result, current) => {
+          result[current[this.treeKey]] = current[this.sortKey]
+          return result
+        }, {})
+        // 重新进行排序
         dropParentChildren.forEach((item, index) => {
           item[this.sortKey] = index
         })
-        this.changeSort(dropParentChildren)
+        // 把序号有变更的项过滤出来，实现数据变更操作
+        const sortList = dropParentChildren.filter(item => {
+          return item[this.sortKey] !== sortObject[item[this.treeKey]]
+        })
+        this.changeSort(sortList)
       }
       this.getTableData()
     },
