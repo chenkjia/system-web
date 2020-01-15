@@ -39,8 +39,32 @@ export default {
         createTreeDragAndDrop(table, this.dropItem)
       }
       if (this.mode === 'page') {
-        createPageDragAndDrop(table, this.dropItem)
+        createPageDragAndDrop(table, this.dropToSort)
       }
+    },
+    dropToSort ({ newIndex, oldIndex }) {
+      // 把拖拽项从列表中抽出来
+      const currRow = this.tableData.splice(oldIndex, 1)[0]
+      // 把拖拽项插入到列表中新位置中去
+      this.tableData.splice(newIndex, 0, currRow)
+      // 计算出拖拽项向下位移多少位，向上位移则为负
+      const length = newIndex - oldIndex
+      const direction = length > 0
+      const directionLength = direction ? 1 : -1
+      const max = direction ? newIndex - 1 : oldIndex
+      const min = direction ? oldIndex : newIndex + 1
+      // 循环拖拽项和目标位置中间的每项，修改他们的sort
+      const sortList = this.tableData.filter((item, index) => {
+        return index >= min && index <= max
+      }).map(item => {
+        return {
+          [this.treeKey]: item[this.treeKey],
+          [this.sortKey]: item[this.sortKey] - directionLength
+        }
+      })
+      // 修改拖拽项的sort
+      currRow[this.sortKey] = currRow.sort + length
+      this.changeSort([...sortList, currRow])
     },
     dropItem ({ direction, dragId, dropId }) {
       // 找到拖拽项

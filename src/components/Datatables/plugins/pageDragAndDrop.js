@@ -55,16 +55,13 @@ import Sortable from 'sortablejs'
 // }
 
 // 绑定拖拽事件
-export const createPageDragAndDrop = (table, dragAndDrop) => {
+export const createPageDragAndDrop = (table, onEnd) => {
   Sortable.create(table, {
     handle: '.table-handle',
     animation: 150,
     swapThreshold: 0.75,
     invertSwap: true,
     invertedSwapThreshold: 1,
-    onEnd: (evt) => {
-      // 判断拖拽项不是目标项的祖先
-      console.log(evt)
-    }
+    onEnd
   })
 }
