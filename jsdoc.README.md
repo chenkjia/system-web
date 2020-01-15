@@ -1,3 +1,8 @@
+```
+参考文档：
+  中文 - http://shouce.jb51.net/jsdoc/about-configuring-jsdoc.html
+  官方 - https://jsdoc.app
+```
 ## 运行文档
 
 ```
