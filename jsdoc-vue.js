@@ -1,5 +1,6 @@
 var compiler = require('vue-template-compiler')
-const { exec } = require('child_process')
+var fs = require('fs')
+var { exec } = require('child_process')
 
 exports.handlers = {
   // 利用 vue-template-compiler 编译 vue 模板
@@ -9,9 +10,12 @@ exports.handlers = {
       e.source = output.script ? output.script.content : ''
     }
   },
-  parseComplete: function ({ sourcefiles, doclets }) {
+  processingComplete: function ({ sourcefiles, doclets }) {
+    const packageData = fs.readFileSync('./package.json')
+    const { name, version } = JSON.parse(packageData)
     // eslint-disable-next-line no-path-concat
-    const url = __dirname + '/doc/index.html'
+    const url = __dirname + `/doc/${name}/${version}/index.html`
+    if (!fs.existsSync(url)) return console.log(`请手动打开${url}`)
     switch (process.platform) {
       // win系统使用
       case 'win32': exec(`start ${url}`); break
