@@ -18,7 +18,10 @@
 const directionList = ['row', 'row-reverse', 'column', 'column-reverse']
 const arrowList = ['left', 'right', 'up', 'down']
 
-// 双栏布局组件
+/**
+ * @module DoubleColumnLayout
+ * 双栏布局组件
+*/
 export default {
   name: 'DoubleColumnLayout',
   props: {
