@@ -15,14 +15,16 @@ exports.handlers = {
     const { name, version } = JSON.parse(packageData)
     // eslint-disable-next-line no-path-concat
     const url = __dirname + `/doc/${name}/${version}/index.html`
-    if (!fs.existsSync(url)) return console.log(`请手动打开${url}`)
-    switch (process.platform) {
-      // win系统使用
-      case 'win32': exec(`start ${url}`); break
-      // mac系统使用
-      case 'darwin':
-      default: exec(`open ${url}`)
-    }
-    console.log(`可查看文档：${url}`)
+    setTimeout(() => {
+      if (!fs.existsSync(url)) return console.log(`请手动打开${url}`)
+      switch (process.platform) {
+        // win系统使用
+        case 'win32': exec(`start ${url}`); break
+        // mac系统使用
+        case 'darwin':
+        default: exec(`open ${url}`)
+      }
+      console.log(`可查看文档：${url}`)
+    }, 500)
   }
 }
