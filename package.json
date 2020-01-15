@@ -9,7 +9,7 @@
     "dll": "vue-cli-service dll",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "doc": "jsdoc -r -c jsdoc.config.js -P package.json"
+    "doc": "jsdoc -r -c jsdoc.config.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
