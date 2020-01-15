@@ -1,6 +1,7 @@
 <template lang="pug">
   DatatablesPage(
     resource="demo/datatables/page"
+    :draggable="true"
     :columns="columns"
     :filterFields="filterFields"
     :operationList="operationList")

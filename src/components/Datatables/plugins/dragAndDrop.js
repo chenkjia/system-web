@@ -1,10 +1,12 @@
 import { keys, sortBy, findIndex, remove, pick } from 'lodash'
 import { createTreeDragAndDrop } from './treeDragAndDrop'
+import { createPageDragAndDrop } from './pageDragAndDrop'
+
 export default {
   props: {
     draggable: {
       type: Boolean,
-      default: true
+      default: false
     },
     sortKey: {
       type: String,
@@ -35,6 +37,9 @@ export default {
       const table = this.$refs.table.$el.children[2].children[0].children[1]
       if (this.mode === 'tree') {
         createTreeDragAndDrop(table, this.dropItem)
+      }
+      if (this.mode === 'page') {
+        createPageDragAndDrop(table, this.dropItem)
       }
     },
     dropItem ({ direction, dragId, dropId }) {

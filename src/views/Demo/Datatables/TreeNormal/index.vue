@@ -2,6 +2,7 @@
   Datatables(
     mode="tree"
     treeKey="id"
+    :draggable="true"
     :data="data"
     :columns="columns"
     :filterFields="filterFields")

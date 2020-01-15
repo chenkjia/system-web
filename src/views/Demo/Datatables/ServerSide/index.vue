@@ -2,6 +2,7 @@
   DatatablesPage(
     resource="demo/datatables/page"
     :serverSide="true"
+    :draggable="true"
     :columns="columns"
     :filterFields="filterFields")
 </template>

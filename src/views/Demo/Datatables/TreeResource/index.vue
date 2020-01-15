@@ -2,6 +2,7 @@
   DatatablesPage(
     mode="tree"
     resource="demo/datatables/tree"
+    :draggable="true"
     :columns="columns"
     :filterFields="filterFields")
 </template>
