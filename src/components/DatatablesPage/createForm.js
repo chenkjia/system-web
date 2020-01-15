@@ -1,4 +1,11 @@
+
 export default {
+/**
+  * @module DatatablesPage-createForm
+  * @props 属性
+  * @prop {Array} createFields -
+  * @prop {Array} createButtonList 表单新增操作按钮组，以多个按钮配置为对象，如[{label: '按钮1', func: () => {}}]
+*/
   props: {
     createFields: {
       type: Array,
@@ -12,6 +19,10 @@ export default {
     return {
       createData: {},
       createDialogVisible: false,
+      /**
+       * @inner createButtons
+       * @default [{取消按钮},{确定按钮}]
+       *  */
       createButtons: this.createButtonList || [{
         label: '取 消',
         func: () => {

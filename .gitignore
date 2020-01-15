@@ -3,6 +3,7 @@ node_modules
 archives
 coverage
 /dist
+/doc
 version.json
 version.jsone
 yarn.lock

@@ -60,6 +60,10 @@
         :buttonList="updateButtons")
 </template>
 <script>
+/**
+ * @name DatatablesPage
+ * @module DatatablesPage 表格页
+ * */
 import { pick, isString, defaultsDeep } from 'lodash'
 
 import createForm from './createForm'
@@ -75,7 +79,6 @@ const buttonListReset = (buttonList, buttonPreset) => {
     return defaultsDeep(item, buttonPreset[item.name])
   })
 }
-
 export default {
   name: 'DatatablesPage',
   mixins: [ createForm, updateForm, tree, sort ],
