@@ -11,10 +11,11 @@ exports.handlers = {
     }
   },
   processingComplete: function ({ sourcefiles, doclets }) {
-    const packageData = fs.readFileSync('./package.json')
-    const { name, version } = JSON.parse(packageData)
+    // const packageData = fs.readFileSync('./package.json')
+    // const { name, version } = JSON.parse(packageData)
+    // const url = __dirname + `/doc/${name}/${version}/index.html`
     // eslint-disable-next-line no-path-concat
-    const url = __dirname + `/doc/${name}/${version}/index.html`
+    const url = __dirname + `/doc/index.html`
     setTimeout(() => {
       if (!fs.existsSync(url)) return console.log(`请手动打开${url}`)
       switch (process.platform) {

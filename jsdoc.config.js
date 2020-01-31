@@ -15,7 +15,7 @@ module.exports = {
     'include': [
       // 需要编译的文件路径 使用时请替换
       './src/components',
-      'package.json',
+      // 'package.json',
       'README.md'
     ],
     'includePattern': '.+\\.(vue|js|md)$',
@@ -41,7 +41,7 @@ module.exports = {
     'recurse': true,
     // 使用模板 minami
     'template': './node_modules/minami',
-    'readme': './README.md',
-    'package': './package.json'
+    'readme': './README.md'
+    // 'package': './package.json'
   }
 }
