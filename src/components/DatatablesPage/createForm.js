@@ -31,6 +31,7 @@ export default {
       }, {
         label: '确 定',
         type: 'primary',
+        validate: true,
         func: this.createFormSubmit
       }]
     }
@@ -41,16 +42,10 @@ export default {
       this.createDialogVisible = true
     },
     createFormSubmit ({ data, form }) {
-      form.validate((valid) => {
-        if (valid) {
-          this.$create({ url: this.resource, data }).then(res => {
-            if (res.code === 0) {
-              this.createDialogVisible = false
-              this.getList()
-            }
-          })
-        } else {
-          return false
+      this.$create({ url: this.resource, data }).then(res => {
+        if (res.code === 0) {
+          this.createDialogVisible = false
+          this.getList()
         }
       })
     }

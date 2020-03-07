@@ -12,7 +12,8 @@ export const fields = {
     label: '菜单类型',
     relation: 'menuTypes',
     form: {
-      formtype: 'select'
+      formtype: 'select',
+      rules: [{ required: true, message: '请选择菜单类型', trigger: 'blur' }]
     },
     filter: {
       formtype: 'select'

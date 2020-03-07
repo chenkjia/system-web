@@ -16,8 +16,8 @@
         v-model="formData[field.name]")
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
-        :data="{data:formData,form:this.$refs['dataform']}"
-        :buttonList="buttonList")
+        :data="{data:formData,form:dataformEl}"
+        :buttonList="statusBtnGroup")
 </template>
 
 <script>
@@ -41,7 +41,8 @@ export default {
   },
   data () {
     return {
-      formData: this.dataInit
+      formData: this.dataInit,
+      dataformEl: null
     }
   },
   computed: {
@@ -53,12 +54,33 @@ export default {
         }
       }, {})
       return rules
+    },
+    statusBtnGroup () {
+      return this.buttonList.map(button => {
+        return Object.assign(
+          button,
+          button.validate ? { func: (data) => this.validateFunc(button, data) } : {}
+        )
+      })
     }
   },
   watch: {
     dataInit (data) {
       this.formData = data
     }
+  },
+  methods: {
+    validateFunc (button, data) {
+      this.dataformEl.validate((valid) => {
+        if (!valid) {
+          return false
+        }
+        button.func(data)
+      })
+    }
+  },
+  mounted () {
+    this.dataformEl = this.$refs['dataform']
   }
 }
 </script>
