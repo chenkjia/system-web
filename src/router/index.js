@@ -39,7 +39,12 @@ const router = new Router({
       path: '/',
       beforeEnter: async (to, from, next) => {
         if (store.getters.accountId === '') {
-          await store.dispatch('user/getInfo')
+          try {
+            await store.dispatch('user/getInfo')
+          } catch (err) {
+            next('login')
+            return
+          }
         }
         const menusPath = store.getters.menus.map(({ url }) => url)
         if (!menusPath.length) {
