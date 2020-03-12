@@ -18,3 +18,8 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+// 忽略检测uncaught:exception类型，但会在console中throw Error
+// eslint-disable-next-line handle-callback-err
+Cypress.on('uncaught:exception', (err, runnable) => {
+  return false
+})
