@@ -8,17 +8,21 @@
       .menus-appstore
         el-divider(content-position="left") 系统管理
         .menus-appstore-list
-          router-link.menus-appstore-item(
+          .menus-appstore-item(
             v-for="menu in searchResultMenus"
             :key="menu._id"
+            @click="linkTo(menu.url)"
             :to="menu.url")
             .menus-appstore-content
               span.iconfont(:class="'icon'+menu.icon")
               |  {{menu.label}}
-            el-rate.menus-appstore-start(
-              :max="1"
+            div.menus-appstore-start(
               :value="menu._id|shortcutsFilter(shortcuts)"
-              @change="changeShortcut(menu._id)")
+              @click.stop)
+              el-rate(
+                :max="1"
+                :value="menu._id|shortcutsFilter(shortcuts)"
+                @change="changeShortcut(menu._id)")
       .app-menu-item(slot="reference")
         span.iconfont.iconappstore
     el-tooltip(
@@ -74,6 +78,9 @@ export default {
     }
   },
   methods: {
+    linkTo (url) {
+      this.$route.path !== url && this.$router.push(url)
+    },
     changeShortcut (menuId) {
       this.$store.dispatch('user/changeShortcuts', menuId)
     }
@@ -113,6 +120,7 @@ export default {
     border-radius: 4px
     color: #606266
     text-decoration: none
+    cursor: pointer
     &:hover
       background: #EBEEF5
       .menus-appstore-start
@@ -121,6 +129,6 @@ export default {
       flex: 1
     .menus-appstore-start
       display: none
-      &[aria-valuenow="1"]
+      &[value="1"]
         display: block
 </style>
