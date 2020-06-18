@@ -13,7 +13,7 @@
 import DictionaryGroup from './DictionaryGroup'
 import DictionaryOption from './DictionaryOption'
 export default {
-  name: 'Dictionaries',
+  name: 'Dictionarie',
   components: {
     DictionaryGroup,
     DictionaryOption

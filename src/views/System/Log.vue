@@ -12,7 +12,7 @@
 <script>
 const columnList = ['label', 'type', 'url', 'icon', 'enabled', 'remark']
 export default {
-  name: 'logs',
+  name: 'log',
   data () {
     return {
       toolbarList: ['create'],

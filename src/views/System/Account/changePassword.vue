@@ -4,7 +4,7 @@ import { fieldsFormat } from '@/utils/fieldsFormat.js'
 import { fields, changeList } from './fields'
 
 export default {
-  name: 'accountsChangePassword',
+  name: 'accountChangePassword',
   data () {
     return {
       changeData: {},
@@ -22,7 +22,7 @@ export default {
           const result = cloneDeep(data)
           result.password = this.$md5(data.password)
           this.$update({
-            url: 'system/accounts/changePassword',
+            url: 'system/account/changePassword',
             params: {
               _id: this.changeFormId
             },

@@ -31,7 +31,7 @@ import changePassword from './changePassword'
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
 import { fields, columnList, filterList, createList, updateList } from './fields'
 export default {
-  name: 'accounts',
+  name: 'account',
   mixins: [changePassword],
   data () {
     return {

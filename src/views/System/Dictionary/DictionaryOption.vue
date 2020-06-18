@@ -13,7 +13,7 @@
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
 import { fields, columnList, createList, updateList } from './optionFields'
 export default {
-  name: 'DictionaryOptions',
+  name: 'DictionaryOption',
   props: {
     dictionaryGroupId: String
   },

@@ -13,7 +13,7 @@
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
 import { fields, columnList, filterList, createList, updateList } from './groupFields'
 export default {
-  name: 'DictionaryGroups',
+  name: 'DictionaryGroup',
   data () {
     return {
       toolbarList: ['create'],

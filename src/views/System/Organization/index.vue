@@ -13,7 +13,7 @@ import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
 import { fields, columnList, filterList, createList, updateList } from './fields'
 
 export default {
-  name: 'organizations',
+  name: 'organization',
   data () {
     return {
       toolbarList: ['create'],
