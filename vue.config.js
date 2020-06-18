@@ -1,5 +1,8 @@
 const version = require('./version.json')
 
+const mockTarget = 'http://192.168.0.33:40001/mock/11'
+const devTarget = 'http://localhost:3000'
+const target = process.env.npm_lifecycle_event === 'mock' ? mockTarget : devTarget
 module.exports = {
   configureWebpack: {
     externals: {
@@ -26,10 +29,10 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: process.env.npm_lifecycle_event === 'mock' ? 'http://localhost:40001/mock/11' : 'http://localhost:3000'
+        target
       },
       '/files': {
-        target: process.env.npm_lifecycle_event === 'mock' ? 'http://localhost:40001/mock/11' : 'http://localhost:3000'
+        target
       }
     }
   },
