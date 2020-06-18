@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "mock": "vue-cli-service serve",
     "build": "bash build/version.sh && vue-cli-service build && bash build/file.sh",
     "lint": "vue-cli-service lint",
     "dll": "vue-cli-service dll",

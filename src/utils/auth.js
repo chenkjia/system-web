@@ -18,11 +18,11 @@ export const getUserInfo = () => {
   })
 }
 
-export const changeShortcuts = (shortcuts) => {
+export const changeShortcuts = (shortcut) => {
   return put({
-    url: 'shortcuts',
+    url: 'shortcut',
     data: {
-      shortcuts
+      shortcut
     }
   })
 }

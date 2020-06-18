@@ -26,10 +26,10 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000'
+        target: process.env.npm_lifecycle_event === 'mock' ? 'http://localhost:40001/mock/11' : 'http://localhost:3000'
       },
       '/files': {
-        target: 'http://localhost:3000'
+        target: process.env.npm_lifecycle_event === 'mock' ? 'http://localhost:40001/mock/11' : 'http://localhost:3000'
       }
     }
   },

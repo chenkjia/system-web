@@ -1,8 +1,8 @@
 <template lang="pug">
   DatatablesPage(
-    resource="system/menus"
-    :columns="columns"
+    resource="system/role"
     :serverSide="true"
+    :columns="columns"
     :filterFields="filterFields"
     :createFields="createFields"
     :updateFields="updateFields"
@@ -12,8 +12,9 @@
 <script>
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
 import { fields, columnList, filterList, createList, updateList } from './fields'
+
 export default {
-  name: 'menus',
+  name: 'roles',
   data () {
     return {
       toolbarList: ['create'],

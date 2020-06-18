@@ -1,8 +1,8 @@
 <template lang="pug">
   DatatablesPage(
-    resource="system/dictionaries"
-    :serverSide="true"
+    resource="system/menu"
     :columns="columns"
+    :serverSide="true"
     :filterFields="filterFields"
     :createFields="createFields"
     :updateFields="updateFields"
@@ -11,19 +11,13 @@
 </template>
 <script>
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
-import { fields, columnList, filterList, createList, updateList } from './groupsFields'
+import { fields, columnList, filterList, createList, updateList } from './fields'
 export default {
-  name: 'DictionaryGroups',
+  name: 'menus',
   data () {
     return {
       toolbarList: ['create'],
-      operationList: ['update', 'delete', {
-        name: 'options',
-        label: '编辑字典项',
-        func: (data) => {
-          this.$emit('selectDictionaryGroup', data)
-        }
-      }],
+      operationList: ['update', 'delete'],
       columns: [],
       filterFields: [],
       createFields: [],

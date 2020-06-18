@@ -4,28 +4,28 @@ export default {
     template: '<router-view/>'
   },
   children: [{
-    path: 'menus',
-    name: 'menus',
-    component: () => import(/* webpackChunkName: "system-menus" */ '@/views/System/Menus')
+    path: 'menu',
+    name: 'menu',
+    component: () => import(/* webpackChunkName: "system-menu" */ '@/views/System/Menu')
   }, {
-    path: 'dictionaries',
-    name: 'dictionaries',
-    component: () => import(/* webpackChunkName: "system-dictionaries" */ '@/views/System/Dictionaries')
+    path: 'dictionary',
+    name: 'dictionary',
+    component: () => import(/* webpackChunkName: "system-dictionary" */ '@/views/System/Dictionary')
   }, {
-    path: 'organizations',
-    name: 'organizations',
-    component: () => import(/* webpackChunkName: "system-organizations" */ '@/views/System/Organizations')
+    path: 'organization',
+    name: 'organization',
+    component: () => import(/* webpackChunkName: "system-organization" */ '@/views/System/Organization')
   }, {
-    path: 'accounts',
-    name: 'accounts',
-    component: () => import(/* webpackChunkName: "system-accounts" */ '@/views/System/Accounts')
+    path: 'account',
+    name: 'account',
+    component: () => import(/* webpackChunkName: "system-account" */ '@/views/System/Account')
   }, {
-    path: 'roles',
-    name: 'roles',
-    component: () => import(/* webpackChunkName: "system-roles" */ '@/views/System/Roles')
+    path: 'role',
+    name: 'role',
+    component: () => import(/* webpackChunkName: "system-role" */ '@/views/System/Role')
   }, {
-    path: 'logs',
-    name: 'logs',
-    component: () => import(/* webpackChunkName: "system-logs" */ '@/views/System/Logs')
+    path: 'log',
+    name: 'log',
+    component: () => import(/* webpackChunkName: "system-log" */ '@/views/System/Log')
   }]
 }

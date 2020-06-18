@@ -11,7 +11,7 @@
 </template>
 <script>
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat.js'
-import { fields, columnList, createList, updateList } from './optionsFields'
+import { fields, columnList, createList, updateList } from './optionFields'
 export default {
   name: 'DictionaryOptions',
   props: {
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     resource () {
-      return `system/dictionaries/options?dictionaryId=${this.dictionaryGroupId}`
+      return `system/dictionary/option?dictionaryId=${this.dictionaryGroupId}`
     }
   },
   data () {

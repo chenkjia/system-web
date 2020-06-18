@@ -1,7 +1,7 @@
 <template lang="pug">
   DatatablesPage(
     ref="DatatablesPage"
-    resource="system/accounts"
+    resource="system/account"
     :serverSide="true"
     :columns="columns"
     :filterFields="filterFields"

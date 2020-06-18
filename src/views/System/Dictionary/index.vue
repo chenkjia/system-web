@@ -1,22 +1,22 @@
 <template lang="pug">
   DoubleColumnLayout(v-model="layoutState")
-    DictionaryGroups(
+    DictionaryGroup(
       slot="main"
       @selectDictionaryGroup="selectDictionaryGroup"
     )
-    DictionaryOptions(
+    DictionaryOption(
       slot="sub"
       v-if="dictionaryGroupId!==''"
       :dictionaryGroupId="dictionaryGroupId")
 </template>
 <script>
-import DictionaryGroups from './DictionaryGroups'
-import DictionaryOptions from './DictionaryOptions'
+import DictionaryGroup from './DictionaryGroup'
+import DictionaryOption from './DictionaryOption'
 export default {
   name: 'Dictionaries',
   components: {
-    DictionaryGroups,
-    DictionaryOptions
+    DictionaryGroup,
+    DictionaryOption
   },
   data () {
     return {
