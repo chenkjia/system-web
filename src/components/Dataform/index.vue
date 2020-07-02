@@ -16,7 +16,7 @@
         v-model="formData[field.name]")
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
-        :data="{data:formData,form:this.$refs['dataform']}"
+        :data="{data:formData,refs:this.$refs}"
         :buttonList="buttonList")
 </template>
 

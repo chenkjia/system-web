@@ -40,8 +40,8 @@ export default {
       this.createData = {}
       this.createDialogVisible = true
     },
-    createFormSubmit ({ data, form }) {
-      form.validate((valid) => {
+    createFormSubmit ({ data, refs }) {
+      refs.dataform.validate((valid) => {
         if (valid) {
           this.$create({ url: this.resource, data }).then(res => {
             if (res.code === 0) {
