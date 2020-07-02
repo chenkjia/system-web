@@ -42,8 +42,8 @@ export default {
       this.updateData = omit(data, ['_id'])
       this.updateDialogVisible = true
     },
-    updateFormSubmit ({ data, form }) {
-      form.validate((valid) => {
+    updateFormSubmit ({ data, refs }) {
+      refs.dataform.validate((valid) => {
         if (valid) {
           this.$update({
             url: this.resource,
