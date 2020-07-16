@@ -2,7 +2,7 @@ export const fields = {
   label: {
     label: '菜单名称',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -12,11 +12,11 @@ export const fields = {
     label: '菜单类型',
     relation: 'menuTypes',
     form: {
-      formtype: 'select',
+      tag: 'select',
       rules: [{ required: true, message: '请选择菜单类型', trigger: 'blur' }]
     },
     filter: {
-      formtype: 'select'
+      tag: 'select'
     },
     render: {
       type: 'select'
@@ -25,7 +25,7 @@ export const fields = {
   url: {
     label: '路径',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -34,7 +34,7 @@ export const fields = {
   icon: {
     label: '图标',
     form: {
-      formtype: 'icon'
+      tag: 'icon'
     },
     filter: {
       like: true
@@ -47,10 +47,10 @@ export const fields = {
     label: '是否启用',
     relation: 'enableOrDisable',
     form: {
-      formtype: 'switch'
+      tag: 'switch'
     },
     filter: {
-      formtype: 'select'
+      tag: 'select'
     },
     render: {
       type: 'select'
@@ -59,13 +59,13 @@ export const fields = {
   remark: {
     label: '备注',
     form: {
-      formtype: 'input',
+      tag: 'input',
       type: 'textarea',
       resize: 'none',
       autosize: true
     },
     filter: {
-      formtype: 'input'
+      tag: 'input'
     }
   }
 }

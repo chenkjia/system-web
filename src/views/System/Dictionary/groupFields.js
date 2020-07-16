@@ -2,7 +2,7 @@ export const fields = {
   sign: {
     label: '字典标识',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -11,7 +11,7 @@ export const fields = {
   label: {
     label: '字典名称',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -25,10 +25,10 @@ export const fields = {
     label: '是否启用',
     relation: 'enableOrDisable',
     form: {
-      formtype: 'switch'
+      tag: 'switch'
     },
     filter: {
-      formtype: 'select'
+      tag: 'select'
     },
     render: {
       type: 'select'
@@ -37,13 +37,13 @@ export const fields = {
   remark: {
     label: '备注',
     form: {
-      formtype: 'input',
+      tag: 'input',
       type: 'textarea',
       resize: 'none',
       autosize: true
     },
     filter: {
-      formtype: 'input'
+      tag: 'input'
     }
   }
 }

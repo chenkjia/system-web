@@ -3,7 +3,7 @@ export const fields = {
     label: '工号',
     sortable: true,
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -12,10 +12,10 @@ export const fields = {
   username: {
     label: '账号',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     update: {
-      formtype: 'render'
+      tag: 'render'
     },
     render: {
       type: 'text'
@@ -27,14 +27,14 @@ export const fields = {
   password: {
     label: '密码',
     form: {
-      formtype: 'input',
+      tag: 'input',
       'show-password': true
     }
   },
   fullname: {
     label: '姓名',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -44,7 +44,7 @@ export const fields = {
     label: '角色',
     relation: 'roles',
     form: {
-      formtype: 'select'
+      tag: 'select'
     },
     create: {
       multiple: true
@@ -59,7 +59,7 @@ export const fields = {
   mobile: {
     label: '联系电话',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -69,10 +69,10 @@ export const fields = {
     label: '是否启用',
     relation: 'enableOrDisable',
     form: {
-      formtype: 'switch'
+      tag: 'switch'
     },
     filter: {
-      formtype: 'select'
+      tag: 'select'
     },
     render: {
       type: 'select'
@@ -81,7 +81,7 @@ export const fields = {
   photo: {
     label: '照片',
     form: {
-      formtype: 'file'
+      tag: 'file'
     },
     render: {
       type: 'file'
@@ -90,13 +90,13 @@ export const fields = {
   remark: {
     label: '备注',
     form: {
-      formtype: 'input',
+      tag: 'input',
       type: 'textarea',
       resize: 'none',
       autosize: true
     },
     filter: {
-      formtype: 'input'
+      tag: 'input'
     }
   }
 }

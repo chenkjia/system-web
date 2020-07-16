@@ -25,7 +25,7 @@ export default {
         label: {
           label: '菜单名称',
           form: {
-            formtype: 'input'
+            tag: 'input'
           },
           filter: {
             like: true
@@ -34,16 +34,16 @@ export default {
         type: {
           label: '菜单类型',
           form: {
-            formtype: 'select'
+            tag: 'select'
           },
           filter: {
-            formtype: 'select'
+            tag: 'select'
           }
         },
         url: {
           label: '路径',
           form: {
-            formtype: 'input'
+            tag: 'input'
           },
           filter: {
             like: true
@@ -52,7 +52,7 @@ export default {
         icon: {
           label: '图标',
           form: {
-            formtype: 'icon'
+            tag: 'icon'
           },
           filter: {
             like: true
@@ -61,22 +61,22 @@ export default {
         enabled: {
           label: '是否启用',
           form: {
-            formtype: 'switch'
+            tag: 'switch'
           },
           filter: {
-            formtype: 'select'
+            tag: 'select'
           }
         },
         remark: {
           label: '备注',
           form: {
-            formtype: 'input',
+            tag: 'input',
             type: 'textarea',
             resize: 'none',
             autosize: true
           },
           filter: {
-            formtype: 'input'
+            tag: 'input'
           }
         }
       }

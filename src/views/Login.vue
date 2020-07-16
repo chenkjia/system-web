@@ -23,13 +23,13 @@ export default {
         name: 'username',
         label: '账号',
         form: {
-          formtype: 'input'
+          tag: 'input'
         }
       }, {
         name: 'password',
         label: '密码',
         form: {
-          formtype: 'input',
+          tag: 'input',
           'show-password': true
         }
       }],

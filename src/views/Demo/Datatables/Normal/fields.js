@@ -3,7 +3,7 @@ export const fields = {
     label: '测试名称',
     sortable: true,
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     filter: {
       like: true
@@ -14,10 +14,10 @@ export const fields = {
     relation: 'menuTypes',
     sortable: true,
     form: {
-      formtype: 'select'
+      tag: 'select'
     },
     filter: {
-      formtype: 'select'
+      tag: 'select'
     },
     render: {
       type: 'select'
@@ -27,7 +27,7 @@ export const fields = {
     label: '图标',
     sortable: true,
     form: {
-      formtype: 'icon'
+      tag: 'icon'
     },
     filter: {
       like: true
@@ -41,10 +41,10 @@ export const fields = {
     relation: 'enableOrDisable',
     sortable: true,
     form: {
-      formtype: 'switch'
+      tag: 'switch'
     },
     filter: {
-      formtype: 'select'
+      tag: 'select'
     },
     render: {
       type: 'select'
@@ -54,13 +54,13 @@ export const fields = {
     label: '备注',
     sortable: true,
     form: {
-      formtype: 'input',
+      tag: 'input',
       type: 'textarea',
       resize: 'none',
       autosize: true
     },
     filter: {
-      formtype: 'input'
+      tag: 'input'
     }
   }
 }

@@ -2,7 +2,7 @@ export const fields = {
   label: {
     label: '角色名称',
     form: {
-      formtype: 'input'
+      tag: 'input'
     },
     create: {
       rules: [{ required: true, message: '请输入角色名称', trigger: 'blur' }]
@@ -18,7 +18,7 @@ export const fields = {
     label: '菜单权限',
     relation: 'menus',
     form: {
-      formtype: 'select',
+      tag: 'select',
       multiple: true
     },
     create: {
@@ -38,10 +38,10 @@ export const fields = {
     label: '是否启用',
     relation: 'enableOrDisable',
     form: {
-      formtype: 'switch'
+      tag: 'switch'
     },
     filter: {
-      formtype: 'select'
+      tag: 'select'
     },
     render: {
       type: 'select'
@@ -50,13 +50,13 @@ export const fields = {
   remark: {
     label: '备注',
     form: {
-      formtype: 'input',
+      tag: 'input',
       type: 'textarea',
       resize: 'none',
       autosize: true
     },
     filter: {
-      formtype: 'input'
+      tag: 'input'
     }
   }
 }
