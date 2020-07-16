@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat'
 
 import {
   ButtonGroup,
@@ -15,3 +16,6 @@ Vue.use(Dataform)
 Vue.use(Datatables)
 Vue.use(DatatablesPage)
 Vue.use(DoubleColumnLayout)
+
+Object.defineProperty(Vue.prototype, '$fieldsFormat', { value: fieldsFormat })
+Object.defineProperty(Vue.prototype, '$fieldsGetRelation', { value: fieldsGetRelation })
