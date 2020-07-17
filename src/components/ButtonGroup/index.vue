@@ -2,7 +2,7 @@
   div
     el-button(
       v-for="button in buttonList"
-      v-bind="button"
+      v-bind.sync="computeAttrs[button.name]"
       :ref="button.name"
       :key="button.name"
       :size="button.size||'mini'"
@@ -33,23 +33,27 @@ export default {
       type: Array,
       default: () => ([])
     }
-  // },
-  // filters: {
-  //   funcProps (btn, datas) {
-  //     return {
-  //       ...datas,
-  //       button:
-  //     }
-  //   }
+  },
+  computed: {
+    computeAttrs () {
+      return this.buttonList.reduce((res, btn) => {
+        if (!btn.name) {
+          console.warn(`请给按钮【${btn.label}】增加主键属性name, 否则无法使用button部分功能`)
+          return res
+        }
+        return { ...res, [btn.name]: btn }
+      }, {})
+    }
   },
   methods: {
     onClickButton (e, btn) {
-      if (!btn.name) {
-        console.warn('请给按钮增加主键名称name, 否则无法使用func参数button')
+      const { name, func, action } = btn
+      if (action) {
+        this.$set(this.computeAttrs[name], 'loading', true)
       }
-      return btn.func({
+      func({
         ...this.data,
-        button: this.$refs[btn.name] ? this.$refs[btn.name][0] : {}
+        button: this.computeAttrs[name]
       })
     }
   }

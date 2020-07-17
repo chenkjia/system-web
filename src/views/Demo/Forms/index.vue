@@ -30,8 +30,16 @@ export default {
         label: '提交',
         type: 'success',
         name: 'submit',
+        action: true,
         func: (funcProps) => {
           console.log('funcProps:', funcProps)
+          const { button } = funcProps
+          // button.loading = true
+          setTimeout(() => {
+            button.label = '提交成功,仅限一次'
+            button.disabled = true
+            button.loading = false
+          }, 500)
         }
       }, {
         label: '重置',
