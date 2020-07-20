@@ -5,7 +5,6 @@ import DataformSelect from './DataformSelect'
 import DataformInput from './DataformInput'
 
 const dataFormItem = {
-  // input: 'el-input',
   input: 'DataformInput',
   inputNumber: 'el-input-number',
   select: 'DataformSelect',
