@@ -46,14 +46,36 @@ export default {
     }
   },
   methods: {
-    onClickButton (e, btn) {
-      const { name, func, action } = btn
+    onClickButton (e, button) {
+      // const { name, func, action, validate } = button
+      if (!button.validate) {
+        return this.handleButton(button)
+      }
+      // 验证表单规则
+      this.validateForm()
+        .then(resolve => this.handleButton(button))
+        // eslint-disable-next-line handle-callback-err
+        .catch(err => {
+          return false
+        })
+    },
+    handleButton (button) {
+      const { name, func, action } = button
       if (action) {
         this.$set(this.computeAttrs[name], 'loading', true)
       }
+      if (typeof func !== 'function') throw new Error('button.func should be a Fucntion')
       func({
         ...this.data,
         button: this.computeAttrs[name]
+      })
+    },
+    validateForm () {
+      const _dataFormComp = this.data.refs.dataform
+      return new Promise((resolve, reject) => {
+        _dataFormComp.validate((valid) => {
+          valid ? resolve(valid) : reject(valid)
+        })
       })
     }
   }
