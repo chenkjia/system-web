@@ -10,13 +10,17 @@
       :key="field.name",
       :label="field.label"
       :prop="field.name")
-      slot(name="field.name")
+      slot(
+        :name="field.name"
+        :field="field"
+        :data.sync="formData")
         component(
           :is="dataFormItem[field.form.tag]"
           :field="field"
           :placeholder="field|transPlacehoder(labelVisable)"
           v-bind="field.form"
-          v-model="formData[field.name]")
+          v-model="formData[field.name]"
+          @change="$emit('onCurChanging', $event, field.name)")
     el-form-item.dataform-button-item
       ButtonGroup.dataform-button(
         :style="buttonAlign|transBtnStyle"

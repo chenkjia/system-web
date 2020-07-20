@@ -4,13 +4,13 @@ div.form-containers
   Dataform.default-form(
     ref="defaultForm"
     size="small"
-    buttonAlign="center"
     label-position="right"
     label-width="100px"
-    :inline="true"
-    :labelVisable="false"
     :formFields="formFields"
-    :buttonList="buttonList")
+    :buttonList="buttonList"
+    @onCurChanging="onCurChangingForm")
+    template(slot="select", slot-scope="scope")
+      span(style="float: left") {{scope.field.label}} - {{scope.data.input}}
   el-divider(content-position="left") 对比表单
   el-divider(content-position="left") 表格嵌套表单
   el-divider(content-position="left") 键盘高度融合示例
@@ -31,10 +31,10 @@ export default {
         type: 'success',
         name: 'submit',
         action: true,
+        validate: true,
         func: (funcProps) => {
           console.log('funcProps:', funcProps)
           const { button } = funcProps
-          // button.loading = true
           setTimeout(() => {
             button.label = '提交成功,仅限一次'
             button.disabled = true
@@ -46,6 +46,11 @@ export default {
         name: 'reset',
         func: () => {}
       }]
+    }
+  },
+  methods: {
+    onCurChangingForm (value, fieldName) {
+      console.log('当前传统表单修改：', value, fieldName)
     }
   },
   mounted () {
