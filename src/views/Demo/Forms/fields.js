@@ -12,6 +12,9 @@ export const columns = {
       'show-word-limit': true,
       rules: [{
         required: true, message: '必填', trigger: 'blur'
+      }, {
+        pattern: '/^[0-9]+$/',
+        message: '必须是数字'
       }]
     }
   },
@@ -32,23 +35,23 @@ export const columns = {
       }
     },
     options: [{
-      value: '选项1',
+      value: 1,
       label: '黄金糕'
       // subtext: 'huangjingao',
       // group: 'food'
     }, {
-      value: '选项2',
+      value: 2,
       label: '双皮奶'
       // subtext: 'shuangpinai',
       // group: 'food'
     }, {
-      value: '选项3',
+      value: 3,
       label: '蚵仔煎'
     }, {
-      value: '选项4',
+      value: 4,
       label: '龙须面'
     }, {
-      value: '选项5',
+      value: 5,
       label: '北京烤鸭'
     }]
   },

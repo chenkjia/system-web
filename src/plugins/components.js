@@ -7,7 +7,8 @@ import {
   Dataform,
   Datatables,
   DatatablesPage,
-  DoubleColumnLayout
+  DoubleColumnLayout,
+  ComparedForm
 } from '@/components'
 
 Vue.use(ButtonGroup)
@@ -16,6 +17,7 @@ Vue.use(Dataform)
 Vue.use(Datatables)
 Vue.use(DatatablesPage)
 Vue.use(DoubleColumnLayout)
+Vue.use(ComparedForm)
 
 Object.defineProperty(Vue.prototype, '$fieldsFormat', { value: fieldsFormat })
 Object.defineProperty(Vue.prototype, '$fieldsGetRelation', { value: fieldsGetRelation })

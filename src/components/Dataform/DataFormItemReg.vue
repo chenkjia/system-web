@@ -9,6 +9,8 @@ const dataFormItem = {
   inputNumber: 'el-input-number',
   select: 'DataformSelect',
   switch: 'el-switch',
+  checkbox: 'el-checkbox',
+  radio: 'el-radio',
   cascader: 'el-cascader',
   timePicker: 'el-time-picker',
   datePicker: 'el-date-picker',

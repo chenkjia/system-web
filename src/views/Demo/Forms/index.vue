@@ -1,7 +1,7 @@
 <template lang='pug'>
 div.form-containers
   el-divider(content-position="left") 传统表单
-  Dataform.default-form(
+  Dataform.form-box(
     ref="defaultForm"
     size="small"
     label-position="right"
@@ -9,9 +9,15 @@ div.form-containers
     :formFields="formFields"
     :buttonList="buttonList"
     @onCurChanging="onCurChangingForm")
-    template(slot="select", slot-scope="scope")
-      span(style="float: left") {{scope.field.label}} - {{scope.data.input}}
+    //- template(slot="select", slot-scope="scope")
+    //-   span(style="float: left") {{scope.field.label}} - {{scope.data.input}}
   el-divider(content-position="left") 对比表单
+  ComparedForm.form-box(
+    ref="comparedForm"
+    :formFields="compFields"
+    :buttonList="compBtns"
+    :dataInit="compDatainit"
+    style="width: 70%")
   el-divider(content-position="left") 表格嵌套表单
   el-divider(content-position="left") 键盘高度融合示例
 </template>
@@ -45,7 +51,26 @@ export default {
         label: '重置',
         name: 'reset',
         func: () => {}
-      }]
+      }],
+      compFields: this.$fieldsFormat(columns, fieldList),
+      compBtns: [{
+        label: '提交',
+        name: 'submit',
+        func: ({ data, form }) => {
+          console.log('funcProps:', data)
+          console.log('form:', form.formData)
+        }
+      }, {
+        label: '重置',
+        name: 'reset',
+        func: ({ data, form }) => {
+          form.resetData()
+        }
+      }],
+      compDatainit: {
+        originInput: '123',
+        originSelect: 1
+      }
     }
   },
   methods: {
@@ -59,7 +84,7 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-.default-form
+.form-box
   width: 70%
   padding: 20px
   margin-left: 10px
