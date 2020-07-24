@@ -21,10 +21,15 @@ export default {
    * @example
    * [{...el-button, label: '', func: () => {}}]
    * @props props参数
+   * @prop {String} formName 指定表单ref名称，用于表单验证
    * @prop {Object} data 传入按钮作为参数的数据
    * @prop {Array} buttonList 按钮组，以多个按钮配置为对象
    **/
   props: {
+    formName: {
+      type: String,
+      default: 'dataform'
+    },
     data: {
       type: Object,
       default: () => ({})
@@ -56,6 +61,7 @@ export default {
         .then(resolve => this.handleButton(button))
         // eslint-disable-next-line handle-callback-err
         .catch(err => {
+          console.warn('button validate err:', err)
           return false
         })
     },
@@ -71,7 +77,7 @@ export default {
       })
     },
     validateForm () {
-      const _dataFormComp = this.data.refs.dataform
+      const _dataFormComp = this.data.refs[this.formName]
       return new Promise((resolve, reject) => {
         _dataFormComp.validate((valid) => {
           valid ? resolve(valid) : reject(valid)
