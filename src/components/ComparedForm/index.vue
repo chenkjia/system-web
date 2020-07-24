@@ -1,8 +1,9 @@
 <template lang='pug'>
 el-form(
   v-bind="$attrs"
-  ref="comparedForm"
-  :rules="rules")
+  ref="compareForm"
+  :rules="rules"
+  :model="formData")
   el-form-item.compared-form__item
     el-table.compared-form__container(
       v-bind="$attrs"
@@ -27,18 +28,21 @@ el-form(
         :label="formHeadFlag.label"
         :prop="formHeadFlag.headkey")
         template(slot-scope="scope")
-          //- v-model 只改变tableData，但无法监听到tableData
-          //- v-model="tableData[scope.$index][formHeadFlag.headkey]"
-          component(
-            :is="formFields[scope.$index]|filterComponent(dataFormItem)"
-            :field="formFields[scope.$index]"
-            :disabled="readOnly"
-            v-model="tableData[scope.$index][formHeadFlag.headkey]"
-            size="small"
-            v-bind="formFields[scope.$index].form"
-             @change="getChange($event, scope)")
+          el-form-item.compared-form__item(
+            :key="scope.$index|filterFieldName(formHeadFlag.headkey, tableData)"
+            :prop="scope.$index|filterFieldName(formHeadFlag.headkey, tableData)")
+            component(
+              :is="formFields[scope.$index]|filterComponent(dataFormItem)"
+              :field="formFields[scope.$index]"
+              :disabled="readOnly"
+              v-model="tableData[scope.$index][formHeadFlag.headkey]"
+              size="small"
+              v-bind="formFields[scope.$index].form"
+              @change="getChange($event, scope)")
   el-form-item.compared-form__item
     ButtonGroup(
+      formName="compareForm"
+      :style="buttonAlign|transBtnStyle"
       :data="buttonProps"
       :buttonList="buttonList")
 </template>
@@ -138,32 +142,13 @@ export default {
     formHeadFlag () {
       return this.computedHeadkeys[this.computedHeadkeys.length - 1]
     },
-    tableData () {
-      const originData = cloneDeep(this.dataInit)
-      return this.formFields.map(field => {
-        const originkeys = this.keyGroup.origin
-        const originkey = this.transFieldName(originkeys.pre, field.name, originkeys.append)
-        return this.computedHeadkeys.reduce((res, { headkey, prekey, appendkey, isLabel }) => {
-          const fieldkey = this.transFieldName(prekey, field.name, appendkey)
-          // 字段映射表
-          const fieldRelation = isLabel ? res.__fieldkeys__ : {
-            ...res.__fieldkeys__,
-            [fieldkey]: headkey
-          }
-          return {
-            ...res,
-            [headkey]: isLabel ? field.label : originData[fieldkey] || originData[originkey] || null,
-            '__allowSelect__': false,
-            '__fieldkeys__': fieldRelation
-          }
-        }, { '__fieldkeys__': {} })
-      })
-    },
     rules () {
-      const rules = this.formFields.reduce((result, current, index) => {
-        return !current.form.rules ? result : {
+      const rules = this.formFields.reduce((result, cur, index) => {
+        const changekeys = this.keyGroup.change
+        const curName = this.transFieldName(changekeys.pre, cur.name, changekeys.append)
+        return !cur.form.rules ? result : {
           ...result,
-          [current.name]: current.form.rules
+          [curName]: cur.form.rules
         }
       }, {})
       return rules
@@ -173,7 +158,7 @@ export default {
     },
     buttonProps () {
       return {
-        data: this.formatFormdata(this.tableData),
+        data: this.formData,
         refs: this.$refs,
         form: this
       }
@@ -182,6 +167,15 @@ export default {
   filters: {
     filterComponent (formitem, reg) {
       return formitem.form ? reg[formitem.form.tag] : reg['render']
+    },
+    filterFieldName (index, headkey, tableData) {
+      const fieldRelation = tableData[index].__fieldkeys__
+      return fieldRelation[headkey]
+    },
+    transBtnStyle (align) {
+      return {
+        textAlign: align
+      }
     }
   },
   data () {
@@ -198,23 +192,42 @@ export default {
         label: '拟变更值',
         key: 'change',
         isForm: true
-      }]
+      }],
+      formValue: {},
+      tableData: []
     }
   },
   methods: {
+    /**
+     * @function transFieldName 转换字段名称
+     * @description 转换成完整的字段名称，用于取值和赋值
+     * @param {String} pre 前缀
+     * @param {String} key 关键字，一般为this.formFields[n].name
+     * @param {String} append 后缀
+     * @return {string} 由驼峰转换后的完整字段
+    */
     transFieldName (pre = '', key = '', append = '') {
       if (!pre && !append) return camelCase(key)
       return camelCase(pre + ',' + key + ',' + append)
     },
+    /**
+     * @function formatFormdata 将tableData转换为formData对象数值
+     * @return {Object} formData对象数值
+    */
     formatFormdata (tableData) {
       return tableData.reduce((res, data) => {
         const fieldDatas = Object.entries(data.__fieldkeys__).reduce((preData, [key, value]) => {
-          preData[key] = data[value]
+          // preData[key] = data[value]
+          preData[value] = data[key]
           return preData
         }, {})
         return Object.assign(res, fieldDatas)
       }, {})
     },
+    /**
+     * @function resetData 重置表单数据
+     * @description 可以从外部通过refs或funcProps中的form直接调用
+     *  */
     resetData () {
       this.tableData.map(data => {
         this.$set(data, this.changekey, data[this.originkey])
@@ -222,11 +235,40 @@ export default {
           this.getChange(data[this.originkey], { row: data })
         })
       })
+    },
+    /**
+     * @function initTableData 初始化tableData
+    */
+    initTableData () {
+      const originData = cloneDeep(this.dataInit)
+      return this.formFields.map(field => {
+        const originkeys = this.keyGroup.origin
+        const originkey = this.transFieldName(originkeys.pre, field.name, originkeys.append)
+        return this.computedHeadkeys.reduce((res, { headkey, prekey, appendkey, isLabel }) => {
+          const fieldkey = this.transFieldName(prekey, field.name, appendkey)
+          // 字段映射表
+          const fieldRelation = isLabel ? res.__fieldkeys__ : {
+            ...res.__fieldkeys__,
+            // [fieldkey]: headkey
+            [headkey]: fieldkey
+          }
+          return {
+            ...res,
+            [headkey]: isLabel ? field.label : originData[fieldkey] || originData[originkey] || null,
+            '__allowSelect__': false,
+            '__fieldkeys__': fieldRelation
+          }
+        }, { '__fieldkeys__': {} })
+      })
     }
+  },
+  mounted () {
+    this.tableData = this.initTableData()
   }
 }
 </script>
-
-<style lang='sass' scoped>
-
+<style scoped>
+.el-table>>>.el-form-item.is-error{
+  margin-bottom: 18px
+}
 </style>
