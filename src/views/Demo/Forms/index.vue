@@ -8,7 +8,7 @@ div.form-containers
     label-width="100px"
     :formFields="formFields"
     :buttonList="buttonList"
-    @onCurChanging="onCurChangingForm")
+    @getChange="onCurChangingForm")
     //- template(slot="select", slot-scope="scope")
     //-   span(style="float: left") {{scope.field.label}} - {{scope.data.input}}
   el-divider(content-position="left") 对比表单
@@ -55,10 +55,11 @@ export default {
       compFields: this.$fieldsFormat(columns, fieldList),
       compBtns: [{
         label: '提交',
+        type: 'success',
         name: 'submit',
-        func: ({ data, form }) => {
+        validate: true,
+        func: ({ data }) => {
           console.log('funcProps:', data)
-          console.log('form:', form.formData)
         }
       }, {
         label: '重置',
