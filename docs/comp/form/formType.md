@@ -1,5 +1,6 @@
 ---
 title: 表单类型
+sidebarDepth: 4
 ---
 
 ```

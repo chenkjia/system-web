@@ -12,7 +12,7 @@ module.exports = {
   ],
   plugins: pluginConf,
   themeConfig: {
-    lastUpdated: 'Last Updated',
+    lastUpdated: '上次更新',
     docsDir: 'docs',
     nav: navConf,
     smoothScroll: true,
