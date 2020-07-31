@@ -4,6 +4,7 @@ archives
 coverage
 /dist
 /doc
+/docs/.vuepress/dist
 version.json
 version.jsone
 yarn.lock
