@@ -52,11 +52,8 @@ yarn docs:dev 跑起来
 ```
 
 1. 在/.vuepress/components 建立自己对应的组件demo文件
-
-2. 在/comp中写入对应的markdown文档说明
-
+2. 在/comp中写入对应的markdown文档说明，也可使用其他markdown可视化友好的工具直接写md文档，如：typora、有道云笔记，但是有些格式问题，比如不能写h1
 3. 如何使用应用中开发好的组件，查看[下文](###4.使用src/component中已经开发好的组件写demo)，请开发能共同使用方便查看的文档~
-
 4. 以下行为都需要重新npm run docs:dev （如果有发现能解决该问题的分享一下~）
   - 任何修改/.vuepress/config.js 
   - 任何增加、删除、重命名文件夹/文件
@@ -202,7 +199,20 @@ sidebarDepth: 4 // 侧边栏层级关系除了在/.vuepress/config.js 配置全�
 
 为了在文档中明显区别代码块与其他文字部分，直接用插件：[vuepress-plugin-demo-container](https://docs.chenjianhui.site/vuepress-plugin-demo-container/zh/)，也可以使用CodeBlock组件（已开发但仅限/docs内使用的组件）包裹展示(自定义布局，支持更多展示效果)。
 
-3) 在说明文档.md中引用写好的demo
+3) 在说明文档.md中引用写好的demo。这里使用vuepress-plugin-demo-container,使用其中支持的slot，写法如下：
+
+```js
+::: demo xxxxx备注信息（注意前面的demo不能丢不能改，是slot-key来着）
+​``` vue
+放入你写的demo组件（/.vuepress/components/xxx.vue）
+​```
+// 用<<< 的方式直接引入vue的代码, 在这里我尝试使用"~@"或“@”等webpack配置alias的写法，都失效，如果你成功了告诉我，分享一下~
+<<< docs/.vuepress/components/xxx.vue 
+
+:::
+```
+
+
 
 ![1596175297128](~@assets/standard/aboutDoc/1596175297128.png)
 
@@ -216,7 +226,7 @@ sidebarDepth: 4 // 侧边栏层级关系除了在/.vuepress/config.js 配置全�
 1）由于项目使用vue-cli3.0脚手架生成，webpack配置部分vue已经帮我们配置好，在vue.config.js上可以获取到我们额外配置的webpack信息，我们可以直接通过`` ../../node_modules/@vue/cli-service/webpack.config.js``获取到解析后的完整webpack配置信息。这里需要考虑到我们引入的项目中组件，用到一些webpack配置直接引用到文档系统中，如alias
 2）在.vuepress/config.js里的[配置configureWebpack或chainWebpack](https://vuepress.vuejs.org/zh/config/#configurewebpack)
 
-### 6.如何自动生成并同步 `.vue`api
+### 如何自动生成并同步 `.vue`api
 
 ​	[vuese](https://github.com/vuese/vuese)
 
@@ -245,8 +255,16 @@ sidebarDepth: 4 // 侧边栏层级关系除了在/.vuepress/config.js 配置全�
 
 项目中的应用是使用pug模板，那么vue-cli3配置时已经装有pug和pug-plugin-loader，所以需要直接调用/node-modules/里的包即可，无需再npm安装
 
+### 
+
+## 关于优化
+
 ### 防止文档系统对原应用级的打包影响
 
 ### 当文档系统越来越重，如何不会越俎代庖，影响应用级操作
+
+### 图片等静态文件优化
+
+
 
 
