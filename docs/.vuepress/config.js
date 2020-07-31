@@ -6,6 +6,7 @@ const pluginConf = require('./plugins.js')
 module.exports = {
   title: 'Hello 前端',
   description: 'Just playing around',
+  base: '/wwis-admin-web/',
   head: [
     ['link', { ref: 'icon', href: './assets/logo.png' }]
   ],

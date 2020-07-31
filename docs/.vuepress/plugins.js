@@ -13,7 +13,7 @@ module.exports = [
     {
       sidebar: true,
       nav: true,
-      sidebarDeth: 4,
+      sidebarDeth: 3,
       collapsable: true
     }
   ]
