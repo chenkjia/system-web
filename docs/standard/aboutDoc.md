@@ -231,7 +231,7 @@ sidebarDepth: 4 // 侧边栏层级关系除了在/.vuepress/config.js 配置全�
 
 ​	[vuese](https://github.com/vuese/vuese)
 
-​	[markdown-it-vuese]( https://github.com/BuptStEve/markdown-it-vuese )
+​	[markdown-it-vuese](https://github.com/BuptStEve/markdown-it-vuese)
 
 ### 部署
 
@@ -249,8 +249,8 @@ sidebarDepth: 4 // 侧边栏层级关系除了在/.vuepress/config.js 配置全�
 ![1596186219794](~@assets/standard/aboutDoc/1596186219794.png)
 
 3）部署到公司gitlab，[官方说明](https://vuepress.vuejs.org/zh/guide/deploy.html#github-pages)
-
-
+gitlab pages 默认是关闭的，如何开启gitlab pages服务
+![1596421263704](~@assets/standard/aboutDoc/1596421263704.png)
 
 ### 支持pug
 

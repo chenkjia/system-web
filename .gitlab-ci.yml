@@ -2,19 +2,19 @@
 image: node:12.14.0
 
 pages:
- cache:
-   paths:
-   - node_modules/
-# 定义由Runner执行的shell脚本或命令
- script:
- - npm i  # npm install
- - yarn docs:build # npm run docs:build
+  cache:
+    paths:
+    - node_modules/
+  # 定义由Runner执行的shell脚本或命令
+  script:
+    - npm i  # npm install
+    - yarn docs:build # npm run docs:build
 
-# 在依赖项之间传递的东西，类似cache，但原理与cache不同
- artifacts:
-   paths:
-   - public
-   
-# 定义job所引用的git分支
- only:
- - release-docs
+  # 在依赖项之间传递的东西，类似cache，但原理与cache不同
+  artifacts:
+    paths:
+    - public
+    
+  # 定义job所引用的git分支
+  only:
+    - release-docs
