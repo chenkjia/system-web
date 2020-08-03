@@ -1,10 +1,9 @@
 # 自动部署does到gitlab上, 各配置说明：https://www.cnblogs.com/szk5043/articles/9854712.html
-image: node:12.14.0
-
 pages:
+  image: node:12.14.0
   cache:
     paths:
-    - node_modules/
+      - node_modules/
   # 定义由Runner执行的shell脚本或命令
   script:
     - npm i  # npm install
@@ -13,7 +12,7 @@ pages:
   # 在依赖项之间传递的东西，类似cache，但原理与cache不同
   artifacts:
     paths:
-    - public
+      - public
     
   # 定义job所引用的git分支
   only:
