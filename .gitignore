@@ -8,6 +8,7 @@ coverage
 version.json
 version.jsone
 yarn.lock
+package-lock.json
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/

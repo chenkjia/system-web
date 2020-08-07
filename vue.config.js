@@ -1,6 +1,6 @@
 const version = require('./version.json')
 
-const mockTarget = 'http://192.168.0.33:40001/mock/11'
+const mockTarget = 'http://192.168.0.45:40001/mock/11'
 const devTarget = 'http://localhost:3000'
 const target = process.env.npm_lifecycle_event === 'mock' ? mockTarget : devTarget
 module.exports = {
