@@ -98,6 +98,12 @@ export default {
         return ['left', 'center', 'right'].indexOf(value) > -1
       }
     },
+    isValidateAll: {
+      type: Boolean,
+      default: true
+    },
+    // 验证规则
+    validateRules: Function,
     keyGroup: {
       type: Object,
       default: () => {
@@ -142,16 +148,13 @@ export default {
     formHeadFlag () {
       return this.computedHeadkeys[this.computedHeadkeys.length - 1]
     },
+    /* 允许全部字段验证；只对已修改的字段验证；根据条件验证 */
     rules () {
-      const rules = this.formFields.reduce((result, cur, index) => {
-        const changekeys = this.keyGroup.change
-        const curName = this.transFieldName(changekeys.pre, cur.name, changekeys.append)
-        return !cur.form.rules ? result : {
-          ...result,
-          [curName]: cur.form.rules
-        }
-      }, {})
-      return rules
+      const allRules = this.setFormRules(this.formFields)
+      if (this.validateRules && typeof this.validateRules === 'function') {
+        return this.validateRules(this.formData, allRules)
+      }
+      return allRules
     },
     formData () {
       return this.formatFormdata(this.tableData)
@@ -260,6 +263,18 @@ export default {
           }
         }, { '__fieldkeys__': {} })
       })
+    },
+    /* 根据传入的字段列表，设置规则 */
+    setFormRules (list) {
+      const rules = list.reduce((result, cur) => {
+        const changekeys = this.keyGroup.change
+        const curName = this.transFieldName(changekeys.pre, cur.name, changekeys.append)
+        return !cur.form.rules ? result : {
+          ...result,
+          [curName]: cur.form.rules
+        }
+      }, {})
+      return rules
     }
   },
   mounted () {

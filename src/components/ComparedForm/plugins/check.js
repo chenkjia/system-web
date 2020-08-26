@@ -8,6 +8,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.table.toggleRowSelection(row, hasChange)
         this.$set(row, '__allowSelect__', hasChange)
+        this.$emit('onChange', value, row['__fieldkeys__'][this.changekey])
       })
     },
     checkItemChange (origin, change) {
