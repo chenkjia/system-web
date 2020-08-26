@@ -3,15 +3,12 @@ title: 表单类型
 sidebarDepth: 4
 ---
 
-```
-具体示例demo可查看项目中: @/views/Demo/Forms/index.vue
-页面访问路径：/demo/forms
-```
 ## 表单全局事件
 - [ ] 1增加基础配置项 @/components/Dataform/plugins/base.js, 各表单组件全局默认属性隐射表：
 
 - [ ] 2表单内组件联动、表单间联动：
-3表单验证：
+
+3.表单验证：
   
    - [x] 每个表单使用官方验证，官方文档：https://github.com/yiminghe/async-validator#length
    - [ ] 增加规则配置表，方便操作
@@ -28,10 +25,20 @@ sidebarDepth: 4
 
 ## 传统表单 DataForm
 
+### 示例
+
+::: demo 传统表单示例(Form/DemoDefault.vue)
+```vue
+   <Form-DemoDefault></Form-DemoDefault>
+```
+
+<<< docs/.vuepress/components/Form/DemoDefault.vue
+:::
+
 ### props 属性
 基础属性参考[el-form](https://element.eleme.cn/#/zh-CN/component/form)，不采用el-form以下属性：
 
-多行多列式的表单请使用[表格嵌套表单](#表格嵌套表单 TableForm)，在交互效果的角度上看更加整洁易操作。
+多行多列式的表单请使用[表格嵌套表单](##表格嵌套表单 TableForm)，在交互效果的角度上看更加整洁易操作。
 
 | 参数          | 说明                                                         | 类型    | 可选值                 | 默认值 |
 | ------------- | ------------------------------------------------------------ | ------- | ---------------------- | ------ |
@@ -55,38 +62,33 @@ sidebarDepth: 4
 | getChange | 返回表单正在修改的字段值、字段名称 | value, fieldName |
 | reset     | 重置所有修改                       | -                |
 
-### 示例
-
-::: demo 传统表单示例(Form/DemoDefault)
-```vue
-<Form-DemoDefault></Form-DemoDefault>
-```
-
-<<< docs/.vuepress/components/Form/DemoDefault.vue
-:::
-
 
 ## 对比表单 CompareForm
 
 ### 需求
 
-- [x] 体现原值与新值对比，二维表格展示，表单展示
-
+- [ ] 体现原值与新值对比，二维表格展示，表单展示
 - [x] 存在新值或已做新值修改，则高亮提醒，且不允许两个值内容一样，
 
 - [x] 一键取消修改（单项取消、全部取消）
 
-- [x] 单项字段表单验证规则
+- [x] 单项字段表单验证规则：1允许全部字段验证、2只对修改值验证、3自定义动态验证规则
 
 - [ ] 单项字段根据权限设置只读、可编辑
 
 - [x] 整个表单权限控制
 
-- [ ] onChange方法,返回所有修改项
+- [x] onChange方法,返回当前修改项值、字段名称
 
-### 效果
+### 示例
 
-![1595215230773](~@assets/form/1595215230773.png)
+::: demo 对比表单(Form/DemoCompare.vue)
+```vue
+   <Form-DemoCompare></Form-DemoCompare>
+```
+
+   <<< docs/.vuepress/components/Form/DemoCompare.vue
+:::
 
 ### 属性
 
@@ -102,10 +104,10 @@ sidebarDepth: 4
 
 ### 方法
 
-| 方法      | 说明                                                         | 返回值               |
-| --------- | ------------------------------------------------------------ | -------------------- |
-| onChange  | 返回已修改的数据项, 所有数据项                               | changeData，fullData |
-| resetData | 重置所有修改, 使用form.resetData()<br />form: buttonGroup按钮组返回的funcProps参数 | -                    |
+| 方法      | 说明                                                         | 返回值                |
+| --------- | ------------------------------------------------------------ | --------------------- |
+| onChange  | 返回已修改的数据项, 字段名称                                 | changeData，fieldName |
+| resetData | 重置所有修改, 使用form.resetData()<br />form: buttonGroup按钮组返回的funcProps参数 | -                     |
 
 
 ## 表格嵌套表单 TableForm
@@ -136,7 +138,7 @@ group属性
 
 | 参数          | 说明                                                         | 类型   | 可选值   | 默认值     |
 | ------------- | ------------------------------------------------------------ | ------ | -------- | ---------- |
-| label         | 分组标题（必填）                                             | String | -        | 分组1....n |
+| label         | 分组标题                                                     | String | -        | 分组1....n |
 | labelPosition | 分组标题显示位置                                             | String | top,left | left       |
 | tableList     | 分组内表格配置说明，不同维度表格设置不同，详细查看tableList属性 | Array  |          |            |
 
