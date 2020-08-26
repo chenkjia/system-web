@@ -3,17 +3,10 @@ import Element from 'element-ui'
 // import pug from '../../node_modules/pug/lib/index'
 
 import 'element-ui/lib/theme-chalk/index.css'
-// import components from '@/plugins/components.js'
 import CodeBlock from './components/CodeBlock.vue'
-import {
-  ButtonGroup,
-  InfoRender,
-  Dataform,
-  Datatables,
-  DatatablesPage,
-  DoubleColumnLayout,
-  ComparedForm
-} from '@/components'
+
+import * as components from '@/components'
+
 import { fieldsFormat, fieldsGetRelation } from '@/utils/fieldsFormat'
 
 export default ({
@@ -26,14 +19,9 @@ export default ({
   Vue.use(CodeBlock)
   Vue.use(Element)
   Vue.use(lodash)
-
-  Vue.use(ButtonGroup)
-  Vue.use(InfoRender)
-  Vue.use(Dataform)
-  Vue.use(Datatables)
-  Vue.use(DatatablesPage)
-  Vue.use(DoubleColumnLayout)
-  Vue.use(ComparedForm)
+  Object.entries(components).map(([moduleName, item]) => {
+    Vue.use(item)
+  })
 
   Object.defineProperty(Vue.prototype, '$fieldsFormat', { value: fieldsFormat })
   Object.defineProperty(Vue.prototype, '$fieldsGetRelation', { value: fieldsGetRelation })

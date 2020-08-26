@@ -17,8 +17,20 @@ module.exports = {
     nav: navConf,
     smoothScroll: true,
   },
+  // markdown: {
+  //   lineNumbers: true
+  // },
   configureWebpack (config, isServer) {
     return {
+      module: {
+        rules: [
+          {
+            test: /\.pug$/,
+            use: 'pug-plain-loader',
+            exclude: /node_modules/
+          }
+        ]
+      },
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '../../src'),
