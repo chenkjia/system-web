@@ -45,7 +45,7 @@
     "jsdoc": "^3.6.3",
     "lint-staged": "^8.1.5",
     "minami": "^1.2.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-axios": "^0.0.4",
     "vue-cli-plugin-dll": "^1.1.9",
